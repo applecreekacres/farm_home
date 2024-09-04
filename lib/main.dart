@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const FarmHome());
 }
 
@@ -30,7 +37,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,21 +46,18 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: const Center(),
       drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: const [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.green
-              ),
-              child: Text("User"),
-            ),
-            ListTile(
-              title: Text("Records"),
-            )
-          ],
-        )
-      ),
+          child: ListView(
+        padding: EdgeInsets.zero,
+        children: const [
+          DrawerHeader(
+            decoration: BoxDecoration(color: Colors.green),
+            child: Text("User"),
+          ),
+          ListTile(
+            title: Text("Records"),
+          )
+        ],
+      )),
       // floatingActionButton: FloatingActionButton(),
     );
   }
