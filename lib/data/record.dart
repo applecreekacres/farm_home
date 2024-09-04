@@ -5,7 +5,7 @@ class Record extends Item {
   String description = "";
   bool isDone = false;
 
-  Record(super.id, super.created, super.modified, this.title, this.description,
+  Record(super.id, super.created, super.modified, super.tags, this.title, this.description,
       this.isDone);
 
   Record.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
