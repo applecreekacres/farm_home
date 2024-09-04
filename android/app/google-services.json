@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "151592527578",
+    "project_id": "farm-home-f6d6a",
+    "storage_bucket": "farm-home-f6d6a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151592527578:android:025cea9d22fb745d4867e3",
+        "android_client_info": {
+          "package_name": "com.brendel.farmhome"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXp1P4FPr0UwpTvZnn58orCKX967pb-yI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
