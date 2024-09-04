@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  runApp(const FarmHome());
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  runApp(FarmHome(prefs: prefs));
 }
 
 class FarmHome extends StatelessWidget {
-  const FarmHome({super.key});
+  final SharedPreferences prefs;
+
+  const FarmHome({super.key, required this.prefs});
 
   @override
   Widget build(BuildContext context) {
