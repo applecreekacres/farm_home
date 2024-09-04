@@ -5,8 +5,4 @@ class Resource extends Item {
 
   Resource.fromMap(super.data) : super.fromMap();
 
-  @override
-  Map<String, dynamic> toMap() {
-    return super.toMap();
-  }
 }
