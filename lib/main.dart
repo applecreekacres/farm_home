@@ -26,6 +26,7 @@ class FarmHome extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Farm Home Page'),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
