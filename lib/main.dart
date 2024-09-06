@@ -29,7 +29,11 @@ class FarmHome extends StatelessWidget {
         providers: [
           Provider<HomeProvider>(
               create: (_) =>
-                  HomeProvider(firebaseFirestore: this._firebaseFirestore)),
+                  HomeProvider(firebaseFirestore: _firebaseFirestore)),
+          Provider<SettingProvider>(
+            create: (_) => SettingProvider(
+                prefs: prefs, firebaseFirestore: _firebaseFirestore),
+          )
         ],
         child: MaterialApp(
           title: 'Farm Home',
