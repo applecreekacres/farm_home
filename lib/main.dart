@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_home/providers/providers.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide AuthProvider;
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/pages.dart';
 import 'package:provider/provider.dart';
+import 'constants/constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,15 +36,21 @@ class FarmHome extends StatelessWidget {
           Provider<SettingProvider>(
             create: (_) => SettingProvider(
                 prefs: prefs, firebaseFirestore: _firebaseFirestore),
-          )
+          ),
+          ChangeNotifierProvider<AuthProvider>(
+              create: (_) => AuthProvider(
+                  firebaseAuth: FirebaseAuth.instance,
+                  googleSignIn: GoogleSignIn(),
+                  prefs: prefs,
+                  firebaseFirestore: _firebaseFirestore))
         ],
         child: MaterialApp(
-          title: 'Farm Home',
+          title: AppConstants.appTitle,
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.green.shade400),
             useMaterial3: true,
           ),
-          home: const HomePage(title: 'Farm Home Page'),
+          home: const SplashPage(),
           debugShowCheckedModeBanner: false,
         ));
   }
