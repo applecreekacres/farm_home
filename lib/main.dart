@@ -37,7 +37,7 @@ class FarmHome extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.green.shade400),
             useMaterial3: true,
           ),
-          home: const MyHomePage(title: 'Farm Home Page'),
+          home: const HomePage(title: 'Farm Home Page'),
           debugShowCheckedModeBanner: false,
         ));
   }
