@@ -1,5 +1,6 @@
 import 'record.dart';
 
 class TransplantRecord extends Record {
-  TransplantRecord(super.id, super.created, super.modified, super.tags, super.title, super.description, super.isDone, super.quantities);
+  TransplantRecord(super.id, super.created, super.modified, super.tags,
+      super.title, super.description, super.isDone, super.quantities);
 }
