@@ -1,9 +1,9 @@
 import 'record.dart';
 
-class PottingUpRecord extends Record {
-  late DateTime pottingUpDate;
+class SeedingRecord extends Record {
+  late DateTime seedingDate;
 
-  PottingUpRecord(
+  SeedingRecord(
       super.id,
       super.created,
       super.modified,
@@ -12,16 +12,17 @@ class PottingUpRecord extends Record {
       super.description,
       super.isDone,
       super.quantities,
-      this.pottingUpDate);
+      this.seedingDate);
 
-  PottingUpRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    pottingUpDate = DateTime.fromMicrosecondsSinceEpoch(data["pottingUpDate"]);
+  SeedingRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
+    seedingDate =
+        DateTime.fromMicrosecondsSinceEpoch(data["seedingDate"]);
   }
 
   @override
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {
-      "pottingUpDate": pottingUpDate.microsecondsSinceEpoch
+      "seedingDate": seedingDate.millisecondsSinceEpoch
     };
     map.addAll(super.toMap());
     return map;
