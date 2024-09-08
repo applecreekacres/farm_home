@@ -7,9 +7,9 @@ class SaleRecord extends Record {
   String invoice = "";
   String lotNumber = "";
 
-  SaleRecord(List<String> tags, String title, String description, bool isDone,
+  SaleRecord(List<String> tags, String title, DateTime timestamp, String description, bool isDone,
       List<Quantity> quantities, this.customer, this.invoice, this.lotNumber)
-      : super(tags, title, description, isDone, quantities,
+      : super(tags, title, timestamp, description, isDone, quantities,
             (SaleRecord).toString());
 
   SaleRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {

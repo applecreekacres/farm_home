@@ -8,9 +8,10 @@ class Record extends Item {
   bool isDone = false;
   List<Quantity> quantities = List<Quantity>.empty();
   String recordType = "";
+  DateTime timestamp = DateTime.now();
 
-  Record(super.tags, this.title, this.description,
-      this.isDone, this.quantities, this.recordType);
+  Record(super.tags, this.title, this.timestamp, this.description, this.isDone, this.quantities,
+      this.recordType);
 
   Record.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     title = data["title"];

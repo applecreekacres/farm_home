@@ -4,9 +4,10 @@ import 'quantity.dart';
 class TransplantRecord extends Record {
   late DateTime transplantDate;
 
-  TransplantRecord(List<String> tags, String title, String description,
+  TransplantRecord(List<String> tags, String title,
+      DateTime timestamp, String description,
       bool isDone, List<Quantity> quantities, this.transplantDate)
-      : super(tags, title, description, isDone, quantities,
+      : super(tags, title, timestamp, description, isDone, quantities,
             "transplanting_record");
 
   TransplantRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
