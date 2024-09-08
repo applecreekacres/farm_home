@@ -9,8 +9,8 @@ class Animal extends Resource {
   String nickname = "";
   late Sex sex;
 
-  Animal(super.tags, this.birthDate, this.isFixed, this.deathDate,
-      this.nickname, this.sex);
+  Animal(List<String> tags, this.birthDate, this.isFixed, this.deathDate,
+      this.nickname, this.sex) : super(tags, (Animal).toString());
 
   ///
   Animal.fromMap(Map<String, dynamic> data) : super.fromMap(data) {

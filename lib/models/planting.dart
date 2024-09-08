@@ -1,5 +1,5 @@
 import 'resource.dart';
 
 class Planting extends Resource {
-  Planting(super.tags);
+  Planting(List<String> tags) : super(tags, (Planting).toString());
 }

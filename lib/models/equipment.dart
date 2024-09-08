@@ -1,5 +1,5 @@
 import 'resource.dart';
 
 class Equipment extends Resource {
-  Equipment(super.tags);
+  Equipment(List<String> tags) : super(tags, (Equipment).toString());
 }

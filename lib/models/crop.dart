@@ -1,5 +1,5 @@
 import 'resource.dart';
 
 class Crop extends Resource {
-  Crop(super.tags);
+  Crop(List<String> tags) : super(tags, (Crop).toString());
 }
