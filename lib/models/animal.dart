@@ -14,7 +14,8 @@ class Animal extends Resource {
 
   ///
   Animal.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    birthDate = data["birthDate"];
+    birthDate = DateTime.fromMillisecondsSinceEpoch(data["birthDate"]);
+    deathDate = DateTime.fromMillisecondsSinceEpoch(data["deathDate"]);
     isFixed = data["isFixed"];
     nickname = data["nickname"];
     sex = data["sex"];

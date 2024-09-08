@@ -11,7 +11,7 @@ class TransplantRecord extends Record {
 
   TransplantRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     transplantDate =
-        DateTime.fromMicrosecondsSinceEpoch(data["transplantDate"]);
+        DateTime.fromMillisecondsSinceEpoch(data["transplantDate"]);
   }
 
   @override

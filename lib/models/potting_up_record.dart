@@ -10,13 +10,13 @@ class PottingUpRecord extends Record {
             tags, title, description, isDone, quantities, "potting_up_record");
 
   PottingUpRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    pottingUpDate = DateTime.fromMicrosecondsSinceEpoch(data["pottingUpDate"]);
+    pottingUpDate = DateTime.fromMillisecondsSinceEpoch(data["pottingUpDate"]);
   }
 
   @override
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {
-      "pottingUpDate": pottingUpDate.microsecondsSinceEpoch
+      "pottingUpDate": pottingUpDate.millisecondsSinceEpoch
     };
     map.addAll(super.toMap());
     return map;
