@@ -1,19 +1,25 @@
+import 'package:uuid/uuid.dart';
+
 abstract class Item {
-  late int id;
-  late DateTime created;
-  late DateTime modified;
+  String _id = const Uuid().v4();
+  DateTime _created = DateTime.now();
+  DateTime _modified = DateTime.now();
   late List<String> tags;
 
-  Item(this.id, this.created, this.modified, this.tags);
+  Item(this.tags);
+
+  void update() {
+    _modified = DateTime.now();
+  }
 
   Item.fromMap(Map<String, dynamic> data) {
-    id = data["id"];
-    created = data["created"];
-    modified = data["modified"];
+    _id = data["id"];
+    _created = data["created"];
+    _modified = data["modified"];
     tags = data["tags"];
   }
 
   Map<String, dynamic> toMap() {
-    return {"id": id, "created": created, "modified": modified, "tags": tags};
+    return {"id": _id, "created": _created, "modified": _modified, "tags": tags};
   }
 }

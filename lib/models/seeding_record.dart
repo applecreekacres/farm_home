@@ -1,22 +1,15 @@
 import 'record.dart';
+import 'quantity.dart';
 
 class SeedingRecord extends Record {
   late DateTime seedingDate;
 
-  SeedingRecord(
-      super.id,
-      super.created,
-      super.modified,
-      super.tags,
-      super.title,
-      super.description,
-      super.isDone,
-      super.quantities,
-      this.seedingDate);
+  SeedingRecord(List<String> tags, String title, String description,
+      bool isDone, List<Quantity> quantities, this.seedingDate)
+      : super(tags, title, description, isDone, quantities, "seeding_record");
 
   SeedingRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    seedingDate =
-        DateTime.fromMicrosecondsSinceEpoch(data["seedingDate"]);
+    seedingDate = DateTime.fromMicrosecondsSinceEpoch(data["seedingDate"]);
   }
 
   @override

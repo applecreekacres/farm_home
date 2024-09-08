@@ -7,15 +7,17 @@ class Record extends Item {
   String description = "";
   bool isDone = false;
   List<Quantity> quantities = List<Quantity>.empty();
+  String recordType = "";
 
-  Record(super.id, super.created, super.modified, super.tags, this.title,
-      this.description, this.isDone, this.quantities);
+  Record(super.tags, this.title, this.description,
+      this.isDone, this.quantities, this.recordType);
 
   Record.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     title = data["title"];
     description = data["description"];
     isDone = data["isDone"];
     quantities = data["quantities"];
+    recordType = data["recordType"];
   }
 
   @override
@@ -24,7 +26,8 @@ class Record extends Item {
       "title": title,
       "description": description,
       "isDone": isDone,
-      "quantities": quantities
+      "quantities": quantities,
+      "recordType": recordType
     };
     map.addAll(super.toMap());
     return map;
