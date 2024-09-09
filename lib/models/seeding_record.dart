@@ -16,7 +16,7 @@ class SeedingRecord extends Record {
             resources, (SeedingRecord).toString());
 
   SeedingRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    seedingDate = DateTime.fromMicrosecondsSinceEpoch(data["seedingDate"]);
+    seedingDate = DateTime.fromMillisecondsSinceEpoch(data["seedingDate"]);
   }
 
   @override
