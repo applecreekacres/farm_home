@@ -14,12 +14,17 @@ abstract class Item {
 
   Item.fromMap(Map<String, dynamic> data) {
     _id = data["id"];
-    _created = data["created"];
-    _modified = data["modified"];
-    tags = data["tags"];
+    _created = DateTime.fromMillisecondsSinceEpoch(data["created"]);
+    _modified = DateTime.fromMillisecondsSinceEpoch(data["modified"]);
+    tags = List<String>.from(data["tags"]);
   }
 
   Map<String, dynamic> toMap() {
-    return {"id": _id, "created": _created, "modified": _modified, "tags": tags};
+    return {
+      "id": _id,
+      "created": _created.millisecondsSinceEpoch,
+      "modified": _modified.millisecondsSinceEpoch,
+      "tags": tags
+    };
   }
 }
