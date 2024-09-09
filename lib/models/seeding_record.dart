@@ -13,7 +13,7 @@ class SeedingRecord extends Record {
       List<Resource> resources,
       this.seedingDate)
       : super(tags, title, timestamp, description, isDone, quantities,
-            resources, "seeding_record");
+            resources, (SeedingRecord).toString());
 
   SeedingRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     seedingDate = DateTime.fromMicrosecondsSinceEpoch(data["seedingDate"]);

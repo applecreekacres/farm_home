@@ -13,7 +13,7 @@ class PottingUpRecord extends Record {
       List<Resource> resources,
       this.pottingUpDate)
       : super(tags, title, timestamp, description, isDone, quantities,
-            resources, "potting_up_record");
+            resources, (PottingUpRecord).toString());
 
   PottingUpRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     pottingUpDate = DateTime.fromMillisecondsSinceEpoch(data["pottingUpDate"]);

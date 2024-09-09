@@ -10,5 +10,5 @@ class ObservationRecord extends Record {
     List<Quantity> quantities,
     List<Resource> resources,
   ) : super(tags, title, timestamp, description, isDone, quantities, resources,
-            "observation_record");
+            (ObservationRecord).toString());
 }

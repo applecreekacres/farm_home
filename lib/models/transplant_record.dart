@@ -13,7 +13,7 @@ class TransplantRecord extends Record {
       List<Resource> resources,
       this.transplantDate)
       : super(tags, title, timestamp, description, isDone, quantities,
-            resources, "transplanting_record");
+            resources, (TransplantRecord).toString());
 
   TransplantRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     transplantDate =

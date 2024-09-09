@@ -13,7 +13,7 @@ class HarvestRecord extends Record {
       List<Resource> resources,
       this.harvestDate)
       : super(tags, title, timestamp, description, isDone, quantities,
-            resources, "harvest_record");
+            resources, (HarvestRecord).toString());
 
   HarvestRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     harvestDate = DateTime.fromMillisecondsSinceEpoch(data["harvestDate"]);
