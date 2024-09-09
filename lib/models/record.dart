@@ -1,6 +1,4 @@
-import 'package:farm_home/models/quantity.dart';
-
-import 'item.dart';
+import 'models.dart';
 
 class Record extends Item {
   String title = "";
@@ -9,9 +7,10 @@ class Record extends Item {
   List<Quantity> quantities = List<Quantity>.empty();
   String recordType = "";
   DateTime timestamp = DateTime.now();
+  List<Resource> resources = List<Resource>.empty();
 
-  Record(super.tags, this.title, this.timestamp, this.description, this.isDone, this.quantities,
-      this.recordType);
+  Record(super.tags, this.title, this.timestamp, this.description, this.isDone,
+      this.quantities, this.resources, this.recordType);
 
   Record.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     title = data["title"];
@@ -19,6 +18,7 @@ class Record extends Item {
     isDone = data["isDone"];
     quantities = data["quantities"];
     recordType = data["recordType"];
+    resources = List<Resource>.from(data["resources"]);
   }
 
   @override
@@ -28,7 +28,8 @@ class Record extends Item {
       "description": description,
       "isDone": isDone,
       "quantities": quantities,
-      "recordType": recordType
+      "recordType": recordType,
+      "resources": resources
     };
     map.addAll(super.toMap());
     return map;

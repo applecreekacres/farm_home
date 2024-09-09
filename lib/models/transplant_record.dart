@@ -1,14 +1,19 @@
-import 'record.dart';
-import 'quantity.dart';
+import 'models.dart';
 
 class TransplantRecord extends Record {
   late DateTime transplantDate;
 
-  TransplantRecord(List<String> tags, String title,
-      DateTime timestamp, String description,
-      bool isDone, List<Quantity> quantities, this.transplantDate)
+  TransplantRecord(
+      List<String> tags,
+      String title,
+      DateTime timestamp,
+      String description,
+      bool isDone,
+      List<Quantity> quantities,
+      List<Resource> resources,
+      this.transplantDate)
       : super(tags, title, timestamp, description, isDone, quantities,
-            "transplanting_record");
+            resources, "transplanting_record");
 
   TransplantRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     transplantDate =

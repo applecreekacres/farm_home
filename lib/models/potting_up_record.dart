@@ -1,5 +1,4 @@
-import 'record.dart';
-import 'quantity.dart';
+import 'models.dart';
 
 class PottingUpRecord extends Record {
   late DateTime pottingUpDate;
@@ -11,9 +10,10 @@ class PottingUpRecord extends Record {
       String description,
       bool isDone,
       List<Quantity> quantities,
+      List<Resource> resources,
       this.pottingUpDate)
       : super(tags, title, timestamp, description, isDone, quantities,
-            "potting_up_record");
+            resources, "potting_up_record");
 
   PottingUpRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     pottingUpDate = DateTime.fromMillisecondsSinceEpoch(data["pottingUpDate"]);
