@@ -9,6 +9,11 @@ class Season extends Reference {
 
   Season(super.tags, super.name, super.description);
 
+  Season.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
+    start = DateTime.fromMillisecondsSinceEpoch(data["start"]);
+    end = DateTime.fromMillisecondsSinceEpoch(data["end"]);
+  }
+
   @override
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {
