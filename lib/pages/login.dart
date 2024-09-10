@@ -45,14 +45,9 @@ class LoginPageState extends State<LoginPage> {
               onPressed: () async {
                 authProvider.handleSignIn().then((isSuccess) {
                   if (isSuccess) {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomePage(
-                          title: AppConstants.appTitle,
-                        ),
-                      ),
-                    );
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const HomePage(),
+                    ));
                   }
                 }).catchError((error, stackTrace) {
                   Fluttertoast.showToast(msg: error.toString());
@@ -62,14 +57,15 @@ class LoginPageState extends State<LoginPage> {
               style: ButtonStyle(
                 backgroundColor: WidgetStateProperty.resolveWith<Color>(
                   (Set<WidgetState> states) {
-                    if (states.contains(WidgetState.pressed))
-                      return Color(0xffdd4b39).withOpacity(0.8);
-                    return Color(0xffdd4b39);
+                    if (states.contains(WidgetState.pressed)) {
+                      return const Color(0xffdd4b39).withOpacity(0.8);
+                    }
+                    return const Color(0xffdd4b39);
                   },
                 ),
                 splashFactory: NoSplash.splashFactory,
                 padding: WidgetStateProperty.all<EdgeInsets>(
-                  EdgeInsets.fromLTRB(30, 15, 30, 15),
+                  const EdgeInsets.fromLTRB(30, 15, 30, 15),
                 ),
               ),
               child: const Text(
