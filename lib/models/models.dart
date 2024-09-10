@@ -16,3 +16,4 @@ export 'equipment.dart';
 export 'crop.dart';
 export 'reference.dart';
 export 'season.dart';
+export 'crop_family.dart';
