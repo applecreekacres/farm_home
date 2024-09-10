@@ -8,6 +8,12 @@ abstract class Item {
 
   Item(this.tags);
 
+  String get id => _id;
+
+  DateTime get created => _created;
+
+  DateTime get modified => _modified;
+
   void update() {
     _modified = DateTime.now();
   }
