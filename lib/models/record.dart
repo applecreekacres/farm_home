@@ -58,7 +58,7 @@ class Record extends Item {
     _title = data["title"];
     _description = data["description"];
     _isDone = data["isDone"];
-    _quantities = data["quantities"];
+    _quantities = List<Quantity>.from(data["quantities"]);
     _recordType = data["recordType"];
     _resources = List<Resource>.from(data["resources"]);
     _timestamp = DateTime.fromMillisecondsSinceEpoch(data["timestamp"]);
