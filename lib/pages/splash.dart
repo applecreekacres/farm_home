@@ -37,7 +37,7 @@ class SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -47,12 +47,12 @@ class SplashPageState extends State<SplashPage> {
             //   width: 100,
             //   height: 100,
             // ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             SizedBox(
               width: 20,
               height: 20,
               child:
-                  const CircularProgressIndicator(color: ColorConstants.themeColor),
+                  CircularProgressIndicator(color: ColorConstants.themeColor),
             ),
           ],
         ),

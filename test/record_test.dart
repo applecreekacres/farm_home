@@ -28,7 +28,7 @@ void main() {
 
   test("Load Record from Map", () {
     final now = DateTime.now().millisecondsSinceEpoch;
-    final id = Uuid().v4();
+    final id = const Uuid().v4();
     Map<String, dynamic> map = {
       "id": id,
       "created":
