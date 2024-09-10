@@ -15,8 +15,7 @@ class SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    if(context.mounted)
-    {
+    if (context.mounted) {
       _checkSignedIn();
     }
   }
@@ -26,10 +25,7 @@ class SplashPageState extends State<SplashPage> {
     bool isLoggedIn = await authProvider.isLoggedIn();
     if (isLoggedIn) {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-            builder: (context) => const HomePage(
-                  title: AppConstants.appTitle,
-                )),
+        MaterialPageRoute(builder: (context) => const HomePage()),
       );
     } else {
       Navigator.pushReplacement(
@@ -51,12 +47,12 @@ class SplashPageState extends State<SplashPage> {
             //   width: 100,
             //   height: 100,
             // ),
-            SizedBox(height: 20),
-            Container(
+            const SizedBox(height: 20),
+            SizedBox(
               width: 20,
               height: 20,
               child:
-                  CircularProgressIndicator(color: ColorConstants.themeColor),
+                  const CircularProgressIndicator(color: ColorConstants.themeColor),
             ),
           ],
         ),
