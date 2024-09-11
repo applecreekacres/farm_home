@@ -5,7 +5,8 @@ class Crop extends Reference {
   int _daysToTransplant = 0;
   int _daysToMaturity = 0;
   int _harvestWindow = 0;
-  CropFamily _cropFamily;
+  CropFamily? _cropFamily;
+  String? _cropFamilyId;
 
   int get daysToPottingUp => _daysToPottingUp;
 
@@ -15,7 +16,13 @@ class Crop extends Reference {
 
   int get harvestWindow => _harvestWindow;
 
-  CropFamily get cropFamily => _cropFamily;
+  CropFamily? get cropFamily {
+    if (_cropFamilyId != null) {
+      return getItemById((CropFamily).toString(), _cropFamilyId as String)
+          as CropFamily?;
+    }
+    return null;
+  }
 
   set daysToPottingUp(int days) {
     if (days != _daysToPottingUp) {
@@ -45,9 +52,10 @@ class Crop extends Reference {
     }
   }
 
-  set cropFamily(CropFamily family) {
+  set cropFamily(CropFamily? family) {
     if (family != _cropFamily) {
       _cropFamily = family;
+      _cropFamilyId = family?.id;
       update();
     }
   }
@@ -61,4 +69,24 @@ class Crop extends Reference {
       this._daysToMaturity,
       this._harvestWindow,
       this._cropFamily);
+
+  Crop.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
+    _daysToPottingUp = data["daysToPottingUp"];
+    _daysToMaturity = data["daysToMaturity"];
+    _daysToTransplant = data["daysToTransplant"];
+    _cropFamilyId = data["cropFamilyId"];
+  }
+
+  @override
+  Map<String, dynamic> toMap() {
+    Map<String, dynamic> map = {
+      "daysToPottingUp": _daysToPottingUp,
+      "daysToTransplant": _daysToTransplant,
+      "daysToMaturity": _daysToMaturity,
+      "harvestWindow": _harvestWindow,
+      "cropFamilyId": _cropFamilyId
+    };
+    map.addAll(super.toMap());
+    return map;
+  }
 }
