@@ -1,7 +1,16 @@
 import 'models.dart';
 
 class HarvestRecord extends Record {
-  late DateTime harvestDate;
+  late DateTime _harvestDate;
+
+  DateTime get harvestDate => _harvestDate;
+
+  set harvestDate(DateTime date) {
+    if (date != _harvestDate) {
+      _harvestDate = date;
+      update();
+    }
+  }
 
   HarvestRecord(
       List<String> tags,
@@ -11,18 +20,18 @@ class HarvestRecord extends Record {
       bool isDone,
       List<Quantity> quantities,
       List<Resource> resources,
-      this.harvestDate)
+      this._harvestDate)
       : super(tags, title, timestamp, description, isDone, quantities,
             resources, (HarvestRecord).toString());
 
   HarvestRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    harvestDate = DateTime.fromMillisecondsSinceEpoch(data["harvestDate"]);
+    _harvestDate = DateTime.fromMillisecondsSinceEpoch(data["harvestDate"]);
   }
 
   @override
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {
-      "harvestDate": harvestDate.millisecondsSinceEpoch
+      "harvestDate": _harvestDate.millisecondsSinceEpoch
     };
     map.addAll(super.toMap());
     return map;
