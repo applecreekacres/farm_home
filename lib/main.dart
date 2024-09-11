@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:farm_home/auth_gate.dart';
 import 'package:farm_home/providers/providers.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide AuthProvider;
 import 'package:flutter/material.dart';
@@ -40,7 +41,9 @@ class FarmHome extends StatelessWidget {
           ChangeNotifierProvider<AuthProvider>(
               create: (_) => AuthProvider(
                   firebaseAuth: FirebaseAuth.instance,
-                  googleSignIn: GoogleSignIn(),
+                  googleSignIn: GoogleSignIn(
+                      clientId:
+                          "151592527578-mp8p672pkcmog3sl1bdfi46scipalhlj.apps.googleusercontent.com"),
                   prefs: prefs,
                   firebaseFirestore: _firebaseFirestore))
         ],
@@ -50,7 +53,7 @@ class FarmHome extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.green.shade400),
             useMaterial3: true,
           ),
-          home: const SplashPage(),
+          home: const AuthGate(),
           debugShowCheckedModeBanner: false,
         ));
   }
