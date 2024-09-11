@@ -12,7 +12,12 @@
           "package_name": "com.brendel.farmhome"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "151592527578-mp8p672pkcmog3sl1bdfi46scipalhlj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBXp1P4FPr0UwpTvZnn58orCKX967pb-yI"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "151592527578-mp8p672pkcmog3sl1bdfi46scipalhlj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
