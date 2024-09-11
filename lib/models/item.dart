@@ -1,6 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uuid/uuid.dart';
 
-abstract class Item {
+class Item {
   String _id = const Uuid().v4();
   DateTime _created = DateTime.now();
   DateTime _modified = DateTime.now();
@@ -32,5 +33,15 @@ abstract class Item {
       "modified": _modified.millisecondsSinceEpoch,
       "tags": tags
     };
+  }
+}
+
+Future<T?> getItemById<T extends Item>(String collection, String itemId) async {
+  final docRef = FirebaseFirestore.instance.collection(collection).doc(itemId);
+  final docSnapshot = await docRef.get();
+  if (docSnapshot.exists) {
+    return Item.fromMap(docSnapshot.data()!) as T;
+  } else {
+    return null;
   }
 }
