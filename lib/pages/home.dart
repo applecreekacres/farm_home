@@ -26,7 +26,20 @@ class _HomePageState extends State<HomePage> {
             child: Text("User"),
           ),
           ListTile(
+            leading: Icon(Icons.description),
             title: Text("Records"),
+          ),
+          ListTile(
+            leading: Icon(Icons.pets),
+            title: Text("Animals")
+          ),
+          ListTile(
+            leading: Icon(Icons.yard),
+            title: Text("Plantings")
+          ),
+          ListTile(
+            leading: Icon(Icons.language),
+            title: Text("Land")
           )
         ],
       )),
