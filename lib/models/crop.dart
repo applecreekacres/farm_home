@@ -1,89 +1,46 @@
 import 'models.dart';
 
 class Crop extends Reference {
-  int _daysToPottingUp = 0;
-  int _daysToTransplant = 0;
-  int _daysToMaturity = 0;
-  int _harvestWindow = 0;
+  int daysToPottingUp = 0;
+  int daysToTransplant = 0;
+  int daysToMaturity = 0;
+  int harvestWindow = 0;
   CropFamily? _cropFamily;
   String? _cropFamilyId;
 
-  int get daysToPottingUp => _daysToPottingUp;
-
-  int get daysToTransplant => _daysToTransplant;
-
-  int get dayToMaturity => _daysToMaturity;
-
-  int get harvestWindow => _harvestWindow;
-
   CropFamily? get cropFamily {
-    if (_cropFamilyId != null) {
-      return getItemById((CropFamily).toString(), _cropFamilyId as String)
-          as CropFamily?;
+    if (_cropFamilyId != null && _cropFamily == null) {
+      _cropFamily =
+          getItemById<CropFamily>(_cropFamilyId as String) as CropFamily?;
     }
-    return null;
-  }
-
-  set daysToPottingUp(int days) {
-    if (days != _daysToPottingUp) {
-      _daysToPottingUp = days;
-      update();
-    }
-  }
-
-  set daysToTransplant(int days) {
-    if (days != _daysToTransplant) {
-      _daysToTransplant = days;
-      update();
-    }
-  }
-
-  set daysToMaturity(int days) {
-    if (days != _daysToMaturity) {
-      _daysToMaturity = days;
-      update();
-    }
-  }
-
-  set harvestWindow(int days) {
-    if (days != _harvestWindow) {
-      _harvestWindow = days;
-      update();
-    }
-  }
-
-  set cropFamily(CropFamily? family) {
-    if (family != _cropFamily) {
-      _cropFamily = family;
-      _cropFamilyId = family?.id;
-      update();
-    }
+    return _cropFamily;
   }
 
   Crop(
       super.tags,
       super.name,
       super.description,
-      this._daysToPottingUp,
-      this._daysToTransplant,
-      this._daysToMaturity,
-      this._harvestWindow,
+      this.daysToPottingUp,
+      this.daysToTransplant,
+      this.daysToMaturity,
+      this.harvestWindow,
       this._cropFamily);
 
   Crop.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    _daysToPottingUp = data["daysToPottingUp"];
-    _daysToMaturity = data["daysToMaturity"];
-    _daysToTransplant = data["daysToTransplant"];
+    daysToPottingUp = data["daysToPottingUp"];
+    daysToMaturity = data["daysToMaturity"];
+    daysToTransplant = data["daysToTransplant"];
+    harvestWindow = data["harvestWindow"];
     _cropFamilyId = data["cropFamilyId"];
   }
 
   @override
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {
-      "daysToPottingUp": _daysToPottingUp,
-      "daysToTransplant": _daysToTransplant,
-      "daysToMaturity": _daysToMaturity,
-      "harvestWindow": _harvestWindow,
+      "daysToPottingUp": daysToPottingUp,
+      "daysToTransplant": daysToTransplant,
+      "daysToMaturity": daysToMaturity,
+      "harvestWindow": harvestWindow,
       "cropFamilyId": _cropFamilyId
     };
     map.addAll(super.toMap());

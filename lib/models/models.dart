@@ -17,3 +17,5 @@ export 'crop.dart';
 export 'reference.dart';
 export 'season.dart';
 export 'crop_family.dart';
+export 'land.dart';
+export 'seeding_record.dart';

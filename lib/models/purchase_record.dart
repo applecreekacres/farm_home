@@ -24,4 +24,11 @@ class PurchaseRecord extends Record {
     invoice = data["invoice"];
     lotNumber = data["lotNumber"];
   }
+
+  @override
+  Map<String, dynamic> toMap() {
+    var map = super.toMap();
+    map.addAll({"seller": seller, "invoice": invoice, "lotNumber": lotNumber});
+    return map;
+  }
 }

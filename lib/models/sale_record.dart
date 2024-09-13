@@ -24,4 +24,12 @@ class SaleRecord extends Record {
     invoice = data["invoice"];
     lotNumber = data["lotNumber"];
   }
+
+  @override
+  Map<String, dynamic> toMap() {
+    var map = super.toMap();
+    map.addAll(
+        {"customer": customer, "invoice": invoice, "lotNumber": lotNumber});
+    return map;
+  }
 }

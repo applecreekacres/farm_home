@@ -36,12 +36,20 @@ class Item {
   }
 }
 
-Future<T?> getItemById<T extends Item>(String collection, String itemId) async {
-  final docRef = FirebaseFirestore.instance.collection(collection).doc(itemId);
+Future<T?> getItemById<T extends Item>(String itemId) async {
+  final docRef = FirebaseFirestore.instance.collection((T).toString()).doc(itemId);
   final docSnapshot = await docRef.get();
   if (docSnapshot.exists) {
     return Item.fromMap(docSnapshot.data()!) as T;
   } else {
     return null;
   }
+}
+
+void updateItem<T extends Item>(T model) async {
+  model._modified = DateTime.now();
+  await FirebaseFirestore.instance
+      .collection((T).toString())
+      .doc(model.id)
+      .set(model.toMap());
 }
