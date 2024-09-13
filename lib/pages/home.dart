@@ -1,5 +1,6 @@
 import 'package:farm_home/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'pages.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,26 +21,27 @@ class _HomePageState extends State<HomePage> {
       drawer: Drawer(
           child: ListView(
         padding: EdgeInsets.zero,
-        children: const [
+        children: [
           DrawerHeader(
-            decoration: BoxDecoration(color: Colors.green),
-            child: Text("User"),
+            decoration: const BoxDecoration(color: Colors.green),
+            child: const Text("User"),
           ),
           ListTile(
-            leading: Icon(Icons.description),
-            title: Text("Records"),
+            leading: const Icon(Icons.description),
+            title: const Text("Records"),
           ),
+          ListTile(leading: Icon(Icons.pets), title: Text("Animals")),
+          ListTile(leading: Icon(Icons.yard), title: Text("Plantings")),
+          ListTile(leading: Icon(Icons.language), title: Text("Land")),
           ListTile(
-            leading: Icon(Icons.pets),
-            title: Text("Animals")
-          ),
-          ListTile(
-            leading: Icon(Icons.yard),
-            title: Text("Plantings")
-          ),
-          ListTile(
-            leading: Icon(Icons.language),
-            title: Text("Land")
+            leading: const Icon(Icons.snowing),
+            title: const Text("Seasons"),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SeasonFormPage()));
+            },
           )
         ],
       )),
