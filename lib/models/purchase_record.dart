@@ -8,7 +8,7 @@ class PurchaseRecord extends Record {
   PurchaseRecord(
       String title,
       DateTime timestamp,
-      String description,
+      String notes,
       bool isDone,
       List<Quantity> quantities,
       List<Resource> resources,
@@ -16,7 +16,7 @@ class PurchaseRecord extends Record {
       this.seller,
       this.invoice,
       this.lotNumber)
-      : super(title, timestamp, description, isDone, quantities, resources,
+      : super(title, timestamp, notes, isDone, quantities, resources,
             tags, (PurchaseRecord).toString());
 
   PurchaseRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {

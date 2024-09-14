@@ -6,13 +6,13 @@ class HarvestRecord extends Record {
   HarvestRecord(
       String title,
       DateTime timestamp,
-      String description,
+      String notes,
       bool isDone,
       List<Quantity> quantities,
       List<Resource> resources,
       List<String> tags,
       this.harvestDate)
-      : super(title, timestamp, description, isDone, quantities, resources,
+      : super(title, timestamp, notes, isDone, quantities, resources,
             tags, (HarvestRecord).toString());
 
   HarvestRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {

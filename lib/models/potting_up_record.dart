@@ -6,13 +6,13 @@ class PottingUpRecord extends Record {
   PottingUpRecord(
       String title,
       DateTime timestamp,
-      String description,
+      String notes,
       bool isDone,
       List<Quantity> quantities,
       List<Resource> resources,
       List<String> tags,
       this.pottingUpDate)
-      : super(title, timestamp, description, isDone, quantities, resources,
+      : super(title, timestamp, notes, isDone, quantities, resources,
             tags, (PottingUpRecord).toString());
 
   PottingUpRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {

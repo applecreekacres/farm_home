@@ -2,7 +2,7 @@ import 'models.dart';
 
 class Record extends Item {
   String title = "";
-  String description = "";
+  String notes = "";
   bool isDone = false;
   List<Quantity> quantities = List<Quantity>.empty();
   String recordType = "";
@@ -10,12 +10,13 @@ class Record extends Item {
   List<Resource> resources = List<Resource>.empty();
   List<String> tags = List<String>.empty();
 
-  Record(this.title, this.timestamp, this.description, this.isDone,
-      this.quantities, this.resources, this.tags, this.recordType) : super();
+  Record(this.title, this.timestamp, this.notes, this.isDone, this.quantities,
+      this.resources, this.tags, this.recordType)
+      : super();
 
   Record.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     title = data["title"];
-    description = data["description"];
+    notes = data["notes"];
     isDone = data["isDone"];
     quantities = List<Quantity>.from(data["quantities"]);
     recordType = data["recordType"];
@@ -28,7 +29,7 @@ class Record extends Item {
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {
       "title": title,
-      "description": description,
+      "notes": notes,
       "isDone": isDone,
       "quantities": quantities,
       "recordType": recordType,

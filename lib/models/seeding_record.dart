@@ -13,13 +13,13 @@ class SeedingRecord extends Record {
   SeedingRecord(
       String title,
       DateTime timestamp,
-      String description,
+      String notes,
       bool isDone,
       List<Quantity> quantities,
       List<Resource> resources,
       List<String> tags,
       this.seedingMethod)
-      : super(title, timestamp, description, isDone, quantities, resources,
+      : super(title, timestamp, notes, isDone, quantities, resources,
             tags, (SeedingRecord).toString());
 
   SeedingRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {

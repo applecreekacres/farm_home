@@ -6,13 +6,13 @@ class TransplantRecord extends Record {
   TransplantRecord(
       String title,
       DateTime timestamp,
-      String description,
+      String notes,
       bool isDone,
       List<Quantity> quantities,
       List<Resource> resources,
       List<String> tags,
       this.transplantDate)
-      : super(title, timestamp, description, isDone, quantities, resources,
+      : super(title, timestamp, notes, isDone, quantities, resources,
             tags, (TransplantRecord).toString());
 
   TransplantRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {

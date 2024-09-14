@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farm_home/constants/constants.dart';
+import 'package:farm_home/models/models.dart';
 
-class Farmer {
+class Farmer extends Item {
   final String id;
   final String photoUrl;
   final String name;
