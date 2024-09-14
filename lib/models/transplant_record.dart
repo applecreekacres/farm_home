@@ -4,16 +4,16 @@ class TransplantRecord extends Record {
   late DateTime transplantDate;
 
   TransplantRecord(
-      List<String> tags,
       String title,
       DateTime timestamp,
       String description,
       bool isDone,
       List<Quantity> quantities,
       List<Resource> resources,
+      List<String> tags,
       this.transplantDate)
-      : super(tags, title, timestamp, description, isDone, quantities,
-            resources, (TransplantRecord).toString());
+      : super(title, timestamp, description, isDone, quantities, resources,
+            tags, (TransplantRecord).toString());
 
   TransplantRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     transplantDate =

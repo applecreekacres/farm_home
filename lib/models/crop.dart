@@ -17,7 +17,6 @@ class Crop extends Reference {
   }
 
   Crop(
-      super.tags,
       super.name,
       super.description,
       this.daysToPottingUp,

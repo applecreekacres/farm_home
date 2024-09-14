@@ -5,7 +5,7 @@ enum LandType { bed, field, landmark, paddock, property, other }
 class Land extends Resource {
   LandType landType;
 
-  Land(List<String> tags, this.landType) : super(tags, (Land).toString());
+  Land(this.landType) : super((Land).toString());
 
   @override
   Map<String, dynamic> toMap() {

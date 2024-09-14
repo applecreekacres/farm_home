@@ -3,7 +3,7 @@ import 'item.dart';
 class Resource extends Item {
   String _resourceType = "";
 
-  Resource(super.tags, this._resourceType);
+  Resource(this._resourceType) : super();
 
   Resource.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     _resourceType = data["resource_type"];

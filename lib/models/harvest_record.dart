@@ -4,16 +4,16 @@ class HarvestRecord extends Record {
   late DateTime harvestDate;
 
   HarvestRecord(
-      List<String> tags,
       String title,
       DateTime timestamp,
       String description,
       bool isDone,
       List<Quantity> quantities,
       List<Resource> resources,
+      List<String> tags,
       this.harvestDate)
-      : super(tags, title, timestamp, description, isDone, quantities,
-            resources, (HarvestRecord).toString());
+      : super(title, timestamp, description, isDone, quantities, resources,
+            tags, (HarvestRecord).toString());
 
   HarvestRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     harvestDate = DateTime.fromMillisecondsSinceEpoch(data["harvestDate"]);

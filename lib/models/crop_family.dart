@@ -1,5 +1,5 @@
 import 'models.dart';
 
 class CropFamily extends Reference {
-  CropFamily(super.tags, super.name, super.description);
+  CropFamily(super.name, super.description);
 }

@@ -9,9 +9,9 @@ class Animal extends Resource {
   String nickname = "";
   late Sex sex;
 
-  Animal(List<String> tags, this.birthDate, this.isFixed, this.deathDate,
+  Animal(this.birthDate, this.isFixed, this.deathDate,
       this.nickname, this.sex)
-      : super(tags, (Animal).toString());
+      : super((Animal).toString());
 
   Animal.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     birthDate = DateTime.fromMillisecondsSinceEpoch(data["birthDate"]);

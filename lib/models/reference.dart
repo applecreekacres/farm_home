@@ -4,7 +4,7 @@ class Reference extends Item {
   String name = "";
   String description = "";
 
-  Reference(super.tags, this.name, this.description);
+  Reference(this.name, this.description);
 
   Reference.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     name = data["name"];

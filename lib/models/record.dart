@@ -8,9 +8,10 @@ class Record extends Item {
   String recordType = "";
   DateTime timestamp = DateTime.now();
   List<Resource> resources = List<Resource>.empty();
+  List<String> tags = List<String>.empty();
 
-  Record(super.tags, this.title, this.timestamp, this.description,
-      this.isDone, this.quantities, this.resources, this.recordType);
+  Record(this.title, this.timestamp, this.description, this.isDone,
+      this.quantities, this.resources, this.tags, this.recordType) : super();
 
   Record.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     title = data["title"];
@@ -20,6 +21,7 @@ class Record extends Item {
     recordType = data["recordType"];
     resources = List<Resource>.from(data["resources"]);
     timestamp = DateTime.fromMillisecondsSinceEpoch(data["timestamp"]);
+    tags = List<String>.from(data["tags"]);
   }
 
   @override

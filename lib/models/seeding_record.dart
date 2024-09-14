@@ -11,16 +11,16 @@ class SeedingRecord extends Record {
   late Equipment seeder;
 
   SeedingRecord(
-      List<String> tags,
       String title,
       DateTime timestamp,
       String description,
       bool isDone,
       List<Quantity> quantities,
       List<Resource> resources,
+      List<String> tags,
       this.seedingMethod)
-      : super(tags, title, timestamp, description, isDone, quantities,
-            resources, (SeedingRecord).toString());
+      : super(title, timestamp, description, isDone, quantities, resources,
+            tags, (SeedingRecord).toString());
 
   SeedingRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     seedingMethod = data["seedingMethod"];
@@ -28,9 +28,7 @@ class SeedingRecord extends Record {
 
   @override
   Map<String, dynamic> toMap() {
-    Map<String, dynamic> map = {
-      "seedingMethod": seedingMethod
-    };
+    Map<String, dynamic> map = {"seedingMethod": seedingMethod};
     map.addAll(super.toMap());
     return map;
   }
