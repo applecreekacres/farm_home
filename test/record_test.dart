@@ -22,7 +22,7 @@ void main() {
     expect(record.resources, List<Resource>.empty());
     expect(record.tags.length, 1);
     expect(record.tags[0], "tag");
-    expect(record.description, "Basic Description");
+    expect(record.notes, "Basic Description");
     expect(record.recordType, "Record");
   });
 
