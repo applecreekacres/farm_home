@@ -4,17 +4,27 @@ class Reference extends Item {
   String name = "";
   String description = "";
 
+  String get referenceType => (this).runtimeType.toString();
+
   Reference(this.name, this.description);
 
   Reference.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    name = data["name"];
-    description = data["description"];
+    if (data["referenceType"] == referenceType) {
+      name = data["name"];
+      description = data["description"];
+    } else {
+      throw ArgumentError("Invalid reference data map provided.");
+    }
   }
 
   @override
   Map<String, dynamic> toMap() {
-    Map<String, dynamic> map = {"name": name, "description": description};
-    map.addAll(super.toMap());
+    var map = super.toMap();
+    map.addAll({
+      "name": name,
+      "description": description,
+      "referenceType": referenceType
+    });
     return map;
   }
 }
