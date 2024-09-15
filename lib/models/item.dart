@@ -24,7 +24,7 @@ class Item {
 
   Item.fromMap(Map<String, dynamic> data) {
     _id = data["id"];
-    _userId = data["userid"];
+    _userId = data["userId"];
     _created = DateTime.fromMillisecondsSinceEpoch(data["created"]);
     _modified = DateTime.fromMillisecondsSinceEpoch(data["modified"]);
   }
