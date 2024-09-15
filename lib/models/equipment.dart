@@ -17,6 +17,7 @@ class Equipment extends Resource {
     }
   }
 
+  @override
   Map<String, dynamic> toMap() {
     var map = super.toMap();
     map.addAll({
