@@ -21,3 +21,4 @@ export 'land.dart';
 export 'seeding_record.dart';
 export 'material.dart';
 export 'material_type.dart';
+export 'input_record.dart';
