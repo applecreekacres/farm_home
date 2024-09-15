@@ -4,5 +4,5 @@ import 'crop.dart';
 class Seed extends Resource {
   Crop crop;
 
-  Seed(this.crop) : super((Seed).toString());
+  Seed(this.crop) : super();
 }

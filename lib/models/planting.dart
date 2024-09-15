@@ -51,7 +51,7 @@ class Planting extends Resource {
       this.daysToTransplant,
       this.daysToHarvest,
       this.harvestWindow)
-      : super((Planting).toString());
+      : super();
 
   Planting.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     _cropId = data["cropId"];

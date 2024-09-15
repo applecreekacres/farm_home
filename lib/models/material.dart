@@ -6,7 +6,7 @@ class Material extends Resource {
   Future<MaterialType?> get material =>
       getItemById<MaterialType>(_materialTypeId);
 
-  Material(MaterialType type) : super((Material).toString()) {
+  Material(MaterialType type) : super() {
     _materialTypeId = type.id;
   }
 
