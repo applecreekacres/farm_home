@@ -12,7 +12,7 @@ class SeasonFormPage extends StatefulWidget {
 class _SeasonFormPageState extends State<SeasonFormPage> {
   final _formKey = GlobalKey<FormState>();
 
-  final Season _season = Season(List<String>.empty(), "", "");
+  final Season _season = Season("", "");
 
   Future<void> _selectStartDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
