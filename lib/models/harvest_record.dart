@@ -3,17 +3,8 @@ import 'models.dart';
 class HarvestRecord extends Record {
   late DateTime harvestDate;
 
-  HarvestRecord(
-      String title,
-      DateTime timestamp,
-      String notes,
-      bool isDone,
-      List<Quantity> quantities,
-      List<Resource> resources,
-      List<String> tags,
-      this.harvestDate)
-      : super(title, timestamp, notes, isDone, quantities, resources,
-            tags, (HarvestRecord).toString());
+  HarvestRecord(super.title, super.timestamp, super.notes, super.isDone,
+      super.quantities, super.resources, super.tags, this.harvestDate);
 
   HarvestRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     harvestDate = DateTime.fromMillisecondsSinceEpoch(data["harvestDate"]);

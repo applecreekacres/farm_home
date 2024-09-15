@@ -12,8 +12,7 @@ void main() {
         false,
         List<Quantity>.empty(),
         List<Resource>.empty(),
-        ["tag"],
-        (Record).toString());
+        ["tag"]);
 
     expect(record.isDone, false);
     expect(record.timestamp, now);
@@ -55,7 +54,7 @@ void main() {
   test("Get Map from Record", () {
     final now = DateTime.now();
     final record =
-        Record("Record", now, "", true, [], [], ["test"], (Record).toString());
+        Record("Record", now, "", true, [], [], ["test"]);
     final map = record.toMap();
 
     expect(map["title"], "Record");

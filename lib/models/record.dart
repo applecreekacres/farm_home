@@ -5,24 +5,30 @@ class Record extends Item {
   String notes = "";
   bool isDone = false;
   List<Quantity> quantities = List<Quantity>.empty();
-  String recordType = "";
   DateTime timestamp = DateTime.now();
   List<Resource> resources = List<Resource>.empty();
   List<String> tags = List<String>.empty();
 
+  String get recordType => (this).runtimeType.toString();
+
   Record(this.title, this.timestamp, this.notes, this.isDone, this.quantities,
-      this.resources, this.tags, this.recordType)
+      this.resources, this.tags)
       : super();
 
   Record.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    title = data["title"];
-    notes = data["notes"];
-    isDone = data["isDone"];
-    quantities = List<Quantity>.from(data["quantities"]);
-    recordType = data["recordType"];
-    resources = List<Resource>.from(data["resources"]);
-    timestamp = DateTime.fromMillisecondsSinceEpoch(data["timestamp"]);
-    tags = List<String>.from(data["tags"]);
+    var received = data['recordType'] as String;
+    if (received == recordType) {
+      title = data["title"];
+      notes = data["notes"];
+      isDone = data["isDone"];
+      quantities = List<Quantity>.from(data["quantities"]);
+      resources = List<Resource>.from(data["resources"]);
+      timestamp = DateTime.fromMillisecondsSinceEpoch(data["timestamp"]);
+      tags = List<String>.from(data["tags"]);
+    } else {
+      throw ArgumentError(
+          "Data provided is of invalid record type. Received $received and expected $recordType");
+    }
   }
 
   @override

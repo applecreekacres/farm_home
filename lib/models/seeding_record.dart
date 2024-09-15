@@ -11,16 +11,17 @@ class SeedingRecord extends Record {
   late Equipment seeder;
 
   SeedingRecord(
-      String title,
-      DateTime timestamp,
-      String notes,
-      bool isDone,
-      List<Quantity> quantities,
-      List<Resource> resources,
-      List<String> tags,
-      this.seedingMethod)
-      : super(title, timestamp, notes, isDone, quantities, resources,
-            tags, (SeedingRecord).toString());
+      super.title,
+      super.timestamp,
+      super.notes,
+      super.isDone,
+      super.quantities,
+      super.resources,
+      super.tags,
+      this.seedingMethod,
+      this.extraSeed,
+      this.traysNeeded,
+      this.seeder);
 
   SeedingRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     seedingMethod = data["seedingMethod"];

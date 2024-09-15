@@ -3,17 +3,8 @@ import 'models.dart';
 class PottingUpRecord extends Record {
   late DateTime pottingUpDate;
 
-  PottingUpRecord(
-      String title,
-      DateTime timestamp,
-      String notes,
-      bool isDone,
-      List<Quantity> quantities,
-      List<Resource> resources,
-      List<String> tags,
-      this.pottingUpDate)
-      : super(title, timestamp, notes, isDone, quantities, resources,
-            tags, (PottingUpRecord).toString());
+  PottingUpRecord(super.title, super.timestamp, super.notes, super.isDone,
+      super.quantities, super.resources, super.tags, this.pottingUpDate);
 
   PottingUpRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     pottingUpDate = DateTime.fromMillisecondsSinceEpoch(data["pottingUpDate"]);

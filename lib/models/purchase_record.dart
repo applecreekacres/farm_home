@@ -6,18 +6,16 @@ class PurchaseRecord extends Record {
   String lotNumber = "";
 
   PurchaseRecord(
-      String title,
-      DateTime timestamp,
-      String notes,
-      bool isDone,
-      List<Quantity> quantities,
-      List<Resource> resources,
-      List<String> tags,
+      super.title,
+      super.timestamp,
+      super.notes,
+      super.isDone,
+      super.quantities,
+      super.resources,
+      super.tags,
       this.seller,
       this.invoice,
-      this.lotNumber)
-      : super(title, timestamp, notes, isDone, quantities, resources,
-            tags, (PurchaseRecord).toString());
+      this.lotNumber);
 
   PurchaseRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     seller = data["seller"];

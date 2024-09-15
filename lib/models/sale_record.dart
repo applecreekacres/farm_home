@@ -6,18 +6,16 @@ class SaleRecord extends Record {
   String lotNumber = "";
 
   SaleRecord(
-      String title,
-      DateTime timestamp,
-      String notes,
-      bool isDone,
-      List<Quantity> quantities,
-      List<Resource> resources,
-      List<String> tags,
+      super.title,
+      super.timestamp,
+      super.notes,
+      super.isDone,
+      super.quantities,
+      super.resources,
+      super.tags,
       this.customer,
       this.invoice,
-      this.lotNumber)
-      : super(title, timestamp, notes, isDone, quantities, resources,
-            tags, (SaleRecord).toString());
+      this.lotNumber);
 
   SaleRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     customer = data["customer"];
