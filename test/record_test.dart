@@ -6,13 +6,13 @@ void main() {
   test("Create a new Record", () {
     final now = DateTime.now();
     final record = Record(
-        ["tag"],
         "New Record",
         now,
         "Basic Description",
         false,
         List<Quantity>.empty(),
         List<Resource>.empty(),
+        ["tag"],
         (Record).toString());
 
     expect(record.isDone, false);
@@ -29,14 +29,16 @@ void main() {
   test("Load Record from Map", () {
     final now = DateTime.now().millisecondsSinceEpoch;
     final id = const Uuid().v4();
+    final userId = const Uuid().v4();
     Map<String, dynamic> map = {
       "id": id,
+      "userId": userId,
       "created":
           DateTime(DateTime.now().year, 1, 2, 3, 4, 5).millisecondsSinceEpoch,
       "modified":
           DateTime(DateTime.now().year, 5, 4, 3, 2, 1).millisecondsSinceEpoch,
       "title": "title",
-      "description": "description",
+      "notes": "description",
       "isDone": false,
       "timestamp": now,
       "tags": ["tag2"],
@@ -53,7 +55,7 @@ void main() {
   test("Get Map from Record", () {
     final now = DateTime.now();
     final record =
-        Record(["test"], "Record", now, "", true, [], [], (Record).toString());
+        Record("Record", now, "", true, [], [], ["test"], (Record).toString());
     final map = record.toMap();
 
     expect(map["title"], "Record");
