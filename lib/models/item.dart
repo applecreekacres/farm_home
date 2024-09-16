@@ -53,7 +53,7 @@ Future<T?> getItemById<T extends Item>(String itemId) async {
   }
 }
 
-Future<List<T>> getItemsByUser<T extends Item>(String itemId) async {
+Future<List<T>> getItemsByUser<T extends Item>() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var user = prefs.getString("userId");
   final docRef = FirebaseFirestore.instance
@@ -66,7 +66,7 @@ Future<List<T>> getItemsByUser<T extends Item>(String itemId) async {
 }
 
 /// Upload an item to Firestore. If the item exists it will be updated.
-void updateItem<T extends Item>(T model) async {
+void createItem<T extends Item>(T model) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   model._userId = prefs.getString("userId") ?? "";
   model._modified = DateTime.now();
@@ -74,4 +74,14 @@ void updateItem<T extends Item>(T model) async {
       .collection((T).toString())
       .doc(model.id)
       .set(model.toMap());
+}
+
+void updateItem<T extends Item>(T model) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  model._userId = prefs.getString("userId") ?? "";
+  model._modified = DateTime.now();
+  await FirebaseFirestore.instance
+      .collection((T).toString())
+      .doc(model.id)
+      .update(model.toMap());
 }

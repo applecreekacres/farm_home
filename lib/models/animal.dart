@@ -5,7 +5,7 @@ enum Sex { male, female }
 class Animal extends Resource {
   late DateTime birthDate;
   bool isFixed = false; // In relation to neutering/castrasting/spaying
-  late DateTime deathDate;
+  DateTime? deathDate;
   String nickname = "";
   late Sex sex;
   String _animalSpeciesId = "";
@@ -24,9 +24,8 @@ class Animal extends Resource {
     _animalSpeciesId = _animalSpecies?.id ?? "";
   }
 
-  Animal(this.birthDate, this.isFixed, this.deathDate, this.nickname, this.sex,
-      this._animalSpecies)
-      : super() {
+  Animal(super.name, super.notes, this.birthDate, this.isFixed, this.deathDate,
+      this.nickname, this.sex, this._animalSpecies) {
     _animalSpeciesId = _animalSpecies?.id ?? "";
   }
 
@@ -44,7 +43,7 @@ class Animal extends Resource {
     Map<String, dynamic> map = {
       "isFixed": isFixed,
       "birthDate": birthDate.millisecondsSinceEpoch,
-      "deathDate": deathDate.millisecondsSinceEpoch,
+      "deathDate": deathDate?.millisecondsSinceEpoch,
       "nickname": nickname,
       "sex": sex,
       "animalSpeciesId": _animalSpeciesId

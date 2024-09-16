@@ -42,6 +42,8 @@ class Planting extends Resource {
   }
 
   Planting(
+      super.name,
+      super.notes,
       this._crop,
       this._beds,
       this.length,

@@ -5,7 +5,8 @@ class Equipment extends Resource {
   String model = "";
   String serialNumber = "";
 
-  Equipment(this.manufacturer, this.model, this.serialNumber) : super();
+  Equipment(super.name, super.notes, this.manufacturer, this.model,
+      this.serialNumber);
 
   Equipment.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     if (data["resourceType"] == resourceType) {
