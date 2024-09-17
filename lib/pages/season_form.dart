@@ -50,11 +50,11 @@ class _SeasonFormPageState extends State<SeasonFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          backgroundColor: Theme.of(context).colorScheme.primary,
           title: const Text("New Season"),
           actions: [
             IconButton(
-                onPressed: () => updateItem<Season>(_season),
+                onPressed: () => createItem<Season>(_season),
                 icon: const Icon(Icons.save))
           ],
         ),
