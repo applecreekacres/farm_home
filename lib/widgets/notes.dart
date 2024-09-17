@@ -5,14 +5,19 @@ class NotesField extends StatelessWidget {
 
   const NotesField({required this.modelField, super.key});
 
-
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      minLines: 5,
-      maxLines: null,
-      keyboardType: TextInputType.multiline,
-      controller: TextEditingController(text: modelField),
-    );
+    return Column(children: [
+      const Text(
+        'Notes',
+        textAlign: TextAlign.left,
+      ),
+      TextFormField(
+        minLines: 5,
+        maxLines: null,
+        keyboardType: TextInputType.multiline,
+        controller: TextEditingController(text: modelField),
+      )
+    ]);
   }
 }
