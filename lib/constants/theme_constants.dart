@@ -6,7 +6,7 @@ class ColorConstants {
 }
 
 ThemeData farmHomeTheme = ThemeData(
-  primaryColor: ColorConstants.primaryColor,
+  colorScheme: ColorScheme.fromSeed(seedColor: ColorConstants.primaryColor),
   fontFamily: 'Urbanist',
   useMaterial3: true,
 );
