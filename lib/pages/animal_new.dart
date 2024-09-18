@@ -44,6 +44,8 @@ class _AnimalNewPageState extends State<AnimalNewPage> {
                 onChanged: (value) => _animal.nickname = value),
             DateTimeTextField(
                 labelText: 'Birth Date',
+                firstDate: DateTime(1970),
+                lastDate: DateTime.now(),
                 value: _animal.birthDate,
                 onChanged: (value) {
                   _animal.birthDate = value!;
@@ -51,6 +53,8 @@ class _AnimalNewPageState extends State<AnimalNewPage> {
                 initialDate: DateTime.now()),
             DateTimeTextField(
                 labelText: 'Death Date',
+                firstDate: DateTime(1970),
+                lastDate: DateTime.now(),
                 value: _animal.deathDate,
                 onChanged: (value) {
                   _animal.deathDate = value!;

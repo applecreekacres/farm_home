@@ -12,8 +12,6 @@ class AnimalListPage extends StatefulWidget {
 }
 
 class _AnimalListPageState extends State<AnimalListPage> {
-  final _formKey = GlobalKey<FormState>();
-
   List<Animal> _animals = [];
 
   @override
@@ -43,8 +41,9 @@ class _AnimalListPageState extends State<AnimalListPage> {
             );
           }),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AnimalNewPage() )),
-        child: const Icon(Icons.add)),
+          onPressed: () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AnimalNewPage())),
+          child: const Icon(Icons.add)),
     );
   }
 }

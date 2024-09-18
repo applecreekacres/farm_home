@@ -30,6 +30,8 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
       LabelledCheckbox(label: 'Done', value: record.isDone),
       DateTimeTextField(
           labelText: 'Timestamp',
+          firstDate: DateTime(1970),
+          lastDate: DateTime(2100),
           value: record.timestamp,
           onChanged: (value) {
             record.timestamp = value!;

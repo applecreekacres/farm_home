@@ -5,17 +5,17 @@ class DateTimeTextField extends StatefulWidget {
   final DateTime? value;
   final ValueChanged<DateTime?>? onChanged;
   final DateTime initialDate;
-  DateTime? firstDate = DateTime(1970);
-  DateTime? lastDate = DateTime(DateTime.now().year + 50);
+  final DateTime? firstDate;
+  final DateTime? lastDate;
 
-  DateTimeTextField(
+  const DateTimeTextField(
       {super.key,
       required this.labelText,
       required this.value,
       required this.onChanged,
       required this.initialDate,
-      this.firstDate,
-      this.lastDate});
+      required this.firstDate,
+      required this.lastDate});
 
   @override
   State<DateTimeTextField> createState() => _DateTimeTextFieldState();

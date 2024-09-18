@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:material_symbols_icons/symbols.dart';
 
-import 'package:farm_home/pages/pages.dart';
 import 'package:farm_home/widgets/widgets.dart';
 
 class ResourceSelectPage extends StatelessWidget {
