@@ -4,3 +4,6 @@ export 'splash.dart';
 export 'season_form.dart';
 export 'animal_list.dart';
 export 'animal_new.dart';
+export 'activity_record_form.dart';
+export 'input_record_form.dart';
+export 'observation_record_form.dart';
