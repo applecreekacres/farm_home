@@ -97,11 +97,11 @@ class AuthProvider extends ChangeNotifier {
     } else {
       // Already sign up, just get data from firestore
       final documentSnapshot = documents.first;
-      final farmer = Farmer.fromDocument(documentSnapshot);
-      await prefs.setString(FirestoreConstants.id, farmer.id);
-      await prefs.setString(FirestoreConstants.name, farmer.name);
-      await prefs.setString(FirestoreConstants.photoUrl, farmer.photoUrl);
-      await prefs.setString(FirestoreConstants.description, farmer.description);
+      // final farmer = Farmer.fromMap(documentSnapshot);
+      // await prefs.setString(FirestoreConstants.id, farmer.id);
+      // await prefs.setString(FirestoreConstants.name, farmer.name);
+      // await prefs.setString(FirestoreConstants.photoUrl, farmer.photoUrl);
+      // await prefs.setString(FirestoreConstants.description, farmer.description);
     }
     _status = Status.authenticated;
     notifyListeners();
