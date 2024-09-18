@@ -34,7 +34,12 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
             record.timestamp = value!;
           },
           initialDate: DateTime.now()),
-      NotesField(modelField: record.notes),
+      NotesField(
+        modelField: record.notes,
+        onChanged: (value) {
+          record.notes = value;
+        },
+      ),
     ];
 
     fields.addAll(this.fields);

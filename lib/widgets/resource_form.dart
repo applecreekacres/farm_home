@@ -28,7 +28,14 @@ class _ResourceFormState<T extends Resource> extends State<ResourceForm<T>> {
                 validator: (value) =>
                     value?.isEmpty ?? true ? 'Please enter a name' : null,
                 onChanged: (value) => resource.name = value),
-                NotesField(modelField: resource.notes),
+            NotesField(
+              modelField: resource.notes,
+              onChanged: (value) {
+                setState(() {
+                  resource.notes = value;
+                });
+              },
+            ),
           ],
         ),
       ),

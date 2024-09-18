@@ -1,7 +1,6 @@
 import 'package:farm_home/constants/constants.dart';
 import 'package:farm_home/models/models.dart';
 import 'package:farm_home/pages/datetime_text_field.dart';
-import 'package:farm_home/widgets/labeled_checkbox.dart';
 import 'package:farm_home/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,7 @@ class AnimalNewPage extends StatefulWidget {
 class _AnimalNewPageState extends State<AnimalNewPage> {
   final _formKey = GlobalKey<FormState>();
 
-  Animal _animal =
+  final Animal _animal =
       Animal("", "", DateTime.now(), false, null, "", Sex.male, null);
 
   @override
@@ -66,7 +65,7 @@ class _AnimalNewPageState extends State<AnimalNewPage> {
                       textAlign: TextAlign.left,
                     ),
                     DropdownButton<Sex>(
-                        items: Sex.values.map((value) {
+                        items: Sex.values.map((Sex value) {
                           return DropdownMenuItem<Sex>(
                               value: value,
                               child: Text(value.toString().split('.')[1]));
@@ -86,7 +85,12 @@ class _AnimalNewPageState extends State<AnimalNewPage> {
                     }),
               ],
             ),
-            NotesField(modelField: _animal.notes),
+            NotesField(
+              modelField: _animal.notes,
+              onChanged: (value) {
+                _animal.notes = value;
+              },
+            ),
           ]),
         ),
       ),
