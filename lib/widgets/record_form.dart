@@ -6,9 +6,9 @@ import 'package:farm_home/widgets/widgets.dart';
 
 class RecordForm<T extends Record> extends StatefulWidget {
   final T record;
-  List<Widget>? additionalFields = List<Widget>.empty();
+  final List<Widget>? additionalFields;
 
-  RecordForm({required this.record, this.additionalFields, super.key});
+  const RecordForm({required this.record, this.additionalFields, super.key});
 
   @override
   State<RecordForm> createState() => _RecordFormState<T>();

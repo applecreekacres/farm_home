@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:farm_home/constants/constants.dart';
-import 'package:farm_home/models/models.dart';
 
 enum Status {
   uninitialized,
@@ -96,7 +95,7 @@ class AuthProvider extends ChangeNotifier {
           FirestoreConstants.photoUrl, currentUser.photoURL ?? "");
     } else {
       // Already sign up, just get data from firestore
-      final documentSnapshot = documents.first;
+      // final documentSnapshot = documents.first;
       // final farmer = Farmer.fromMap(documentSnapshot);
       // await prefs.setString(FirestoreConstants.id, farmer.id);
       // await prefs.setString(FirestoreConstants.name, farmer.name);
