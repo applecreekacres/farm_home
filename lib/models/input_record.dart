@@ -13,8 +13,8 @@ class InputRecord extends Record {
       super.quantities,
       super.resources,
       super.tags,
-      Material material) {
-    _materialId = material.id;
+      Material? material) {
+    _materialId = material?.id ?? "";
   }
 
   InputRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
