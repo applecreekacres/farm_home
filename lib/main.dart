@@ -49,10 +49,7 @@ class FarmHome extends StatelessWidget {
         ],
         child: MaterialApp(
           title: AppConstants.appTitle,
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.green.shade400),
-            useMaterial3: true,
-          ),
+          theme: farmHomeTheme,
           home: const AuthGate(),
           debugShowCheckedModeBanner: false,
         ));
