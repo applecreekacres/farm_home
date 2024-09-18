@@ -40,10 +40,11 @@ class _AnimalListPageState extends State<AnimalListPage> {
               title: Text(_animals[index].nickname),
             );
           }),
-      floatingActionButton: FloatingActionButton(
-          onPressed: () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const AnimalNewPage())),
-          child: const Icon(Icons.add)),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () => Navigator.push(context,
+      //       MaterialPageRoute(builder: (context) => const AnimalNewPage())),
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 }

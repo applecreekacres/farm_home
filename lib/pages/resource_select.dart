@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:material_symbols_icons/symbols.dart';
 
+import 'package:farm_home/pages/pages.dart';
 import 'package:farm_home/widgets/widgets.dart';
 
 class ResourceSelectPage extends StatelessWidget {
@@ -20,7 +21,14 @@ class ResourceSelectPage extends StatelessWidget {
         children: [
           ListTile(
               leading: const Icon(Icons.pets),
-              title: const Text("Animal")),
+              title: const Text("Animal"),
+              onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AnimalForm()));
+            },
+          ),
           ListTile(
               leading: const Icon(Icons.agriculture),
               title: const Text("Equipment")),
