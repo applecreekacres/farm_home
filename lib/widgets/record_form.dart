@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
+
+import 'package:farm_home/models/models.dart';
 import 'package:farm_home/pages/datetime_text_field.dart';
 import 'package:farm_home/widgets/widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:farm_home/models/models.dart';
 
 class RecordForm<T extends Record> extends StatefulWidget {
   final T record;

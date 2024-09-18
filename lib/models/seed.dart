@@ -1,5 +1,5 @@
-import 'resource.dart';
 import 'crop.dart';
+import 'resource.dart';
 
 class Seed extends Resource {
   Crop crop;

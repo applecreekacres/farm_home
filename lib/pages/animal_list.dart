@@ -1,8 +1,8 @@
-import 'package:farm_home/constants/constants.dart';
-import 'package:farm_home/models/models.dart';
 import 'package:flutter/material.dart';
-import 'package:farm_home/widgets/widgets.dart';
+
+import 'package:farm_home/models/models.dart';
 import 'package:farm_home/pages/pages.dart';
+import 'package:farm_home/widgets/widgets.dart';
 
 class AnimalListPage extends StatefulWidget {
   const AnimalListPage({super.key});
