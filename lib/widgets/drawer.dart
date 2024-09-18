@@ -12,7 +12,7 @@ class FarmHomeDrawer extends StatelessWidget {
       padding: EdgeInsets.zero,
       children: [
         DrawerHeader(
-          decoration: const BoxDecoration(color: ColorConstants.primaryColor),
+          decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary),
           child: const Text("User"),
         ),
         ListTile(
@@ -29,8 +29,8 @@ class FarmHomeDrawer extends StatelessWidget {
                     builder: (context) => const AnimalListPage()));
           },
         ),
-        ListTile(leading: Icon(Icons.yard), title: Text("Plantings")),
-        ListTile(leading: Icon(Icons.language), title: Text("Land")),
+        ListTile(leading: const Icon(Icons.yard), title: const Text("Plantings")),
+        ListTile(leading: const Icon(Icons.language), title: const Text("Land")),
         ListTile(
           leading: const Icon(Icons.snowing),
           title: const Text("Seasons"),
