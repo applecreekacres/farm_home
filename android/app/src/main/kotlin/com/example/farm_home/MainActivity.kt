@@ -1,4 +1,4 @@
-package com.example.farm_home
+package com.brendel.farmhome
 
 import io.flutter.embedding.android.FlutterActivity
 

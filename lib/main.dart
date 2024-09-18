@@ -1,5 +1,16 @@
 import 'package:flutter/material.dart';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide AuthProvider;
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:farm_home/auth_gate.dart';
+import 'package:farm_home/providers/providers.dart';
+
+import 'constants/constants.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -7,58 +18,42 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  runApp(const FarmHome());
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  runApp(FarmHome(prefs: prefs));
 }
 
 class FarmHome extends StatelessWidget {
-  const FarmHome({super.key});
+  final SharedPreferences prefs;
+
+  final _firebaseFirestore = FirebaseFirestore.instance;
+
+  FarmHome({super.key, required this.prefs});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Farm Home',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green.shade400),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Farm Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: const Center(),
-      drawer: Drawer(
-          child: ListView(
-        padding: EdgeInsets.zero,
-        children: const [
-          DrawerHeader(
-            decoration: BoxDecoration(color: Colors.green),
-            child: Text("User"),
+    return MultiProvider(
+        providers: [
+          Provider<HomeProvider>(
+              create: (_) =>
+                  HomeProvider(firebaseFirestore: _firebaseFirestore)),
+          Provider<SettingProvider>(
+            create: (_) => SettingProvider(
+                prefs: prefs, firebaseFirestore: _firebaseFirestore),
           ),
-          ListTile(
-            title: Text("Records"),
-          )
+          ChangeNotifierProvider<AuthProvider>(
+              create: (_) => AuthProvider(
+                  firebaseAuth: FirebaseAuth.instance,
+                  googleSignIn: GoogleSignIn(
+                      clientId:
+                          "151592527578-mp8p672pkcmog3sl1bdfi46scipalhlj.apps.googleusercontent.com"),
+                  prefs: prefs,
+                  firebaseFirestore: _firebaseFirestore))
         ],
-      )),
-      // floatingActionButton: FloatingActionButton(),
-    );
+        child: MaterialApp(
+          title: AppConstants.appTitle,
+          theme: farmHomeTheme,
+          home: const AuthGate(),
+          debugShowCheckedModeBanner: false,
+        ));
   }
 }
