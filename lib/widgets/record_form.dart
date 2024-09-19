@@ -31,7 +31,13 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
           validator: (value) =>
               value?.isEmpty ?? true ? 'Please enter a name' : null,
           onChanged: (value) => record.title = value),
-      LabelledCheckbox(label: 'Done', value: record.isDone!),
+      LabelledCheckbox(
+        label: 'Done',
+        value: record.isDone!,
+        onChanged: (value) {
+          record.isDone = value!;
+        },
+      ),
       DateTimeTextField(
           labelText: 'Timestamp',
           firstDate: DateTime(1970),
@@ -71,6 +77,7 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
                     } else {
                       updateItem<T>(record);
                     }
+                    Navigator.of(context).pop();
                   },
                   icon: const Icon(Icons.save))
             ],

@@ -13,7 +13,7 @@ class InputRecord extends Record {
       super.quantities,
       super.resources,
       super.tags,
-      Material? material}) {
+      Material? material}) : super() {
     _materialId = material?.id ?? "";
   }
 

@@ -30,6 +30,12 @@ class RecordSelectPage extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.pets),
             title: const Text("Harvest"),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const HarvestRecordForm()));
+            },
           ),
           ListTile(
             leading: const Icon(Icons.input),
@@ -42,7 +48,15 @@ class RecordSelectPage extends StatelessWidget {
             },
           ),
           ListTile(
-              leading: Icon(Icons.construction), title: Text("Maintenance")),
+            leading: const Icon(Icons.construction),
+            title: const Text("Maintenance"),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const MaintenanceRecordForm()));
+            },
+          ),
           ListTile(
             leading: const Icon(Icons.snowing),
             title: const Text("Observation"),
@@ -53,13 +67,56 @@ class RecordSelectPage extends StatelessWidget {
                       builder: (context) => const ObservationRecordForm()));
             },
           ),
-          ListTile(leading: Icon(Icons.yard), title: Text("Potting Up")),
-          ListTile(leading: Icon(Icons.money), title: Text("Purchase")),
           ListTile(
-              leading: Icon(Icons.currency_exchange_rounded),
-              title: Text("Sale")),
-          ListTile(leading: Icon(Icons.yard), title: Text("Seeding")),
-          ListTile(leading: Icon(Icons.yard), title: Text("Transplant")),
+            leading: const Icon(Icons.yard),
+            title: const Text("Potting Up"),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const PottingUpRecordForm()));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.money),
+            title: const Text("Purchase"),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const PurchaseRecordForm()));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.currency_exchange_rounded),
+            title: const Text("Sale"),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SaleRecordForm()));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.yard),
+            title: const Text("Seeding"),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SeedingRecordForm()));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.yard),
+            title: const Text("Transplant"),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const TransplantRecordForm()));
+            },
+          ),
         ],
       ),
     );
