@@ -1,12 +1,12 @@
 import 'models.dart';
 
 class SaleRecord extends Record {
-  String customer = "";
-  String invoice = "";
-  String lotNumber = "";
+  String? customer = "";
+  String? invoice = "";
+  String? lotNumber = "";
 
   SaleRecord(
-      super.title,
+      {super.title,
       super.timestamp,
       super.notes,
       super.isDone,
@@ -15,7 +15,7 @@ class SaleRecord extends Record {
       super.tags,
       this.customer,
       this.invoice,
-      this.lotNumber);
+      this.lotNumber});
 
   SaleRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     customer = data["customer"];

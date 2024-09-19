@@ -2,26 +2,31 @@ import 'package:farm_home/models/models.dart';
 
 class MaintenanceRecord extends Record {
   List<String> _equipmentUsedId = List<String>.empty();
-  List<Equipment> _equipmentUsed = List<Equipment>.empty();
+  List<Equipment>? equipmentUsed = List<Equipment>.empty();
 
-  List<Equipment> get equipmentUsed {
-    if (_equipmentUsedId.isNotEmpty && _equipmentUsed.isEmpty) {
-      _equipmentUsed = _equipmentUsedId
+  List<Equipment>? get equipment {
+    if (_equipmentUsedId.isNotEmpty && equipmentUsed!.isEmpty) {
+      equipmentUsed = _equipmentUsedId
           .map((id) => getItemById<Equipment>(id) as Equipment)
           .toList();
     }
-    return _equipmentUsed;
+    return equipmentUsed;
   }
 
-  set equipmentUsed(List<Equipment> e) {
-    _equipmentUsed = e;
-    _equipmentUsedId = _equipmentUsed.map((e) => e.id).toList();
+  set equipment(List<Equipment>? e) {
+    equipmentUsed = e;
+    _equipmentUsedId = equipmentUsed!.map((e) => e.id).toList();
   }
 
-  MaintenanceRecord(super.title, super.timestamp, super.notes, super.isDone,
-      super.quantities, super.resources, super.tags, this._equipmentUsed) {
-    _equipmentUsedId = _equipmentUsed.map((e) => e.id).toList();
-  }
+  MaintenanceRecord(
+      {super.title,
+      super.timestamp,
+      super.notes,
+      super.isDone,
+      super.quantities,
+      super.resources,
+      super.tags,
+      this.equipmentUsed});
 
   MaintenanceRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     _equipmentUsedId = data["equipmentUsedId"];

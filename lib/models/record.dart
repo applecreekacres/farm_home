@@ -1,18 +1,24 @@
 import 'models.dart';
 
 class Record extends Item {
-  String title = "";
-  String notes = "";
-  bool isDone = false;
-  List<Quantity> quantities = List<Quantity>.empty();
-  DateTime timestamp = DateTime.now();
-  List<Resource> resources = List<Resource>.empty();
-  List<String> tags = List<String>.empty();
+  String? title = "";
+  String? notes = "";
+  bool? isDone = false;
+  List<Quantity>? quantities = List<Quantity>.empty();
+  DateTime? timestamp = DateTime.now();
+  List<Resource>? resources = List<Resource>.empty();
+  List<String>? tags = List<String>.empty();
 
   String get recordType => (this).runtimeType.toString();
 
-  Record(this.title, this.timestamp, this.notes, this.isDone, this.quantities,
-      this.resources, this.tags)
+  Record(
+      {this.title,
+      this.timestamp,
+      this.notes,
+      this.isDone,
+      this.quantities,
+      this.resources,
+      this.tags})
       : super();
 
   Record.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
@@ -39,8 +45,8 @@ class Record extends Item {
       "isDone": isDone,
       "quantities": quantities,
       "recordType": recordType,
-      "resources": resources.map((res) => res.id).toList(),
-      "timestamp": timestamp.millisecondsSinceEpoch
+      "resources": resources?.map((res) => res.id).toList(),
+      "timestamp": timestamp?.millisecondsSinceEpoch
     };
     map.addAll(super.toMap());
     return map;

@@ -6,14 +6,14 @@ class InputRecord extends Record {
   Future<Material?> get material => getItemById<Material>(_materialId);
 
   InputRecord(
-      super.title,
+      {super.title,
       super.timestamp,
       super.notes,
       super.isDone,
       super.quantities,
       super.resources,
       super.tags,
-      Material? material) {
+      Material? material}) {
     _materialId = material?.id ?? "";
   }
 

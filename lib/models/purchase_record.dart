@@ -1,12 +1,12 @@
 import 'models.dart';
 
 class PurchaseRecord extends Record {
-  String seller = "";
-  String invoice = "";
-  String lotNumber = "";
+  String? seller = "";
+  String? invoice = "";
+  String? lotNumber = "";
 
   PurchaseRecord(
-      super.title,
+      {super.title,
       super.timestamp,
       super.notes,
       super.isDone,
@@ -15,7 +15,7 @@ class PurchaseRecord extends Record {
       super.tags,
       this.seller,
       this.invoice,
-      this.lotNumber);
+      this.lotNumber});
 
   PurchaseRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     seller = data["seller"];
