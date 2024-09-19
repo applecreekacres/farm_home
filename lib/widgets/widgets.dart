@@ -7,3 +7,6 @@ export 'resource_form.dart';
 export 'expandable_fab.dart';
 export 'reference_form.dart';
 export 'datetime_text_field.dart';
+export 'record_select.dart';
+export 'resource_select.dart';
+export 'reference_select.dart';
