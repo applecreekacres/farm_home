@@ -10,6 +10,8 @@ class ActivityRecord extends Record {
       super.resources,
       super.tags});
 
+  ActivityRecord.fromMap(super.data) : super.fromMap();
+
   @override
   String itemName() {
     return "Activity";

@@ -22,19 +22,13 @@ abstract class Record extends Item {
   }
 
   Record.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    var received = data['recordType'] as String;
-    if (received == itemName()) {
-      title = data["title"];
-      notes = data["notes"];
-      isDone = data["isDone"];
-      quantities = List<Quantity>.from(data["quantities"]);
-      resources = List<Resource>.from(data["resources"]);
-      timestamp = DateTime.fromMillisecondsSinceEpoch(data["timestamp"]);
-      tags = List<String>.from(data["tags"]);
-    } else {
-      throw ArgumentError(
-          "Data provided is of invalid record type. Received $received and expected $itemName");
-    }
+    title = data["title"];
+    notes = data["notes"];
+    isDone = data["isDone"];
+    quantities = List<Quantity>.from(data["quantities"]);
+    resources = List<Resource>.from(data["resources"]);
+    timestamp = DateTime.fromMillisecondsSinceEpoch(data["timestamp"]);
+    tags = List<String>.from(data["tags"]);
   }
 
   @override
