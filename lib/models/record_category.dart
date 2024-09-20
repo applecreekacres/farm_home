@@ -4,7 +4,7 @@ class RecordCategory extends Reference {
   RecordCategory({super.name, super.description});
 
   @override
-  String referenceType() {
+  String itemName() {
     return "Record Category";
   }
 }

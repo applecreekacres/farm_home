@@ -17,4 +17,9 @@ class Land extends Resource {
     map.addAll({"landType": landType});
     return map;
   }
+
+  @override
+  String itemName() {
+    return "Land";
+  }
 }

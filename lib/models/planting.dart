@@ -19,7 +19,7 @@ class Planting extends Resource {
       this.crop,
       this.beds,
       this.length = 0,
-      this.rows =0,
+      this.rows = 0,
       this.inRowSpacing = 0,
       this.daysToPottingUp = 0,
       this.daysToTransplant = 0,
@@ -54,5 +54,10 @@ class Planting extends Resource {
       "harvestWindow": harvestWindow
     });
     return map;
+  }
+
+  @override
+  String itemName() {
+    return "Planting";
   }
 }

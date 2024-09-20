@@ -1,6 +1,6 @@
 import 'package:farm_home/models/models.dart';
 
-enum Sex { male, female , unknown}
+enum Sex { male, female, unknown }
 
 class Animal extends Resource {
   late DateTime? birthDate;
@@ -13,8 +13,7 @@ class Animal extends Resource {
 
   AnimalSpecies? get animalSpecies {
     if (_animalSpeciesId != "") {
-      species =
-          getItemById<AnimalSpecies>(_animalSpeciesId) as AnimalSpecies;
+      species = getItemById<AnimalSpecies>(_animalSpeciesId) as AnimalSpecies;
     }
     return species;
   }
@@ -57,5 +56,10 @@ class Animal extends Resource {
     };
     map.addAll(super.toMap());
     return map;
+  }
+
+  @override
+  String itemName() {
+    return "Animal";
   }
 }

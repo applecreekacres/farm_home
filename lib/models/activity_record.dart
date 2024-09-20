@@ -11,7 +11,7 @@ class ActivityRecord extends Record {
       super.tags});
 
   @override
-  String recordName() {
+  String itemName() {
     return "Activity";
   }
 }

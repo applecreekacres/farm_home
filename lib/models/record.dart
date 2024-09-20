@@ -9,8 +9,6 @@ abstract class Record extends Item {
   List<Resource> resources = List<Resource>.empty();
   List<String> tags = List<String>.empty();
 
-  String recordName();
-
   Record(
       {this.title = "",
       this.timestamp,
@@ -25,7 +23,7 @@ abstract class Record extends Item {
 
   Record.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     var received = data['recordType'] as String;
-    if (received == recordName()) {
+    if (received == itemName()) {
       title = data["title"];
       notes = data["notes"];
       isDone = data["isDone"];
@@ -35,7 +33,7 @@ abstract class Record extends Item {
       tags = List<String>.from(data["tags"]);
     } else {
       throw ArgumentError(
-          "Data provided is of invalid record type. Received $received and expected $recordName");
+          "Data provided is of invalid record type. Received $received and expected $itemName");
     }
   }
 
@@ -46,7 +44,7 @@ abstract class Record extends Item {
       "notes": notes,
       "isDone": isDone,
       "quantities": quantities,
-      "recordType": recordName(),
+      "recordType": itemName(),
       "resources": resources.map((res) => res.id).toList(),
       "timestamp": timestamp?.millisecondsSinceEpoch
     };

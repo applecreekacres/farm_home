@@ -6,7 +6,7 @@ class AnimalSpecies extends Reference {
   AnimalSpecies.fromMap(super.data) : super.fromMap();
 
   @override
-  String referenceType() {
+  String itemName() {
     return "Animal Species";
   }
 }

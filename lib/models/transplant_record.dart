@@ -28,7 +28,7 @@ class TransplantRecord extends Record {
   }
 
   @override
-  String recordName() {
+  String itemName() {
     return "Transplant";
   }
 }

@@ -25,7 +25,7 @@ class HarvestRecord extends Record {
   }
 
   @override
-  String recordName() {
+  String itemName() {
     return "Harvest";
   }
 }

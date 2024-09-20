@@ -4,12 +4,10 @@ abstract class Reference extends Item {
   String name = "";
   String description = "";
 
-  String referenceType();
-
   Reference({this.name = "", this.description = ""});
 
   Reference.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    if (data["referenceType"] == referenceType) {
+    if (data["itemName"] == itemName) {
       name = data["name"];
       description = data["description"];
     } else {
@@ -23,7 +21,7 @@ abstract class Reference extends Item {
     map.addAll({
       "name": name,
       "description": description,
-      "referenceType": referenceType(),
+      "itemName": itemName(),
     });
     return map;
   }

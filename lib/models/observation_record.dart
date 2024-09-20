@@ -11,7 +11,7 @@ class ObservationRecord extends Record {
       super.tags});
 
   @override
-  String recordName() {
+  String itemName() {
     return "Observation";
   }
 }

@@ -46,7 +46,7 @@ class Crop extends Reference {
   }
 
   @override
-  String referenceType() {
+  String itemName() {
     return "Crop";
   }
 }

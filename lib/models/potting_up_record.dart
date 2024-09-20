@@ -27,7 +27,7 @@ class PottingUpRecord extends Record {
   }
 
   @override
-  String recordName() {
+  String itemName() {
     return "Potting Up";
   }
 }

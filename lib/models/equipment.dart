@@ -32,4 +32,9 @@ class Equipment extends Resource {
     });
     return map;
   }
+
+  @override
+  String itemName() {
+    return "Equipment";
+  }
 }

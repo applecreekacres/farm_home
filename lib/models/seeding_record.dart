@@ -35,7 +35,7 @@ class SeedingRecord extends Record {
   }
 
   @override
-  String recordName() {
+  String itemName() {
     return "Seeding";
   }
 }

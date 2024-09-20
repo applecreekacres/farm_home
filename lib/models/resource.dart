@@ -1,6 +1,6 @@
 import 'item.dart';
 
-class Resource extends Item {
+abstract class Resource extends Item {
   String name = "";
   String notes = "";
   String get resourceType => (this).runtimeType.toString();

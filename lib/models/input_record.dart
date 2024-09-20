@@ -3,7 +3,14 @@ import 'package:farm_home/models/models.dart';
 class InputRecord extends Record {
   String _materialId = "";
 
-  Future<Material?> get material => getItemById<Material>(_materialId);
+  Future<Material?> get material async {
+    var data = await getItemById<Material>(_materialId);
+    if (data != null) {
+      return Material.fromMap(data);
+    } else {
+      return null;
+    }
+  }
 
   InputRecord(
       {super.title,
@@ -30,7 +37,7 @@ class InputRecord extends Record {
   }
 
   @override
-  String recordName() {
+  String itemName() {
     return "Input";
   }
 }

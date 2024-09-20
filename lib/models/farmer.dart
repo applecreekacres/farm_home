@@ -17,4 +17,9 @@ class Farmer extends Item {
     map.addAll({"name": name, "photoUrl": photoUrl});
     return map;
   }
+
+  @override
+  String itemName() {
+    return "Farmer";
+  }
 }

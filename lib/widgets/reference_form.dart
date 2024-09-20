@@ -23,7 +23,7 @@ class _ReferenceFormState<T extends Reference> extends State<ReferenceForm<T>> {
   T get reference => widget.reference;
   bool get isNew => widget.isNew;
   List<Widget> get fields => widget.additionalFields ?? List<Widget>.empty();
-  String get referenceName => reference.referenceType();
+  String get referenceName => reference.itemName();
 
   List<Widget> _buildFields() {
     var fields = [
@@ -51,29 +51,29 @@ class _ReferenceFormState<T extends Reference> extends State<ReferenceForm<T>> {
     return Form(
       key: _formKey,
       child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            title: Text('New $referenceName'),
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    if (widget.isNew) {
-                      createItem<T>(reference);
-                    } else {
-                      updateItem<T>(reference);
-                    }
-                    Navigator.of(context).pop();
-                  },
-                  icon: const Icon(Icons.save))
-            ],
-          ),
-          body: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-            child: Column(
-              children: _buildFields(),
-            ),
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          title: Text('New $referenceName'),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  if (widget.isNew) {
+                    createItem<T>(reference);
+                  } else {
+                    updateItem<T>(reference);
+                  }
+                  Navigator.of(context).pop();
+                },
+                icon: const Icon(Icons.save))
+          ],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+          child: Column(
+            children: _buildFields(),
           ),
         ),
+      ),
     );
   }
 }

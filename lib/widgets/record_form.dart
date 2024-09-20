@@ -22,7 +22,7 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
   final _formKey = GlobalKey<FormState>();
   T get record => widget.record;
   List<Widget> get fields => widget.additionalFields ?? List<Widget>.empty();
-  String get recordName => record.recordName();
+  String get itemName => record.itemName();
 
   List<Widget> _buildFields() {
     List<Widget> fields = [
@@ -68,7 +68,7 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Theme.of(context).colorScheme.primary,
-            title: Text('New $recordName Record'),
+            title: Text('New $itemName Record'),
             actions: [
               IconButton(
                   onPressed: () {

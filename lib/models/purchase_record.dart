@@ -31,7 +31,7 @@ class PurchaseRecord extends Record {
   }
 
   @override
-  String recordName() {
+  String itemName() {
     return "Purchase";
   }
 }

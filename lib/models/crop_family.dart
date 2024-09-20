@@ -4,7 +4,7 @@ class CropFamily extends Reference {
   CropFamily({super.name, super.description});
 
   @override
-  String referenceType() {
+  String itemName() {
     return "Crop Family";
   }
 }

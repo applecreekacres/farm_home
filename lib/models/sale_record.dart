@@ -32,7 +32,7 @@ class SaleRecord extends Record {
   }
 
   @override
-  String recordName() {
+  String itemName() {
     return "Sale";
   }
 }

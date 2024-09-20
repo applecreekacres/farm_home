@@ -3,8 +3,10 @@ import 'package:farm_home/models/models.dart';
 class MaterialType extends Reference {
   MaterialType({super.name, super.description});
 
+  MaterialType.fromMap(super.data) : super.fromMap();
+
   @override
-  String referenceType() {
+  String itemName() {
     return "Material Type";
   }
 }
