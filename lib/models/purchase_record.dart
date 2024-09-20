@@ -29,4 +29,9 @@ class PurchaseRecord extends Record {
     map.addAll({"seller": seller, "invoice": invoice, "lotNumber": lotNumber});
     return map;
   }
+
+  @override
+  String recordName() {
+    return "Purchase";
+  }
 }

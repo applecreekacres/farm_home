@@ -23,4 +23,9 @@ class HarvestRecord extends Record {
     map.addAll(super.toMap());
     return map;
   }
+
+  @override
+  String recordName() {
+    return "Harvest";
+  }
 }

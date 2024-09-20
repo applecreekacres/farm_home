@@ -22,7 +22,7 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
   final _formKey = GlobalKey<FormState>();
   T get record => widget.record;
   List<Widget> get fields => widget.additionalFields ?? List<Widget>.empty();
-  String get recordName => record.recordType.replaceFirst("Record", '');
+  String get recordName => record.recordName();
 
   List<Widget> _buildFields() {
     List<Widget> fields = [
@@ -83,8 +83,8 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
             ],
             bottom: const TabBar(
               tabs: [
-                Tab(icon: Icon(Icons.notes_outlined)),
-                Tab(icon: Icon(Icons.add_chart_outlined)),
+                Tab(icon: Icon(Icons.notes)),
+                Tab(icon: Icon(Icons.add_chart)),
               ],
             ),
           ),

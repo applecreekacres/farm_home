@@ -26,7 +26,8 @@ class MaintenanceRecord extends Record {
       super.quantities,
       super.resources,
       super.tags,
-      this.equipmentUsed}) : super();
+      this.equipmentUsed})
+      : super();
 
   MaintenanceRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     _equipmentUsedId = data["equipmentUsedId"];
@@ -37,5 +38,10 @@ class MaintenanceRecord extends Record {
     var map = super.toMap();
     map.addAll({"equipmentUsedId": _equipmentUsedId});
     return map;
+  }
+
+  @override
+  String recordName() {
+    return "Maintenance";
   }
 }

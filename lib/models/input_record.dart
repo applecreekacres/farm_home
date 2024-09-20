@@ -13,7 +13,8 @@ class InputRecord extends Record {
       super.quantities,
       super.resources,
       super.tags,
-      Material? material}) : super() {
+      Material? material})
+      : super() {
     _materialId = material?.id ?? "";
   }
 
@@ -26,5 +27,10 @@ class InputRecord extends Record {
     var map = super.toMap();
     map.addAll({"materialId": _materialId});
     return map;
+  }
+
+  @override
+  String recordName() {
+    return "Input";
   }
 }

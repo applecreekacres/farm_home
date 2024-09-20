@@ -33,4 +33,9 @@ class SeedingRecord extends Record {
     map.addAll(super.toMap());
     return map;
   }
+
+  @override
+  String recordName() {
+    return "Seeding";
+  }
 }

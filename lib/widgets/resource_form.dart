@@ -57,8 +57,8 @@ class _ResourceFormState<T extends Resource> extends State<ResourceForm<T>> {
             ],
             bottom: const TabBar(
               tabs: [
-                Tab(icon: Icon(Icons.notes_outlined)),
-                Tab(icon: Icon(Icons.add_chart_outlined)),
+                Tab(icon: Icon(Icons.notes)),
+                Tab(icon: Icon(Icons.add_chart)),
               ],
             ),
           ),

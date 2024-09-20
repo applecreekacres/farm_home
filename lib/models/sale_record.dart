@@ -30,4 +30,9 @@ class SaleRecord extends Record {
         {"customer": customer, "invoice": invoice, "lotNumber": lotNumber});
     return map;
   }
+
+  @override
+  String recordName() {
+    return "Sale";
+  }
 }

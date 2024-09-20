@@ -12,7 +12,7 @@ class RecordSelectWidget extends StatelessWidget {
       padding: EdgeInsets.zero,
       children: [
         ListTile(
-          leading: const Icon(Icons.accessibility_new_rounded),
+          leading: const Icon(Icons.accessibility_new),
           title: const Text("Activity"),
           onTap: () {
             Navigator.push(
@@ -82,7 +82,7 @@ class RecordSelectWidget extends StatelessWidget {
           },
         ),
         ListTile(
-          leading: const Icon(Icons.currency_exchange_rounded),
+          leading: const Icon(Icons.currency_exchange),
           title: const Text("Sale"),
           onTap: () {
             Navigator.push(

@@ -26,4 +26,9 @@ class TransplantRecord extends Record {
     map.addAll(super.toMap());
     return map;
   }
+
+  @override
+  String recordName() {
+    return "Transplant";
+  }
 }

@@ -9,4 +9,9 @@ class ActivityRecord extends Record {
       super.quantities,
       super.resources,
       super.tags});
+
+  @override
+  String recordName() {
+    return "Activity";
+  }
 }
