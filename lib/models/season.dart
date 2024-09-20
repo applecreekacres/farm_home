@@ -7,7 +7,11 @@ class Season extends Reference {
   /// Default to the last day of the current year
   DateTime end = DateTime(DateTime.now().year, 12, 31, 23, 59, 59, 999, 999);
 
-  Season({super.name, super.description});
+  Season({super.name, super.description})
+  {
+    start = DateTime(DateTime.now().year, 1, 1);
+    end = DateTime(DateTime.now().year, 12, 31, 23, 59, 59, 999, 999);
+  }
 
   Season.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     start = DateTime.fromMillisecondsSinceEpoch(data["start"]);
