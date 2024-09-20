@@ -32,6 +32,28 @@ class _SeasonFormState extends State<SeasonForm> {
     return ReferenceForm<Season>(
       reference: _record,
       isNew: _isNew,
+      additionalFields: [
+        DateTimeTextField(
+          labelText: "Start",
+          value: _record.start,
+          onChanged: (value) {
+            _record.start = value!;
+          },
+          initialDate: DateTime(DateTime.now().year),
+          firstDate: DateTime(1970),
+          lastDate: DateTime(2100),
+        ),
+        DateTimeTextField(
+          labelText: "End",
+          value: _record.end,
+          onChanged: (value) {
+            _record.end = value!;
+          },
+          initialDate: DateTime(DateTime.now().year, 12, 31, 23, 59, 999),
+          firstDate: DateTime(1970),
+          lastDate: DateTime(2100),
+        ),
+      ],
     );
   }
 }
