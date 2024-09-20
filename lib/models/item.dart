@@ -85,3 +85,7 @@ void updateItem<T extends Item>(T model) async {
       .doc(model.id)
       .update(model.toMap());
 }
+
+void deleteItem<T extends Item>(String collection, String id) async {
+  await FirebaseFirestore.instance.collection(collection).doc(id).delete();
+}
