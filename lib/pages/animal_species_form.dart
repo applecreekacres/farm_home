@@ -3,23 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:farm_home/models/models.dart';
 import 'package:farm_home/widgets/widgets.dart';
 
-class SeasonForm extends StatefulWidget {
-  final Season? record;
+class AnimalSpeciesForm extends StatefulWidget {
+  final AnimalSpecies? record;
 
-  const SeasonForm({this.record, super.key});
+  const AnimalSpeciesForm({this.record, super.key});
 
   @override
-  State<SeasonForm> createState() => _SeasonFormState();
+  State<AnimalSpeciesForm> createState() => _AnimalSpeciesFormState();
 }
 
-class _SeasonFormState extends State<SeasonForm> {
-  late Season _record;
+class _AnimalSpeciesFormState extends State<AnimalSpeciesForm> {
+  late AnimalSpecies _record;
   bool _isNew = false;
 
   @override
   void initState() {
     if (widget.record == null) {
-      _record = Season();
+      _record = AnimalSpecies();
       _isNew = true;
     } else {
       _record = widget.record!;
@@ -29,7 +29,7 @@ class _SeasonFormState extends State<SeasonForm> {
 
   @override
   Widget build(BuildContext context) {
-    return ReferenceForm<Season>(
+    return ReferenceForm<AnimalSpecies>(
       reference: _record,
       isNew: _isNew,
     );
