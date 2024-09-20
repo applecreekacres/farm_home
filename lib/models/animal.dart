@@ -1,32 +1,39 @@
 import 'package:farm_home/models/models.dart';
 
-enum Sex { male, female }
+enum Sex { male, female , unknown}
 
 class Animal extends Resource {
-  late DateTime birthDate;
+  late DateTime? birthDate;
   bool isFixed = false; // In relation to neutering/castrasting/spaying
   DateTime? deathDate;
   String nickname = "";
   late Sex sex;
   String _animalSpeciesId = "";
-  AnimalSpecies? _animalSpecies;
+  AnimalSpecies? species;
 
   AnimalSpecies? get animalSpecies {
     if (_animalSpeciesId != "") {
-      _animalSpecies =
+      species =
           getItemById<AnimalSpecies>(_animalSpeciesId) as AnimalSpecies;
     }
-    return _animalSpecies;
+    return species;
   }
 
   set animalSpecies(AnimalSpecies? a) {
-    _animalSpecies = a;
-    _animalSpeciesId = _animalSpecies?.id ?? "";
+    species = a;
+    _animalSpeciesId = species?.id ?? "";
   }
 
-  Animal(super.name, super.notes, this.birthDate, this.isFixed, this.deathDate,
-      this.nickname, this.sex, this._animalSpecies) {
-    _animalSpeciesId = _animalSpecies?.id ?? "";
+  Animal(
+      {super.name,
+      super.notes,
+      this.birthDate,
+      this.isFixed = false,
+      this.deathDate,
+      this.nickname = "",
+      this.sex = Sex.unknown,
+      this.species}) {
+    _animalSpeciesId = species?.id ?? "";
   }
 
   Animal.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
@@ -42,7 +49,7 @@ class Animal extends Resource {
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {
       "isFixed": isFixed,
-      "birthDate": birthDate.millisecondsSinceEpoch,
+      "birthDate": birthDate?.millisecondsSinceEpoch,
       "deathDate": deathDate?.millisecondsSinceEpoch,
       "nickname": nickname,
       "sex": sex,

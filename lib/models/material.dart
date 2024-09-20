@@ -6,8 +6,8 @@ class Material extends Resource {
   Future<MaterialType?> get material =>
       getItemById<MaterialType>(_materialTypeId);
 
-  Material(super.name, super.notes, MaterialType type) {
-    _materialTypeId = type.id;
+  Material({super.name, super.notes, MaterialType? type}) {
+    _materialTypeId = type?.id ?? "";
   }
 
   Material.fromMap(Map<String, dynamic> data) : super.fromMap(data) {

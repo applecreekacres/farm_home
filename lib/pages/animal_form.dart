@@ -13,8 +13,7 @@ class AnimalForm extends StatefulWidget {
 class _AnimalFormState extends State<AnimalForm> {
   final _formKey = GlobalKey<FormState>();
 
-  final Animal _animal =
-      Animal("", "", DateTime.now(), false, null, "", Sex.male, null);
+  final Animal _animal = Animal();
 
   @override
   Widget build(BuildContext context) {

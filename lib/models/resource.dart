@@ -5,7 +5,7 @@ class Resource extends Item {
   String notes = "";
   String get resourceType => (this).runtimeType.toString();
 
-  Resource(this.name, this.notes);
+  Resource({this.name = "", this.notes = ""});
 
   Resource.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     if (resourceType == data["resourceType"]) {
