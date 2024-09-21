@@ -3,6 +3,8 @@ import 'package:farm_home/models/models.dart';
 enum Sex { male, female, unknown }
 
 class Animal extends Resource {
+  static const collectionName = "Animal";
+
   late DateTime? birthDate;
   bool isFixed = false; // In relation to neutering/castrasting/spaying
   DateTime? deathDate;
@@ -13,7 +15,8 @@ class Animal extends Resource {
 
   AnimalSpecies? get animalSpecies {
     if (_animalSpeciesId != "") {
-      species = getItemById<AnimalSpecies>(_animalSpeciesId) as AnimalSpecies;
+      species = getItemById(AnimalSpecies.collectionName, _animalSpeciesId)
+          as AnimalSpecies;
     }
     return species;
   }
@@ -60,6 +63,6 @@ class Animal extends Resource {
 
   @override
   String itemName() {
-    return "Animal";
+    return collectionName;
   }
 }

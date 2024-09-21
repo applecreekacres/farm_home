@@ -1,10 +1,12 @@
 import 'package:farm_home/models/models.dart';
 
 class Material extends Resource {
+  static const collectionName = "Material";
+
   String _materialTypeId = "";
 
   Future<MaterialType?> get material async {
-    var data = await getItemById<Material>(_materialTypeId);
+    var data = await getItemById(MaterialType.collectionName, _materialTypeId);
     if (data != null) {
       return MaterialType.fromMap(data);
     } else {
@@ -22,6 +24,6 @@ class Material extends Resource {
 
   @override
   String itemName() {
-    return "Material";
+    return collectionName;
   }
 }

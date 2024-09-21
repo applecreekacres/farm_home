@@ -18,6 +18,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await Firebase.app().setAutomaticDataCollectionEnabled(true);
   SharedPreferences prefs = await SharedPreferences.getInstance();
   runApp(FarmHome(prefs: prefs));
 }

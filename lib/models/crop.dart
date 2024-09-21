@@ -1,6 +1,8 @@
 import 'models.dart';
 
 class Crop extends Reference {
+  static const collectionName = "Crop";
+
   int daysToPottingUp = 0;
   int daysToTransplant = 0;
   int daysToMaturity = 0;
@@ -10,7 +12,8 @@ class Crop extends Reference {
 
   CropFamily? get cropFamily {
     if (_cropFamilyId != null && family == null) {
-      family = getItemById<CropFamily>(_cropFamilyId as String) as CropFamily?;
+      family = getItemById(CropFamily.collectionName, _cropFamilyId as String)
+          as CropFamily?;
     }
     return family;
   }
@@ -47,6 +50,6 @@ class Crop extends Reference {
 
   @override
   String itemName() {
-    return "Crop";
+    return collectionName;
   }
 }

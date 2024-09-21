@@ -7,7 +7,7 @@ abstract class Reference extends Item {
   Reference({this.name = "", this.description = ""});
 
   Reference.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    if (data["itemName"] == itemName) {
+    if (data["itemName"] == itemName()) {
       name = data["name"];
       description = data["description"];
     } else {

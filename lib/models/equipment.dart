@@ -1,6 +1,8 @@
 import 'resource.dart';
 
 class Equipment extends Resource {
+  static const collectionName = "Equipment";
+
   String manufacturer = "";
   String model = "";
   String serialNumber = "";
@@ -35,6 +37,6 @@ class Equipment extends Resource {
 
   @override
   String itemName() {
-    return "Equipment";
+    return collectionName;
   }
 }

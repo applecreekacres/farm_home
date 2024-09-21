@@ -44,9 +44,9 @@ abstract class Item {
 /// Get an item from Firestore with a specific identification.
 ///
 /// Will return [null] if no item by the given ID exists.
-Future<Map<String, dynamic>?> getItemById<T extends Item>(String itemId) async {
-  final docRef =
-      FirebaseFirestore.instance.collection((T).toString()).doc(itemId);
+Future<Map<String, dynamic>?> getItemById(
+    String collection, String itemId) async {
+  final docRef = FirebaseFirestore.instance.collection(collection).doc(itemId);
   final docSnapshot = await docRef.get();
   if (docSnapshot.exists) {
     return docSnapshot.data()!;
@@ -55,11 +55,12 @@ Future<Map<String, dynamic>?> getItemById<T extends Item>(String itemId) async {
   }
 }
 
-Future<List<Map<String, dynamic>>> getItemsByUser<T extends Item>() async {
+Future<List<Map<String, dynamic>>> getItemsByUser(
+    String collection) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var user = prefs.getString("userId");
   final docRef = FirebaseFirestore.instance
-      .collection((T).toString())
+      .collection(collection)
       .where('userId', isEqualTo: user);
   final docSnapshot = await docRef.get();
   final itemList = docSnapshot.docs.map((doc) => doc.data()).toList();

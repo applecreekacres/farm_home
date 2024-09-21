@@ -20,7 +20,7 @@ class _AnimalListPageState extends State<AnimalListPage> {
   }
 
   Future<void> _getAnimals() async {
-    _animals = (await getItemsByUser<Animal>())
+    _animals = (await getItemsByUser(Animal.collectionName))
         .map((data) => Animal.fromMap(data))
         .toList();
     setState(() {});

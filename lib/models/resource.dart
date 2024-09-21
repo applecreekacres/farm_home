@@ -18,7 +18,7 @@ abstract class Resource extends Item {
   @override
   Map<String, dynamic> toMap() {
     var map = super.toMap();
-    map.addAll({"resource_type": resourceType, "notes": notes});
+    map.addAll({"name": name, "resource_type": resourceType, "notes": notes});
     return map;
   }
 }
