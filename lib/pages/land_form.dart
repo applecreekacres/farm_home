@@ -19,6 +19,7 @@ class _LandFormState extends State<LandForm> {
   Widget build(BuildContext context) {
     return ResourceForm<Land>(
       resource: _land,
+      isNew: true,
       key: _formKey,
     );
   }

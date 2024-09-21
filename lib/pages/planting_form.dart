@@ -19,6 +19,7 @@ class _PlantingFormState extends State<PlantingForm> {
   Widget build(BuildContext context) {
     return ResourceForm<Planting>(
       resource: _planting,
+      isNew: true,
       key: _formKey,
     );
   }

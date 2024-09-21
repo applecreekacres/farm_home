@@ -19,6 +19,7 @@ class _SeedFormState extends State<SeedForm> {
   Widget build(BuildContext context) {
     return ResourceForm<Seed>(
       resource: _seed,
+      isNew: true,
       key: _formKey,
     );
   }

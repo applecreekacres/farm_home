@@ -20,6 +20,7 @@ class _AnimalFormState extends State<AnimalForm> {
     return ResourceForm<Animal>(
       resource: _animal,
       key: _formKey,
+      isNew: true,
       additionalFields: [
         DateTimeTextField(
             labelText: 'Birth Date',
@@ -48,6 +49,7 @@ class _AnimalFormState extends State<AnimalForm> {
                   textAlign: TextAlign.left,
                 ),
                 DropdownButton<Sex>(
+                    value: _animal.sex,
                     items: Sex.values.map((Sex value) {
                       return DropdownMenuItem<Sex>(
                           value: value,

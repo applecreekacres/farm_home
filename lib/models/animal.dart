@@ -48,10 +48,10 @@ class Animal extends Resource {
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {
       "isFixed": isFixed,
-      "birthDate": birthDate?.millisecondsSinceEpoch,
-      "deathDate": deathDate?.millisecondsSinceEpoch,
+      "birthDate": birthDate?.millisecondsSinceEpoch ?? "",
+      "deathDate": deathDate?.millisecondsSinceEpoch ?? "",
       "nickname": nickname,
-      "sex": sex,
+      "sex": sex.toString(),
       "animalSpeciesId": _animalSpeciesId
     };
     map.addAll(super.toMap());

@@ -19,6 +19,7 @@ class _EquipmentFormState extends State<EquipmentForm> {
   Widget build(BuildContext context) {
     return ResourceForm<Equipment>(
       resource: _equipment,
+      isNew: true,
       key: _formKey,
     );
   }

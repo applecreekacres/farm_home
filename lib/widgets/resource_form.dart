@@ -6,9 +6,13 @@ import 'package:farm_home/widgets/widgets.dart';
 class ResourceForm<T extends Resource> extends StatefulWidget {
   final T resource;
   final List<Widget>? additionalFields;
+  final bool isNew;
 
   const ResourceForm(
-      {required this.resource, this.additionalFields, super.key});
+      {required this.resource,
+      required this.isNew,
+      this.additionalFields,
+      super.key});
 
   @override
   State<ResourceForm> createState() => _ResourceFormState<T>();
@@ -52,7 +56,14 @@ class _ResourceFormState<T extends Resource> extends State<ResourceForm<T>> {
             title: Text('New $resourceName'),
             actions: [
               IconButton(
-                  onPressed: () => createItem<T>(resource),
+                  onPressed: () {
+                    if (widget.isNew) {
+                      createItem<T>(resource);
+                    } else {
+                      updateItem<T>(resource);
+                    }
+                    Navigator.of(context).pop();
+                  },
                   icon: const Icon(Icons.save))
             ],
             bottom: const TabBar(

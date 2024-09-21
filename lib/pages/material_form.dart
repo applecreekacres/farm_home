@@ -19,6 +19,7 @@ class _MaterialFormState extends State<MaterialForm> {
   Widget build(BuildContext context) {
     return ResourceForm<Material>(
       resource: _material,
+      isNew: true,
       key: _formKey,
     );
   }

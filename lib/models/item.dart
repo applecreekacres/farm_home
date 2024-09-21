@@ -72,7 +72,7 @@ void createItem<T extends Item>(T model) async {
   model._userId = prefs.getString("userId") ?? "";
   model._modified = DateTime.now();
   await FirebaseFirestore.instance
-      .collection((T as Item).itemName())
+      .collection(model.itemName())
       .doc(model.id)
       .set(model.toMap());
 }
