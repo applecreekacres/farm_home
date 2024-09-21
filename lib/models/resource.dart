@@ -8,17 +8,14 @@ abstract class Resource extends Item {
   Resource({this.name = "", this.notes = ""});
 
   Resource.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    if (resourceType == data["resourceType"]) {
-      notes = data["notes"];
-    } else {
-      ArgumentError("Invalid data mapping resource type provided.");
-    }
+    name = data["name"];
+    notes = data["notes"];
   }
 
   @override
   Map<String, dynamic> toMap() {
     var map = super.toMap();
-    map.addAll({"name": name, "resource_type": resourceType, "notes": notes});
+    map.addAll({"name": name, "notes": notes});
     return map;
   }
 }

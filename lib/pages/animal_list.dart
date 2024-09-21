@@ -15,8 +15,8 @@ class _AnimalListPageState extends State<AnimalListPage> {
 
   @override
   void initState() {
-    super.initState();
     _getAnimals();
+    super.initState();
   }
 
   Future<void> _getAnimals() async {
@@ -38,7 +38,7 @@ class _AnimalListPageState extends State<AnimalListPage> {
           itemCount: _animals.length,
           itemBuilder: (context, index) {
             return ListTile(
-              title: Text(_animals[index].nickname),
+              title: Text(_animals[index].name),
             );
           }),
       // floatingActionButton: FloatingActionButton(

@@ -36,7 +36,8 @@ abstract class Item {
       "id": _id,
       "userId": _userId,
       "created": _created.millisecondsSinceEpoch,
-      "modified": _modified.millisecondsSinceEpoch
+      "modified": _modified.millisecondsSinceEpoch,
+      "itemName": itemName(),
     };
   }
 }
@@ -55,8 +56,7 @@ Future<Map<String, dynamic>?> getItemById(
   }
 }
 
-Future<List<Map<String, dynamic>>> getItemsByUser(
-    String collection) async {
+Future<List<Map<String, dynamic>>> getItemsByUser(String collection) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var user = prefs.getString("userId");
   final docRef = FirebaseFirestore.instance
