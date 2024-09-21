@@ -15,6 +15,8 @@ abstract class Item {
 
   String itemName();
 
+  String itemType();
+
   /// Unique identifier of every item and derived class that is created.
   String get id => _id;
 

@@ -18,4 +18,9 @@ abstract class Resource extends Item {
     map.addAll({"name": name, "notes": notes});
     return map;
   }
+
+  @override
+  String itemType() {
+    return "Resource";
+  }
 }

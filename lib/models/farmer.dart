@@ -22,4 +22,9 @@ class Farmer extends Item {
   String itemName() {
     return "Farmer";
   }
+
+  @override
+  String itemType() {
+    return "User";
+  }
 }
