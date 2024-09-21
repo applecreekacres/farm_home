@@ -33,7 +33,7 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
           onChanged: (value) => record.title = value),
       LabelledCheckbox(
         label: 'Done',
-        value: record.isDone!,
+        value: record.isDone,
         onChanged: (value) {
           record.isDone = value!;
         },
@@ -48,7 +48,7 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
           },
           initialDate: DateTime.now()),
       NotesField(
-        modelField: record.notes!,
+        modelField: record.notes,
         onChanged: (value) {
           record.notes = value;
         },
@@ -96,8 +96,8 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
                   children: _buildFields(),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                 child: Column(
                   children: [],
                 ),

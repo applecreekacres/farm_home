@@ -81,8 +81,8 @@ class _ResourceFormState<T extends Resource> extends State<ResourceForm<T>> {
                   children: _buildFields(),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                 child: Column(
                   children: [],
                 ),
