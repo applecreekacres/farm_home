@@ -3,17 +3,25 @@ import 'package:farm_home/models/models.dart';
 class InputRecord extends Record {
   String _materialId = "";
 
-  Future<Material?> get material => getItemById<Material>(_materialId);
+  Future<Material?> get material async {
+    var data = await getItemById(Material.collectionName, _materialId);
+    if (data != null) {
+      return Material.fromMap(data);
+    } else {
+      return null;
+    }
+  }
 
   InputRecord(
-      super.title,
+      {super.title,
       super.timestamp,
       super.notes,
       super.isDone,
       super.quantities,
       super.resources,
       super.tags,
-      Material? material) {
+      Material? material})
+      : super() {
     _materialId = material?.id ?? "";
   }
 
@@ -26,5 +34,10 @@ class InputRecord extends Record {
     var map = super.toMap();
     map.addAll({"materialId": _materialId});
     return map;
+  }
+
+  @override
+  String itemName() {
+    return "Input";
   }
 }

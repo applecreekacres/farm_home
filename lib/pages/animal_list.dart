@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:farm_home/models/models.dart';
-import 'package:farm_home/pages/pages.dart';
 import 'package:farm_home/widgets/widgets.dart';
 
 class AnimalListPage extends StatefulWidget {
@@ -21,7 +20,9 @@ class _AnimalListPageState extends State<AnimalListPage> {
   }
 
   Future<void> _getAnimals() async {
-    _animals = await getItemsByUser<Animal>();
+    _animals = (await getItemsByUser(Animal.collectionName))
+        .map((data) => Animal.fromMap(data))
+        .toList();
     setState(() {});
   }
 

@@ -38,7 +38,9 @@ class _DateTimeTextFieldState extends State<DateTimeTextField> {
 
     if (pickedDate != null) {
       _dateString = pickedDate;
-      widget.onChanged?.call(pickedDate);
+      setState(() {
+        widget.onChanged?.call(pickedDate);
+      });
     }
   }
 

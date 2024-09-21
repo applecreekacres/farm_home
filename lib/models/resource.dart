@@ -1,11 +1,11 @@
 import 'item.dart';
 
-class Resource extends Item {
+abstract class Resource extends Item {
   String name = "";
   String notes = "";
   String get resourceType => (this).runtimeType.toString();
 
-  Resource(this.name, this.notes);
+  Resource({this.name = "", this.notes = ""});
 
   Resource.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     if (resourceType == data["resourceType"]) {
@@ -18,7 +18,7 @@ class Resource extends Item {
   @override
   Map<String, dynamic> toMap() {
     var map = super.toMap();
-    map.addAll({"resource_type": resourceType, "notes": notes});
+    map.addAll({"name": name, "resource_type": resourceType, "notes": notes});
     return map;
   }
 }

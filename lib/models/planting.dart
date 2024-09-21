@@ -3,8 +3,8 @@ import 'models.dart';
 class Planting extends Resource {
   String _cropId = "";
   List<String> _bedsId = List<String>.empty();
-  late Crop? _crop;
-  late List<Land> _beds;
+  late Crop? crop;
+  late List<Land>? beds;
   late int length;
   late int rows;
   late int inRowSpacing;
@@ -13,46 +13,18 @@ class Planting extends Resource {
   late int daysToHarvest;
   late int harvestWindow;
 
-  Crop? get crop {
-    if (_cropId != "" && _crop == null) {
-      _crop = getItemById<Crop>(_cropId as String) as Crop;
-    }
-    return _crop;
-  }
-
-  set crop(Crop? c) {
-    _crop = c;
-    if (c != null) {
-      _cropId = c.id;
-    }
-  }
-
-  List<Land> get beds {
-    if (_bedsId.isNotEmpty && _beds.isNotEmpty) {
-      for (var id in _bedsId) {
-        _beds.add(getItemById<Land>(id) as Land);
-      }
-    }
-    return _beds;
-  }
-
-  set beds(List<Land> b) {
-    beds = b;
-    _bedsId = b.map((m) => m.id).toList();
-  }
-
   Planting(
-      super.name,
+      {super.name,
       super.notes,
-      this._crop,
-      this._beds,
-      this.length,
-      this.rows,
-      this.inRowSpacing,
-      this.daysToPottingUp,
-      this.daysToTransplant,
-      this.daysToHarvest,
-      this.harvestWindow)
+      this.crop,
+      this.beds,
+      this.length = 0,
+      this.rows = 0,
+      this.inRowSpacing = 0,
+      this.daysToPottingUp = 0,
+      this.daysToTransplant = 0,
+      this.daysToHarvest = 0,
+      this.harvestWindow = 0})
       : super();
 
   Planting.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
@@ -71,8 +43,8 @@ class Planting extends Resource {
   Map<String, dynamic> toMap() {
     var map = super.toMap();
     map.addAll({
-      "cropId": _crop?.id,
-      "bedsId": _beds.map((obj) => obj.id).toList(),
+      "cropId": crop?.id,
+      "bedsId": beds?.map((obj) => obj.id).toList(),
       "length": length,
       "rows": rows,
       "inRowSpacing": inRowSpacing,
@@ -82,5 +54,10 @@ class Planting extends Resource {
       "harvestWindow": harvestWindow
     });
     return map;
+  }
+
+  @override
+  String itemName() {
+    return "Planting";
   }
 }

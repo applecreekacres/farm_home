@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:farm_home/constants/constants.dart';
-import 'package:farm_home/pages/record_select.dart';
-import 'package:farm_home/pages/reference_select.dart';
-import 'package:farm_home/pages/resource_select.dart';
 import 'package:farm_home/widgets/widgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,18 +24,27 @@ class _HomePageState extends State<HomePage> {
         distance: 112,
         children: [
           ActionButton(
-            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const RecordSelectPage())),
+            onPressed: () => showModalBottomSheet<void>(
+                context: context,
+                builder: (BuildContext context) {
+                  return const RecordSelectWidget();
+                }),
             icon: const Icon(Icons.task),
           ),
           ActionButton(
-            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const ResourceSelectPage())),
+            onPressed: () => showModalBottomSheet<void>(
+                context: context,
+                builder: (BuildContext context) {
+                  return const ResourceSelectWidget();
+                }),
             icon: const Icon(Icons.yard),
           ),
           ActionButton(
-            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const ReferenceSelectPage())),
+            onPressed: () => showModalBottomSheet<void>(
+                context: context,
+                builder: (BuildContext context) {
+                  return const ReferenceSelectWidget();
+                }),
             icon: const Icon(Icons.abc),
           ),
         ],

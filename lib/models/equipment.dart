@@ -1,12 +1,18 @@
 import 'resource.dart';
 
 class Equipment extends Resource {
+  static const collectionName = "Equipment";
+
   String manufacturer = "";
   String model = "";
   String serialNumber = "";
 
-  Equipment(super.name, super.notes, this.manufacturer, this.model,
-      this.serialNumber);
+  Equipment(
+      {super.name,
+      super.notes,
+      this.manufacturer = "",
+      this.model = "",
+      this.serialNumber = ""});
 
   Equipment.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     if (data["resourceType"] == resourceType) {
@@ -27,5 +33,10 @@ class Equipment extends Resource {
       "serialNumber": serialNumber
     });
     return map;
+  }
+
+  @override
+  String itemName() {
+    return collectionName;
   }
 }

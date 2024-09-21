@@ -3,29 +3,27 @@ import 'package:farm_home/models/models.dart';
 import 'package:uuid/uuid.dart';
 
 void main() {
-  test("Create a new Record", () {
+  test("Create a new Activity Record", () {
     final now = DateTime.now();
-    final record = Record(
-        "New Record",
-        now,
-        "Basic Description",
-        false,
-        List<Quantity>.empty(),
-        List<Resource>.empty(),
-        ["tag"]);
+    final record = ActivityRecord(
+        title: "New Activity Record",
+        timestamp: now,
+        notes: "Basic Description",
+        isDone: false,
+        tags: ["tag"]);
 
     expect(record.isDone, false);
     expect(record.timestamp, now);
-    expect(record.title, "New Record");
+    expect(record.title, "New Activity Record");
     expect(record.quantities, List<Quantity>.empty());
     expect(record.resources, List<Resource>.empty());
     expect(record.tags.length, 1);
     expect(record.tags[0], "tag");
     expect(record.notes, "Basic Description");
-    expect(record.recordType, "Record");
+    expect(record.itemName(), "Activity");
   });
 
-  test("Load Record from Map", () {
+  test("Load ActivityRecord from Map", () {
     final now = DateTime.now().millisecondsSinceEpoch;
     final id = const Uuid().v4();
     final userId = const Uuid().v4();
@@ -43,20 +41,24 @@ void main() {
       "tags": ["tag2"],
       "quantities": [],
       "resources": [],
-      "recordType": (Record).toString()
+      "itemName": "Activity"
     };
 
-    final record = Record.fromMap(map);
+    final record = ActivityRecord.fromMap(map);
 
     expect(record.title, "title");
   });
 
-  test("Get Map from Record", () {
+  test("Get Map from ActivityRecord", () {
     final now = DateTime.now();
-    final record =
-        Record("Record", now, "", true, [], [], ["test"]);
+    final record = ActivityRecord(
+        title: "Activity Record",
+        timestamp: now,
+        notes: "",
+        isDone: true,
+        tags: ["test"]);
     final map = record.toMap();
 
-    expect(map["title"], "Record");
+    expect(map["title"], "Activity Record");
   });
 }

@@ -3,23 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:farm_home/models/models.dart';
 import 'package:farm_home/widgets/widgets.dart';
 
-class ActivityRecordForm extends StatefulWidget {
-  final ActivityRecord? record;
+class MaintenanceRecordForm extends StatefulWidget {
+  final MaintenanceRecord? record;
 
-  const ActivityRecordForm({this.record, super.key});
+  const MaintenanceRecordForm({this.record, super.key});
 
   @override
-  State<ActivityRecordForm> createState() => _ActivityRecordFormState();
+  State<MaintenanceRecordForm> createState() => _MaintenanceRecordFormState();
 }
 
-class _ActivityRecordFormState extends State<ActivityRecordForm> {
-  late ActivityRecord _record;
+class _MaintenanceRecordFormState extends State<MaintenanceRecordForm> {
+  late MaintenanceRecord _record;
   bool _isNew = false;
 
   @override
   void initState() {
     if (widget.record == null) {
-      _record = ActivityRecord();
+      _record = MaintenanceRecord();
       _isNew = true;
     } else {
       _record = widget.record!;
@@ -29,7 +29,7 @@ class _ActivityRecordFormState extends State<ActivityRecordForm> {
 
   @override
   Widget build(BuildContext context) {
-    return RecordForm<ActivityRecord>(
+    return RecordForm<MaintenanceRecord>(
       record: _record,
       isNew: _isNew,
     );

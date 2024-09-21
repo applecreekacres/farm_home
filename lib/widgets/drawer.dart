@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:farm_home/pages/pages.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 class FarmHomeDrawer extends StatelessWidget {
   const FarmHomeDrawer({super.key});
@@ -12,33 +13,16 @@ class FarmHomeDrawer extends StatelessWidget {
       padding: EdgeInsets.zero,
       children: [
         DrawerHeader(
-          decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary),
+          decoration:
+              BoxDecoration(color: Theme.of(context).colorScheme.primary),
           child: const Text("User"),
         ),
         ListTile(
-          leading: const Icon(Icons.description),
-          title: const Text("Records"),
-        ),
-        ListTile(
-          leading: const Icon(Icons.pets),
-          title: const Text("Animals"),
+          leading: const Icon(Symbols.house),
+          title: const Text("Home"),
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const AnimalListPage()));
-          },
-        ),
-        ListTile(leading: const Icon(Icons.yard), title: const Text("Plantings")),
-        ListTile(leading: const Icon(Icons.language), title: const Text("Land")),
-        ListTile(
-          leading: const Icon(Icons.snowing),
-          title: const Text("Seasons"),
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const SeasonFormPage()));
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => const HomePage()));
           },
         )
       ],

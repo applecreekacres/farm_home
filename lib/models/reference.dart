@@ -1,15 +1,13 @@
 import 'models.dart';
 
-class Reference extends Item {
+abstract class Reference extends Item {
   String name = "";
   String description = "";
 
-  String get referenceType => (this).runtimeType.toString();
-
-  Reference(this.name, this.description);
+  Reference({this.name = "", this.description = ""});
 
   Reference.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    if (data["referenceType"] == referenceType) {
+    if (data["itemName"] == itemName()) {
       name = data["name"];
       description = data["description"];
     } else {
@@ -23,7 +21,7 @@ class Reference extends Item {
     map.addAll({
       "name": name,
       "description": description,
-      "referenceType": referenceType
+      "itemName": itemName(),
     });
     return map;
   }

@@ -13,14 +13,28 @@ class AnimalForm extends StatefulWidget {
 class _AnimalFormState extends State<AnimalForm> {
   final _formKey = GlobalKey<FormState>();
 
-  final Animal _animal =
-      Animal("", "", DateTime.now(), false, null, "", Sex.male, null);
+  final Animal _animal = Animal();
+  List<AnimalSpecies> _allSpecies = [];
+
+  Future<void> _getSpecies() async {
+    var data = await getItemsByUser(AnimalSpecies.collectionName);
+    setState(() {
+      _allSpecies = data.map((d) => AnimalSpecies.fromMap(d)).toList();
+    });
+  }
+
+  @override
+  void initState() {
+    _getSpecies();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return ResourceForm<Animal>(
       resource: _animal,
       key: _formKey,
+      isNew: true,
       additionalFields: [
         DateTimeTextField(
             labelText: 'Birth Date',
@@ -49,6 +63,7 @@ class _AnimalFormState extends State<AnimalForm> {
                   textAlign: TextAlign.left,
                 ),
                 DropdownButton<Sex>(
+                    value: _animal.sex,
                     items: Sex.values.map((Sex value) {
                       return DropdownMenuItem<Sex>(
                           value: value,
@@ -67,6 +82,26 @@ class _AnimalFormState extends State<AnimalForm> {
                 onChanged: (value) {
                   _animal.isFixed = value!;
                 }),
+            Column(
+              children: [
+                const Text(
+                  'Species',
+                  textAlign: TextAlign.left,
+                ),
+                DropdownButton<AnimalSpecies>(
+                    value: _animal.species,
+                    items: _allSpecies.map((AnimalSpecies value) {
+                      return DropdownMenuItem<AnimalSpecies>(
+                          value: value,
+                          child: Text(value.name));
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        _animal.species = value;
+                      });
+                    })
+              ],
+            ),
           ],
         ),
       ],

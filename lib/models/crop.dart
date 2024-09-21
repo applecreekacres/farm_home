@@ -1,29 +1,31 @@
 import 'models.dart';
 
 class Crop extends Reference {
+  static const collectionName = "Crop";
+
   int daysToPottingUp = 0;
   int daysToTransplant = 0;
   int daysToMaturity = 0;
   int harvestWindow = 0;
-  CropFamily? _cropFamily;
+  CropFamily? family;
   String? _cropFamilyId;
 
   CropFamily? get cropFamily {
-    if (_cropFamilyId != null && _cropFamily == null) {
-      _cropFamily =
-          getItemById<CropFamily>(_cropFamilyId as String) as CropFamily?;
+    if (_cropFamilyId != null && family == null) {
+      family = getItemById(CropFamily.collectionName, _cropFamilyId as String)
+          as CropFamily?;
     }
-    return _cropFamily;
+    return family;
   }
 
   Crop(
-      super.name,
+      {super.name,
       super.description,
-      this.daysToPottingUp,
-      this.daysToTransplant,
-      this.daysToMaturity,
-      this.harvestWindow,
-      this._cropFamily);
+      this.daysToPottingUp = 0,
+      this.daysToTransplant = 0,
+      this.daysToMaturity = 0,
+      this.harvestWindow = 0,
+      this.family});
 
   Crop.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     daysToPottingUp = data["daysToPottingUp"];
@@ -44,5 +46,10 @@ class Crop extends Reference {
     };
     map.addAll(super.toMap());
     return map;
+  }
+
+  @override
+  String itemName() {
+    return collectionName;
   }
 }

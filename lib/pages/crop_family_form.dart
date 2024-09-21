@@ -3,23 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:farm_home/models/models.dart';
 import 'package:farm_home/widgets/widgets.dart';
 
-class ActivityRecordForm extends StatefulWidget {
-  final ActivityRecord? record;
+class CropFamilyForm extends StatefulWidget {
+  final CropFamily? record;
 
-  const ActivityRecordForm({this.record, super.key});
+  const CropFamilyForm({this.record, super.key});
 
   @override
-  State<ActivityRecordForm> createState() => _ActivityRecordFormState();
+  State<CropFamilyForm> createState() => _CropFamilyFormState();
 }
 
-class _ActivityRecordFormState extends State<ActivityRecordForm> {
-  late ActivityRecord _record;
+class _CropFamilyFormState extends State<CropFamilyForm> {
+  late CropFamily _record;
   bool _isNew = false;
 
   @override
   void initState() {
     if (widget.record == null) {
-      _record = ActivityRecord();
+      _record = CropFamily();
       _isNew = true;
     } else {
       _record = widget.record!;
@@ -29,8 +29,8 @@ class _ActivityRecordFormState extends State<ActivityRecordForm> {
 
   @override
   Widget build(BuildContext context) {
-    return RecordForm<ActivityRecord>(
-      record: _record,
+    return ReferenceForm<CropFamily>(
+      reference: _record,
       isNew: _isNew,
     );
   }
