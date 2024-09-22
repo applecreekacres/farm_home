@@ -40,6 +40,7 @@ abstract class Item {
       "created": _created.millisecondsSinceEpoch,
       "modified": _modified.millisecondsSinceEpoch,
       "itemName": itemName(),
+      "itemType": itemType(),
     };
   }
 }
