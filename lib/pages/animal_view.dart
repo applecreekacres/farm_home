@@ -12,7 +12,8 @@ class AnimalView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final animal = Provider.of<ResourceProvider<Animal>>(context, listen: false).resource!;
+    final animal =
+        Provider.of<ResourceProvider<Animal>>(context, listen: false).resource!;
 
     return Scaffold(
         appBar: AppBar(
@@ -22,12 +23,8 @@ class AnimalView extends StatelessWidget {
         drawer: const FarmHomeDrawer(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const AnimalForm(
-                          isNew: false,
-                        )));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const AnimalForm()));
           },
           child: const Icon(Icons.edit),
         ),
