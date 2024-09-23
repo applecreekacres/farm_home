@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'package:farm_home/models/models.dart';
 import 'package:farm_home/widgets/widgets.dart';
+import 'package:provider/provider.dart';
+import 'package:farm_home/providers/providers.dart';
 
 class AnimalForm extends StatefulWidget {
-  const AnimalForm({super.key});
+  final bool isNew;
+  final Animal? animal;
+
+  const AnimalForm({super.key, this.animal, this.isNew = false});
 
   @override
   State<StatefulWidget> createState() => _AnimalFormState();
@@ -13,7 +18,7 @@ class AnimalForm extends StatefulWidget {
 class _AnimalFormState extends State<AnimalForm> {
   final _formKey = GlobalKey<FormState>();
 
-  final Animal _animal = Animal();
+  late Animal _animal;
   List<AnimalSpecies> _allSpecies = [];
 
   Future<void> _getSpecies() async {
@@ -25,6 +30,9 @@ class _AnimalFormState extends State<AnimalForm> {
 
   @override
   void initState() {
+    _animal = widget.isNew
+        ? Animal()
+        : Provider.of<ResourceProvider<Animal>>(context, listen: false).resource!;
     _getSpecies();
     super.initState();
   }
@@ -34,7 +42,7 @@ class _AnimalFormState extends State<AnimalForm> {
     return ResourceForm<Animal>(
       resource: _animal,
       key: _formKey,
-      isNew: true,
+      isNew: widget.isNew,
       additionalFields: [
         DateTimeTextField(
             labelText: 'Birth Date',
@@ -92,8 +100,7 @@ class _AnimalFormState extends State<AnimalForm> {
                     value: _animal.animalSpecies,
                     items: _allSpecies.map((AnimalSpecies value) {
                       return DropdownMenuItem<AnimalSpecies>(
-                          value: value,
-                          child: Text(value.name));
+                          value: value, child: Text(value.name));
                     }).toList(),
                     onChanged: (value) {
                       setState(() {

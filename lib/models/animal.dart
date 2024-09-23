@@ -11,13 +11,21 @@ class Animal extends Resource {
   String nickname = "";
   late Sex sex;
   String _animalSpeciesId = "";
-  AnimalSpecies? species;
+  Future<AnimalSpecies?> species;
 
-  AnimalSpecies? get animalSpecies {
+  AnimalSpecies? _fetchSpecies() async {
+    AnimalSpecies? s;
     if (_animalSpeciesId != "" && species == null) {
-      species = getItemById(AnimalSpecies.collectionName, _animalSpeciesId)
-          as AnimalSpecies;
+      var data =
+          await getItemById(AnimalSpecies.collectionName, _animalSpeciesId);
+      if (data != null) {
+        s = AnimalSpecies.fromMap(data);
+      }
     }
+    return s;
+  }
+
+  AnimalSpecies? get animalSpecies async {
     return species;
   }
 
@@ -39,13 +47,11 @@ class Animal extends Resource {
   }
 
   Animal.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    if (data["birthDate"] != "")
-    {
+    if (data["birthDate"] != "") {
       birthDate = DateTime.fromMillisecondsSinceEpoch(data["birthDate"]);
     }
 
-    if(data["deathDate"] != "")
-    {
+    if (data["deathDate"] != "") {
       deathDate = DateTime.fromMillisecondsSinceEpoch(data["deathDate"]);
     }
     isFixed = data["isFixed"];

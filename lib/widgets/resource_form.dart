@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:farm_home/models/models.dart';
 import 'package:farm_home/widgets/widgets.dart';
+import 'package:provider/provider.dart';
+import 'package:farm_home/providers/providers.dart';
 
 class ResourceForm<T extends Resource> extends StatefulWidget {
   final T resource;
@@ -38,9 +40,10 @@ class _ResourceFormState<T extends Resource> extends State<ResourceForm<T>> {
     fields.addAll(this.fields);
     return fields;
   }
-  
+
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ResourceProvider>(context, listen: false);
     return Form(
       key: _formKey,
       child: DefaultTabController(
@@ -57,6 +60,7 @@ class _ResourceFormState<T extends Resource> extends State<ResourceForm<T>> {
                     } else {
                       updateItem<T>(resource);
                     }
+                    provider.resource = resource;
                     Navigator.of(context).pop();
                   },
                   icon: const Icon(Icons.save))

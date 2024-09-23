@@ -1,7 +1,10 @@
-import 'package:farm_home/pages/animal_form.dart';
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+
 import 'package:farm_home/models/models.dart';
+import 'package:farm_home/pages/pages.dart';
+import 'package:farm_home/providers/providers.dart';
 import 'package:farm_home/widgets/widgets.dart';
 
 class AnimalListPage extends StatefulWidget {
@@ -40,6 +43,12 @@ class _AnimalListPageState extends State<AnimalListPage> {
           itemBuilder: (context, index) {
             return ListTile(
               title: Text(_animals[index].name),
+              onTap: () {
+                var provider = Provider.of<ResourceProvider<Animal>>(context, listen: false);
+                provider.resource = _animals[index];
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const AnimalView()));
+              },
             );
           }),
       floatingActionButton: FloatingActionButton(
