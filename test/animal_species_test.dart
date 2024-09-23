@@ -45,7 +45,8 @@ void main() {
           DateTime(DateTime.now().year, 1, 2, 3, 4, 5).millisecondsSinceEpoch,
       "modified":
           DateTime(DateTime.now().year, 5, 4, 3, 2, 1).millisecondsSinceEpoch,
-      "itemName": "Animal Species"
+      "itemName": "Animal Species",
+      "itemType": "Reference"
     };
 
     final species = AnimalSpecies.fromMap(map);
