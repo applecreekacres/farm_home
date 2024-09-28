@@ -24,9 +24,16 @@ void main() {
       "nickname": "Meowgan",
       "birthDate": DateTime(2013, 3, 15).microsecondsSinceEpoch,
       "deathDate": "",
-      "isFixed": false.toString(),
-      "sex": "male",
-      "speciesId": "333444555666", // fake obviously
+      "isFixed": false,
+      "sex": "Sex.male",
+      "animalSpeciesId": "333444555666", // fake obviously
+      "id": "888777666555",
+      "created": DateTime.now().millisecondsSinceEpoch,
+      "modified": DateTime.now().millisecondsSinceEpoch,
+      "userId": "000999888777"
     };
+    var animal = Animal.fromMap(map);
+
+    expect(animal.name, map["name"]);
   });
 }
