@@ -14,7 +14,7 @@ class Animal extends Resource {
   AnimalSpecies? species;
 
   AnimalSpecies? get animalSpecies {
-    if (_animalSpeciesId != "") {
+    if (_animalSpeciesId != "" && species == null) {
       species = getItemById(AnimalSpecies.collectionName, _animalSpeciesId)
           as AnimalSpecies;
     }
@@ -39,11 +39,18 @@ class Animal extends Resource {
   }
 
   Animal.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    birthDate = DateTime.fromMillisecondsSinceEpoch(data["birthDate"]);
-    deathDate = DateTime.fromMillisecondsSinceEpoch(data["deathDate"]);
+    if (data["birthDate"] != "")
+    {
+      birthDate = DateTime.fromMillisecondsSinceEpoch(data["birthDate"]);
+    }
+
+    if(data["deathDate"] != "")
+    {
+      deathDate = DateTime.fromMillisecondsSinceEpoch(data["deathDate"]);
+    }
     isFixed = data["isFixed"];
     nickname = data["nickname"];
-    sex = data["sex"];
+    sex = Sex.values.firstWhere((e) => e.toString() == data['sex']);
     _animalSpeciesId = data["animalSpeciesId"];
   }
 

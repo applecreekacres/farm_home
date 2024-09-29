@@ -1,3 +1,4 @@
+import 'package:farm_home/pages/animal_form.dart';
 import 'package:flutter/material.dart';
 
 import 'package:farm_home/models/models.dart';
@@ -15,8 +16,8 @@ class _AnimalListPageState extends State<AnimalListPage> {
 
   @override
   void initState() {
-    super.initState();
     _getAnimals();
+    super.initState();
   }
 
   Future<void> _getAnimals() async {
@@ -38,14 +39,17 @@ class _AnimalListPageState extends State<AnimalListPage> {
           itemCount: _animals.length,
           itemBuilder: (context, index) {
             return ListTile(
-              title: Text(_animals[index].nickname),
+              title: Text(_animals[index].name),
             );
           }),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () => Navigator.push(context,
-      //       MaterialPageRoute(builder: (context) => const AnimalNewPage())),
-      //   child: const Icon(Icons.add),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AnimalForm()));
+          setState(() {});
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

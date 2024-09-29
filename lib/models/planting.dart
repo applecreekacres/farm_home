@@ -43,8 +43,8 @@ class Planting extends Resource {
   Map<String, dynamic> toMap() {
     var map = super.toMap();
     map.addAll({
-      "cropId": crop?.id,
-      "bedsId": beds?.map((obj) => obj.id).toList(),
+      "cropId": _cropId,
+      "bedsId": _bedsId,
       "length": length,
       "rows": rows,
       "inRowSpacing": inRowSpacing,

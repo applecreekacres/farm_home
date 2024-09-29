@@ -45,4 +45,9 @@ abstract class Record extends Item {
     map.addAll(super.toMap());
     return map;
   }
+
+  @override
+  String itemType() {
+    return "Record";
+  }
 }

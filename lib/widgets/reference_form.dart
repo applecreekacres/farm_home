@@ -34,11 +34,6 @@ class _ReferenceFormState<T extends Reference> extends State<ReferenceForm<T>> {
           onChanged: (value) => reference.name = value),
       NotesField(
         modelField: reference.description,
-        onChanged: (value) {
-          setState(() {
-            reference.description = value;
-          });
-        },
       ),
     ];
 

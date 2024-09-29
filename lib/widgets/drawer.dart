@@ -24,7 +24,15 @@ class FarmHomeDrawer extends StatelessWidget {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const HomePage()));
           },
-        )
+        ),
+        ListTile(
+          leading: const Icon(Icons.pets),
+          title: const Text("Animals"),
+          onTap: () {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => const AnimalListPage()));
+          },
+        ),
       ],
     ));
   }

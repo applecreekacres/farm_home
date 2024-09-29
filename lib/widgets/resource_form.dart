@@ -33,17 +33,12 @@ class _ResourceFormState<T extends Resource> extends State<ResourceForm<T>> {
           onChanged: (value) => resource.name = value),
       NotesField(
         modelField: resource.notes,
-        onChanged: (value) {
-          setState(() {
-            resource.notes = value;
-          });
-        },
       ),
     ];
     fields.addAll(this.fields);
     return fields;
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Form(

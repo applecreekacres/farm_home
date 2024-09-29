@@ -89,7 +89,7 @@ class _AnimalFormState extends State<AnimalForm> {
                   textAlign: TextAlign.left,
                 ),
                 DropdownButton<AnimalSpecies>(
-                    value: _animal.species,
+                    value: _animal.animalSpecies,
                     items: _allSpecies.map((AnimalSpecies value) {
                       return DropdownMenuItem<AnimalSpecies>(
                           value: value,
@@ -97,7 +97,7 @@ class _AnimalFormState extends State<AnimalForm> {
                     }).toList(),
                     onChanged: (value) {
                       setState(() {
-                        _animal.species = value;
+                        _animal.animalSpecies = value;
                       });
                     })
               ],

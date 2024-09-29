@@ -15,6 +15,8 @@ abstract class Item {
 
   String itemName();
 
+  String itemType();
+
   /// Unique identifier of every item and derived class that is created.
   String get id => _id;
 
@@ -36,7 +38,9 @@ abstract class Item {
       "id": _id,
       "userId": _userId,
       "created": _created.millisecondsSinceEpoch,
-      "modified": _modified.millisecondsSinceEpoch
+      "modified": _modified.millisecondsSinceEpoch,
+      "itemName": itemName(),
+      "itemType": itemType(),
     };
   }
 }
@@ -55,8 +59,7 @@ Future<Map<String, dynamic>?> getItemById(
   }
 }
 
-Future<List<Map<String, dynamic>>> getItemsByUser(
-    String collection) async {
+Future<List<Map<String, dynamic>>> getItemsByUser(String collection) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var user = prefs.getString("userId");
   final docRef = FirebaseFirestore.instance

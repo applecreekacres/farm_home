@@ -21,6 +21,20 @@ class _EquipmentFormState extends State<EquipmentForm> {
       resource: _equipment,
       isNew: true,
       key: _formKey,
+      additionalFields: [
+        TextFormField(
+          decoration: const InputDecoration(labelText: "Manufacturer"),
+          onChanged:(value) => _equipment.manufacturer = value,
+        ),
+        TextFormField(
+          decoration: const InputDecoration(labelText: "Model"),
+          onChanged: (value) => _equipment.model = value,
+        ),
+        TextFormField(
+          decoration: const InputDecoration(labelText: "Serial Number"),
+          onChanged: (value) => _equipment.serialNumber = value,
+        ),
+      ],
     );
   }
 }

@@ -25,4 +25,9 @@ abstract class Reference extends Item {
     });
     return map;
   }
+
+  @override
+  String itemType() {
+    return "Reference";
+  }
 }
