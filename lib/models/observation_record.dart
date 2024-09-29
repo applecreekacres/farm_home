@@ -10,6 +10,8 @@ class ObservationRecord extends Record {
       super.resources,
       super.tags});
 
+  ObservationRecord.fromMap(super.data) : super.fromMap();
+
   @override
   String itemName() {
     return "Observation";

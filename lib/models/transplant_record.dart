@@ -1,8 +1,6 @@
 import 'models.dart';
 
 class TransplantRecord extends Record {
-  late DateTime? transplantDate = DateTime.now();
-
   TransplantRecord(
       {super.title,
       super.timestamp,
@@ -10,22 +8,9 @@ class TransplantRecord extends Record {
       super.isDone,
       super.quantities,
       super.resources,
-      super.tags,
-      this.transplantDate});
+      super.tags});
 
-  TransplantRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    transplantDate =
-        DateTime.fromMillisecondsSinceEpoch(data["transplantDate"]);
-  }
-
-  @override
-  Map<String, dynamic> toMap() {
-    Map<String, dynamic> map = {
-      "transplantDate": transplantDate?.millisecondsSinceEpoch
-    };
-    map.addAll(super.toMap());
-    return map;
-  }
+  TransplantRecord.fromMap(super.data) : super.fromMap();
 
   @override
   String itemName() {
