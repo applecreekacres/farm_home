@@ -1,3 +1,4 @@
+import 'package:farm_home/constants/constants.dart';
 import 'package:farm_home/models/models.dart';
 
 class Material extends Resource {
@@ -6,7 +7,7 @@ class Material extends Resource {
   String _materialTypeId = "";
 
   Future<MaterialType?> get material async {
-    var data = await getItemById(MaterialType.collectionName, _materialTypeId);
+    var data = await getItemById(ReferenceConstants.materialType, _materialTypeId);
     if (data != null) {
       return MaterialType.fromMap(data);
     } else {

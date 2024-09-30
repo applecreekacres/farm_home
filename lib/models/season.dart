@@ -1,3 +1,5 @@
+import 'package:farm_home/constants/constants.dart';
+
 import 'models.dart';
 
 class Season extends Reference {
@@ -29,6 +31,6 @@ class Season extends Reference {
 
   @override
   String itemName() {
-    return "Season";
+    return ReferenceConstants.season;
   }
 }

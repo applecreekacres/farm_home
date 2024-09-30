@@ -1,7 +1,8 @@
+import 'package:farm_home/constants/constants.dart';
+
 import 'models.dart';
 
 class Crop extends Reference {
-  static const collectionName = "Crop";
 
   int daysToPottingUp = 0;
   int daysToTransplant = 0;
@@ -12,7 +13,7 @@ class Crop extends Reference {
 
   CropFamily? get cropFamily {
     if (_cropFamilyId != null && family == null) {
-      family = getItemById(CropFamily.collectionName, _cropFamilyId as String)
+      family = getItemById(ReferenceConstants.cropFamily, _cropFamilyId as String)
           as CropFamily?;
     }
     return family;
@@ -50,6 +51,6 @@ class Crop extends Reference {
 
   @override
   String itemName() {
-    return collectionName;
+    return ReferenceConstants.crop;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:farm_home/constants/constants.dart';
 import 'package:farm_home/models/models.dart';
 
 class Unit extends Reference {
@@ -7,6 +8,6 @@ class Unit extends Reference {
 
   @override
   String itemName() {
-    return "Unit";
+    return ReferenceConstants.unit;
   }
 }
