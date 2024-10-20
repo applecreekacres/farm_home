@@ -8,23 +8,8 @@ import 'package:farm_home/models/models.dart';
 class CropFamilyProvider extends ChangeNotifier {
   CropFamilyProvider();
 
-  @override
-  void dispose() {
-    if (!_controller.isClosed) {
-      _controller.close();
-    }
-    super.dispose();
-  }
-
-  late final StreamController<List<CropFamily>> _controller =
-      StreamController(onListen: () async {
+  Future<List<CropFamily>> get cropFamilies async {
     var items = await getItemsByUser(ReferenceConstants.cropFamily);
-    _controller.add(items.map((value) {
-      return CropFamily.fromMap(value);
-    }).toList());
-    _controller.close();
-  });
-
-  Stream<List<CropFamily>> get cropFamilies => _controller.stream;
-
+    return items.map((v) => CropFamily.fromMap(v)).toList();
+  }
 }

@@ -36,8 +36,8 @@ class _CropFormState extends State<CropForm> {
       reference: _record,
       isNew: _isNew,
       additionalFields: [
-        StreamWidget<List<CropFamily>>(
-          stream: _family.cropFamilies,
+        FutureWidget<List<CropFamily>>(
+          future: _family.cropFamilies,
           onData: (data) {
             if (data != null) {
               return ReferenceDropDownButton<CropFamily>(

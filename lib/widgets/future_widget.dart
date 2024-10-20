@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class StreamWidget<T> extends StatelessWidget {
-  final Stream<T> stream;
+class FutureWidget<T> extends StatelessWidget {
+  final Future<T> future;
   final Widget Function()? onLoading;
   final Widget Function(T?) onData;
   final Widget Function(dynamic)? onError;
 
-  const StreamWidget({
+  const FutureWidget({
     super.key,
-    required this.stream,
+    required this.future,
     required this.onData,
     this.onError,
     this.onLoading,
@@ -16,8 +16,8 @@ class StreamWidget<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<T>(
-      stream: stream,
+    return FutureBuilder<T>(
+      future: future,
       builder: (BuildContext context, AsyncSnapshot<T> snapshot) {
         if (snapshot.hasData) {
           return this._handleData(snapshot.data);
