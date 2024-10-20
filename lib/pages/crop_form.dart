@@ -36,38 +36,24 @@ class _CropFormState extends State<CropForm> {
       reference: _record,
       isNew: _isNew,
       additionalFields: [
-        StreamBuilder<List<CropFamily>>(
-            stream: _family.cropFamilies,
-            builder: (BuildContext context,
-                AsyncSnapshot<List<CropFamily>> snapshot) {
-              if (snapshot.hasError) {
-                return Padding(
-                  padding: EdgeInsets.all(10),
-                  child: const Text("Error"),
-                );
-              } else {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.none:
-                    return Text("No crop families");
-                  case ConnectionState.waiting:
-                    return CircularProgressIndicator();
-                  case ConnectionState.active:
-                    return Text("No crop families retrieving");
-                  case ConnectionState.done:
-                    if (snapshot.data != null) {
-                      var data = snapshot.data ?? [];
-                      return ReferenceDropDownButton<CropFamily>(
-                        label: data.first.itemName(),
-                        items: data,
-                        onChanged: (value) {
-                          _record.cropFamilyId = value?.id;
-                        },
-                      );
-                    }
-                }
-              }
-              return Text("Something bad");
-            }),
+        StreamWidget<List<CropFamily>>(
+          stream: _family.cropFamilies,
+          onData: (data) {
+            if (data != null) {
+              return ReferenceDropDownButton<CropFamily>(
+                label: data.first.itemName(),
+                items: data,
+                onChanged: (value) {
+                  _record.cropFamilyId = value?.id;
+                },
+              );
+            } else {
+              return const Text("No Crop families");
+            }
+          },
+          onLoading: () => CircularProgressIndicator(),
+          onError: (p0) => const Text("Failed to load crop families"),
+        ),
         IntFormField(
           label: "Days to Potting Up",
           onChanged: (value) => _record.daysToPottingUp = value ?? 0,

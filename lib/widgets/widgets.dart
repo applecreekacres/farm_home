@@ -13,3 +13,4 @@ export 'reference_select.dart';
 export 'reference_dropdown_button.dart';
 export 'int_form_field.dart';
 export 'resource_dropdown_button.dart';
+export 'stream_widget.dart';
