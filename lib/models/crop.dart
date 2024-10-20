@@ -3,7 +3,6 @@ import 'package:farm_home/constants/constants.dart';
 import 'models.dart';
 
 class Crop extends Reference {
-
   int daysToPottingUp = 0;
   int daysToTransplant = 0;
   int daysToMaturity = 0;
@@ -11,13 +10,22 @@ class Crop extends Reference {
   CropFamily? family;
   String? _cropFamilyId;
 
-  CropFamily? get cropFamily {
+  Future<CropFamily?> get cropFamily async {
     if (_cropFamilyId != null && family == null) {
-      family = getItemById(ReferenceConstants.cropFamily, _cropFamilyId as String)
-          as CropFamily?;
+      var map = await getItemById(
+          ReferenceConstants.cropFamily, _cropFamilyId as String);
+      if (map != null) {
+        family = CropFamily.fromMap(map);
+      }
     }
     return family;
   }
+
+  set cropFamilyId(String? id) {
+    _cropFamilyId = id;
+  }
+
+  String? get cropFamilyId => _cropFamilyId;
 
   Crop(
       {super.name,

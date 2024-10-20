@@ -22,7 +22,7 @@ class _ReferenceDropDownButtonState<T extends Reference>
     return DropdownButton<int>(
       items: widget.items.map((value) {
         return DropdownMenuItem(
-          value: widget.items.indexWhere((name) => name == value.name),
+          value: widget.items.indexWhere((family) => family.name == value.name),
           child: Text(value.name),
         );
       }).toList(),
