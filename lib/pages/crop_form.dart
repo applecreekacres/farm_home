@@ -1,10 +1,8 @@
-import 'dart:async';
-
-import 'package:farm_home/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'package:farm_home/models/models.dart';
 import 'package:farm_home/widgets/widgets.dart';
+import 'package:farm_home/providers/providers.dart';
 
 class CropForm extends StatefulWidget {
   final Crop? record;
@@ -19,24 +17,7 @@ class _CropFormState extends State<CropForm> {
   late Crop _record;
   bool _isNew = false;
 
-  late final StreamController<List<CropFamily>> _controller =
-      StreamController(onListen: () async {
-    var items = await getItemsByUser(ReferenceConstants.cropFamily);
-    _controller.add(items.map((value) {
-      return CropFamily.fromMap(value);
-    }).toList());
-    _controller.close();
-  });
-
-  Stream<List<CropFamily>> get _family => _controller.stream;
-
-  @override
-  void dispose() {
-    if (!_controller.isClosed) {
-      _controller.close();
-    }
-    super.dispose();
-  }
+  final CropFamilyProvider _family = CropFamilyProvider();
 
   @override
   void initState() {
@@ -56,7 +37,7 @@ class _CropFormState extends State<CropForm> {
       isNew: _isNew,
       additionalFields: [
         StreamBuilder<List<CropFamily>>(
-            stream: _family,
+            stream: _family.cropFamilies,
             builder: (BuildContext context,
                 AsyncSnapshot<List<CropFamily>> snapshot) {
               if (snapshot.hasError) {
