@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ReferenceDropDownButton<T extends Reference> extends StatefulWidget {
   final String label;
   final List<T> items;
-  final ValueChanged<String?>? onChanged;
+  final ValueChanged<T?>? onChanged;
 
   const ReferenceDropDownButton(
       {super.key, required this.label, required this.items, this.onChanged});
@@ -23,23 +23,22 @@ class _ReferenceDropDownButtonState<T extends Reference>
     return Row(
       children: [
         Text(widget.label),
-        DropdownButton<int>(
+        DropdownButton<T>(
           items: widget.items.map((value) {
             return DropdownMenuItem(
-              value: widget.items
-                  .indexWhere((item) => item.name == value.name),
+              value: value,
               child: Text(value.name),
             );
           }).toList(),
           onChanged: (value) {
             if (value != null) {
               setState(() {
-                _selectedIndex = value;
+                _selectedIndex = widget.items.indexWhere((item) => item.name == value.name);
               });
             }
-            widget.onChanged?.call(widget.items[_selectedIndex].id);
+            widget.onChanged?.call(value);
           },
-          value: _selectedIndex,
+          value: widget.items[_selectedIndex],
         )
       ],
     );

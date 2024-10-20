@@ -79,7 +79,7 @@ class _CropFormState extends State<CropForm> {
                         label: data.first.itemName(),
                         items: data,
                         onChanged: (value) {
-                          _record.cropFamilyId = value;
+                          _record.cropFamilyId = value?.id;
                         },
                       );
                     }
