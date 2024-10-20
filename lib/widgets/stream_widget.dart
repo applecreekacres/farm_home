@@ -7,6 +7,7 @@ class StreamWidget<T> extends StatelessWidget {
   final Widget Function(dynamic)? onError;
 
   const StreamWidget({
+    super.key,
     required this.stream,
     required this.onData,
     this.onError,
