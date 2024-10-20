@@ -69,13 +69,14 @@ class _CropFormState extends State<CropForm> {
                   case ConnectionState.none:
                     return Text("No crop families");
                   case ConnectionState.waiting:
-                    return Text("crop families loading");
+                    return CircularProgressIndicator();
                   case ConnectionState.active:
                     return Text("No crop families retrieving");
                   case ConnectionState.done:
                     if (snapshot.data != null) {
                       var data = snapshot.data ?? [];
                       return ReferenceDropDownButton<CropFamily>(
+                        label: data.first.itemName(),
                         items: data,
                         onChanged: (value) {
                           _record.cropFamilyId = value;
