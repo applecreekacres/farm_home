@@ -44,58 +44,45 @@ class _AnimalFormState extends State<AnimalForm> {
               _animal.deathDate = value!;
             },
             initialDate: DateTime.now()),
-        Row(
-          children: [
-            Column(
-              children: [
-                const Text(
-                  'Sex',
-                  textAlign: TextAlign.left,
-                ),
-                DropdownButton<Sex>(
-                    value: _animal.sex,
-                    items: Sex.values.map((Sex value) {
-                      return DropdownMenuItem<Sex>(
-                          value: value,
-                          child: Text(value.toString().split('.')[1]));
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        _animal.sex = value as Sex;
-                      });
-                    })
-              ],
-            ),
-            LabelledCheckbox(
-                label: 'Is Fixed',
-                value: _animal.isFixed,
+        const Text(
+          'Sex',
+          textAlign: TextAlign.left,
+        ),
+        DropdownButton<Sex>(
+            value: _animal.sex,
+            items: Sex.values.map((Sex value) {
+              return DropdownMenuItem<Sex>(
+                  value: value, child: Text(value.toString().split('.')[1]));
+            }).toList(),
+            onChanged: (value) {
+              setState(() {
+                _animal.sex = value as Sex;
+              });
+            }),
+        LabelledCheckbox(
+            label: 'Is Fixed',
+            value: _animal.isFixed,
+            onChanged: (value) {
+              _animal.isFixed = value!;
+            }),
+        FutureWidget(
+          future: refProvider.animalSpecies,
+          onData: (data) {
+            if (data != null) {
+              return ReferenceDropDownButton<AnimalSpecies>(
+                label: ReferenceConstants.animalSpecies,
+                items: data,
                 onChanged: (value) {
-                  _animal.isFixed = value!;
-                }),
-            Column(
-              children: [
-                FutureWidget(
-                  future: refProvider.animalSpecies,
-                  onData: (data) {
-                    if (data != null) {
-                      return ReferenceDropDownButton<AnimalSpecies>(
-                        label: ReferenceConstants.animalSpecies,
-                        items: data,
-                        onChanged: (value) {
-                          setState(
-                            () {
-                              _animal.animalSpecies = value;
-                            },
-                          );
-                        },
-                      );
-                    }
-                    return const Text("Can't load species");
-                  },
-                ),
-              ],
-            ),
-          ],
+                  setState(
+                    () {
+                      _animal.animalSpecies = value;
+                    },
+                  );
+                },
+              );
+            }
+            return const Text("Can't load species");
+          },
         ),
       ],
     );
