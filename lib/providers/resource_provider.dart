@@ -1,13 +1,15 @@
-import 'package:farm_home/models/models.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
-class ResourceProvider<T extends Resource> extends ChangeNotifier {
-  T? _resource;
+import 'package:farm_home/constants/constants.dart';
+import 'package:farm_home/models/models.dart';
 
-  T? get resource => _resource;
+class ResourceProvider extends ChangeNotifier {
+  ResourceProvider();
 
-  set resource(T? value) {
-    _resource = value;
-    notifyListeners();
+  Future<List<Animal>> get animals async {
+    var items = await getItemsByUser(ResourceConstants.animal);
+    return items.map((v) => Animal.fromMap(v)).toList();
   }
 }

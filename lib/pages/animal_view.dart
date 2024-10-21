@@ -8,12 +8,13 @@ import 'package:farm_home/providers/providers.dart';
 import 'package:farm_home/widgets/widgets.dart';
 
 class AnimalView extends StatelessWidget {
-  const AnimalView({super.key});
+  final int index;
+
+  const AnimalView({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
-    final animal =
-        Provider.of<ResourceProvider<Animal>>(context, listen: false).resource!;
+    final resProvider = Provider.of<ResourceProvider>(context);
 
     return Scaffold(
         appBar: AppBar(
@@ -28,8 +29,6 @@ class AnimalView extends StatelessWidget {
           },
           child: const Icon(Icons.edit),
         ),
-        body: Column(
-          children: [Text(animal.name)],
-        ));
+        body: const Text("Lorem"));
   }
 }

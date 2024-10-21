@@ -51,8 +51,10 @@ class FarmHome extends StatelessWidget {
                 prefs: prefs,
                 firebaseFirestore: _firebaseFirestore),
           ),
-          ChangeNotifierProvider<ResourceProvider<Animal>>(
-              create: (_) => ResourceProvider<Animal>()),
+          ChangeNotifierProvider<ResourceProvider>(
+              create: (_) => ResourceProvider()),
+          ChangeNotifierProvider<ReferenceProvider>(
+              create: (_) => ReferenceProvider()),
         ],
         child: MaterialApp(
           title: AppConstants.appTitle,

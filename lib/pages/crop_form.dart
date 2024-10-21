@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:farm_home/models/models.dart';
 import 'package:farm_home/widgets/widgets.dart';
 import 'package:farm_home/providers/providers.dart';
+import 'package:provider/provider.dart';
 
 class CropForm extends StatefulWidget {
   final Crop? record;
@@ -17,8 +18,6 @@ class _CropFormState extends State<CropForm> {
   late Crop _record;
   bool _isNew = false;
 
-  final CropFamilyProvider _family = CropFamilyProvider();
-
   @override
   void initState() {
     if (widget.record == null) {
@@ -32,12 +31,13 @@ class _CropFormState extends State<CropForm> {
 
   @override
   Widget build(BuildContext context) {
+    final refProvider = Provider.of<ReferenceProvider>(context);
     return ReferenceForm<Crop>(
       reference: _record,
       isNew: _isNew,
       additionalFields: [
         FutureWidget<List<CropFamily>>(
-          future: _family.cropFamilies,
+          future: refProvider.cropFamilies,
           onData: (data) {
             if (data != null) {
               return ReferenceDropDownButton<CropFamily>(
