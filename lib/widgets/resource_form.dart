@@ -74,8 +74,13 @@ class _ResourceFormState<T extends Resource> extends State<ResourceForm<T>> {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-                child: Column(
-                  children: _buildFields(),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: _buildFields(),
+                    ),
+                  ),
                 ),
               ),
               const Padding(
