@@ -1,3 +1,4 @@
+import 'package:farm_home/providers/record_provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -55,6 +56,8 @@ class FarmHome extends StatelessWidget {
               create: (_) => ResourceProvider()),
           ChangeNotifierProvider<ReferenceProvider>(
               create: (_) => ReferenceProvider()),
+          ChangeNotifierProvider<RecordProvider>(
+              create: (_) => RecordProvider()),
         ],
         child: MaterialApp(
           title: AppConstants.appTitle,
