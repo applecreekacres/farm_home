@@ -27,6 +27,7 @@ class _ResourceFormState<T extends Resource> extends State<ResourceForm<T>> {
   List<Widget> _buildFields() {
     var fields = [
       TextFormField(
+          initialValue: widget.isNew ? "" : resource.name,
           decoration: const InputDecoration(labelText: "Name"),
           validator: (value) =>
               value?.isEmpty ?? true ? 'Please enter a name' : null,
