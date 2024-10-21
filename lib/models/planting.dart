@@ -3,6 +3,8 @@ import 'models.dart';
 class Planting extends Resource {
   String _cropId = "";
   List<String> _bedsId = List<String>.empty();
+  String _seasonId = "";
+  late Season? season;
   late Crop? crop;
   late List<Land>? beds;
   late int length;
@@ -18,6 +20,7 @@ class Planting extends Resource {
       super.notes,
       this.crop,
       this.beds,
+      this.season,
       this.length = 0,
       this.rows = 0,
       this.inRowSpacing = 0,
@@ -30,6 +33,7 @@ class Planting extends Resource {
   Planting.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     _cropId = data["cropId"];
     _bedsId = data["bedsId"];
+    _seasonId = data["seasonId"];
     length = data["length"];
     rows = data["rows"];
     inRowSpacing = data["inRowSpacing"];
@@ -45,6 +49,7 @@ class Planting extends Resource {
     map.addAll({
       "cropId": _cropId,
       "bedsId": _bedsId,
+      "seasonId": _seasonId,
       "length": length,
       "rows": rows,
       "inRowSpacing": inRowSpacing,
