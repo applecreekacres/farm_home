@@ -12,4 +12,9 @@ class ResourceProvider extends ChangeNotifier {
     var items = await getItemsByUser(ResourceConstants.animal);
     return items.map((v) => Animal.fromMap(v)).toList();
   }
+
+  Future<List<Crop>> get crops async {
+    var items = await getItemsByUser(ResourceConstants.crop);
+    return items.map((v) => Crop.fromMap(v)).toList();
+  }
 }

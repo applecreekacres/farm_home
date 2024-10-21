@@ -38,7 +38,7 @@ class _ResourceFormState<T extends Resource> extends State<ResourceForm<T>> {
     fields.addAll(this.fields);
     return fields;
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -46,6 +46,7 @@ class _ResourceFormState<T extends Resource> extends State<ResourceForm<T>> {
       child: DefaultTabController(
         length: 2,
         child: Scaffold(
+          extendBody: true,
           appBar: AppBar(
             backgroundColor: Theme.of(context).colorScheme.primary,
             title: Text('New $resourceName'),
