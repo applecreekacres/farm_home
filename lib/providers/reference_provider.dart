@@ -12,4 +12,9 @@ class ReferenceProvider extends ChangeNotifier {
     var items = await getItemsByUser(ReferenceConstants.cropFamily);
     return items.map((v) => CropFamily.fromMap(v)).toList();
   }
+
+  Future<List<AnimalSpecies>> get animalSpecies async {
+    var items = await getItemsByUser(ReferenceConstants.animalSpecies);
+    return items.map((v) => AnimalSpecies.fromMap(v)).toList();
+  }
 }

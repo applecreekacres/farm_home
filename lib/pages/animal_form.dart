@@ -1,7 +1,10 @@
+import 'package:farm_home/constants/constants.dart';
+import 'package:farm_home/providers/providers.dart';
 import 'package:flutter/material.dart';
 
 import 'package:farm_home/models/models.dart';
 import 'package:farm_home/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 class AnimalForm extends StatefulWidget {
   const AnimalForm({super.key});
@@ -14,23 +17,10 @@ class _AnimalFormState extends State<AnimalForm> {
   final _formKey = GlobalKey<FormState>();
 
   final Animal _animal = Animal();
-  List<AnimalSpecies> _allSpecies = [];
-
-  Future<void> _getSpecies() async {
-    var data = await getItemsByUser(AnimalSpecies.collectionName);
-    setState(() {
-      _allSpecies = data.map((d) => AnimalSpecies.fromMap(d)).toList();
-    });
-  }
-
-  @override
-  void initState() {
-    _getSpecies();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
+    final refProvider = Provider.of<ReferenceProvider>(context);
     return ResourceForm<Animal>(
       resource: _animal,
       key: _formKey,
@@ -84,22 +74,25 @@ class _AnimalFormState extends State<AnimalForm> {
                 }),
             Column(
               children: [
-                const Text(
-                  'Species',
-                  textAlign: TextAlign.left,
+                FutureWidget(
+                  future: refProvider.animalSpecies,
+                  onData: (data) {
+                    if (data != null) {
+                      return ReferenceDropDownButton<AnimalSpecies>(
+                        label: ReferenceConstants.animalSpecies,
+                        items: data,
+                        onChanged: (value) {
+                          setState(
+                            () {
+                              _animal.animalSpecies = value;
+                            },
+                          );
+                        },
+                      );
+                    }
+                    return const Text("Can't load species");
+                  },
                 ),
-                DropdownButton<AnimalSpecies>(
-                    value: _animal.animalSpecies,
-                    items: _allSpecies.map((AnimalSpecies value) {
-                      return DropdownMenuItem<AnimalSpecies>(
-                          value: value,
-                          child: Text(value.name));
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        _animal.animalSpecies = value;
-                      });
-                    })
               ],
             ),
           ],
