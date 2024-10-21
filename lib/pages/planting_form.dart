@@ -25,6 +25,7 @@ class _PlantingFormState extends State<PlantingForm> {
     final refProvider = Provider.of<ReferenceProvider>(context);
     final resProvider = Provider.of<ResourceProvider>(context);
     Crop crop;
+
     return ResourceForm<Planting>(
       resource: _planting,
       isNew: true,
@@ -72,16 +73,20 @@ class _PlantingFormState extends State<PlantingForm> {
                 }),
             IntFormField(
               label: "Length",
+              controllerValue: _planting.length,
               onChanged: (value) {
-                _planting.length = value ?? 0;
+                _planting.length = value;
               },
             ),
             IntFormField(
-                label: "Rows",
-                onChanged: (value) => _planting.rows = value ?? 0),
+              label: "Rows",
+              onChanged: (value) => _planting.rows = value,
+              controllerValue: _planting.rows,
+            ),
             IntFormField(
                 label: "In-Row Spacing",
-                onChanged: (value) => _planting.inRowSpacing = value ?? 0),
+                controllerValue: _planting.inRowSpacing,
+                onChanged: (value) => _planting.inRowSpacing = value),
             IntFormField(
               label: "Days to Potting Up",
               onChanged: (value) {
