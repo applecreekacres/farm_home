@@ -9,7 +9,7 @@ class RecordProvider extends ChangeNotifier {
   RecordProvider();
 
   Future<List<Record>> get activities async {
-    var items = await getItemsByUser(RecordConstants.activity);
+    var items = await getItems<ActivityRecord>();
     return items.map((v) => ActivityRecord.fromMap(v)).toList();
   }
 }

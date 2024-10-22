@@ -7,7 +7,7 @@ class Material extends Resource {
   String _materialTypeId = "";
 
   Future<MaterialType?> get material async {
-    var data = await getItemById(ReferenceConstants.materialType, _materialTypeId);
+    var data = await getItemById(_materialTypeId);
     if (data != null) {
       return MaterialType.fromMap(data);
     } else {

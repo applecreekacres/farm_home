@@ -18,7 +18,12 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: const Text(AppConstants.appTitle),
       ),
-      body: const Center(),
+      body: Padding(
+        padding: EdgeInsets.all(10),
+        child: Column(children: [
+          const Text("Open Records"),
+        ],),
+      ),
       drawer: const FarmHomeDrawer(),
       floatingActionButton: ExpandableFab(
         distance: 112,

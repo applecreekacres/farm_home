@@ -4,7 +4,7 @@ class InputRecord extends Record {
   String _materialId = "";
 
   Future<Material?> get material async {
-    var data = await getItemById(Material.collectionName, _materialId);
+    var data = await getItemById(_materialId);
     if (data != null) {
       return Material.fromMap(data);
     } else {

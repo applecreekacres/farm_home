@@ -15,7 +15,7 @@ class Animal extends Resource {
 
   AnimalSpecies? get animalSpecies {
     if (_animalSpeciesId != "" && species == null) {
-      species = getItemById(AnimalSpecies.collectionName, _animalSpeciesId)
+      species = getItemById(_animalSpeciesId)
           as AnimalSpecies;
     }
     return species;

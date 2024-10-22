@@ -12,8 +12,7 @@ class Crop extends Reference {
 
   Future<CropFamily?> get cropFamily async {
     if (_cropFamilyId != null && family == null) {
-      var map = await getItemById(
-          ReferenceConstants.cropFamily, _cropFamilyId as String);
+      var map = await getItemById(_cropFamilyId as String);
       if (map != null) {
         family = CropFamily.fromMap(map);
       }

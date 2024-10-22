@@ -48,26 +48,40 @@ abstract class Item {
 /// Get an item from Firestore with a specific identification.
 ///
 /// Will return [null] if no item by the given ID exists.
-Future<Map<String, dynamic>?> getItemById(
-    String collection, String itemId) async {
-  final docRef = FirebaseFirestore.instance.collection(collection).doc(itemId);
-  final docSnapshot = await docRef.get();
-  if (docSnapshot.exists) {
-    return docSnapshot.data()!;
-  } else {
-    return null;
-  }
-}
-
-Future<List<Map<String, dynamic>>> getItemsByUser(String collection) async {
+Future<Map<String, dynamic>?> getItemById(String itemId) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var user = prefs.getString("userId");
-  final docRef = FirebaseFirestore.instance
-      .collection(collection)
-      .where('userId', isEqualTo: user);
-  final docSnapshot = await docRef.get();
-  final itemList = docSnapshot.docs.map((doc) => doc.data()).toList();
-  return itemList;
+  if (user != null) {
+    final docRef = FirebaseFirestore.instance.collection(user).doc(itemId);
+    final docSnapshot = await docRef.get();
+    if (docSnapshot.exists) {
+      return docSnapshot.data()!;
+    }
+  }
+  return null;
+}
+
+Future<List<Map<String, dynamic>>> getItemsByField(
+    String field, String value) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var user = prefs.getString("userId");
+  if (user != null) {
+    final docRef = FirebaseFirestore.instance
+        .collection(user)
+        .where(field, isEqualTo: value);
+    final docSnapshot = await docRef.get();
+    final itemList = docSnapshot.docs.map((doc) => doc.data()).toList();
+    return itemList;
+  }
+  return [];
+}
+
+Future<List<Map<String, dynamic>>> getItems<T extends Item>() async {
+  return getItemsByField("itemName", (T as Item).itemName());
+}
+
+Future<List<Map<String, dynamic>>> getItemsByType(String itemType) async {
+  return getItemsByField("itemType", itemType);
 }
 
 /// Upload an item to Firestore. If the item exists it will be updated.
@@ -76,7 +90,7 @@ void createItem<T extends Item>(T model) async {
   model._userId = prefs.getString("userId") ?? "";
   model._modified = DateTime.now();
   await FirebaseFirestore.instance
-      .collection(model.itemName())
+      .collection(model._userId)
       .doc(model.id)
       .set(model.toMap());
 }
@@ -86,14 +100,15 @@ void updateItem<T extends Item>(T model) async {
   model._userId = prefs.getString("userId") ?? "";
   model._modified = DateTime.now();
   await FirebaseFirestore.instance
-      .collection((T as Item).itemName())
+      .collection(model._userId)
       .doc(model.id)
       .update(model.toMap());
 }
 
 void deleteItem<T extends Item>(String id) async {
-  await FirebaseFirestore.instance
-      .collection((T as Item).itemName())
-      .doc(id)
-      .delete();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var user = prefs.getString("userId");
+  if (user != null) {
+    await FirebaseFirestore.instance.collection(user).doc(id).delete();
+  }
 }

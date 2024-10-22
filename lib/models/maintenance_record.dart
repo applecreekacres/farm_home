@@ -7,7 +7,7 @@ class MaintenanceRecord extends Record {
   List<Equipment>? get equipment {
     if (_equipmentUsedId.isNotEmpty && equipmentUsed!.isEmpty) {
       equipmentUsed = _equipmentUsedId
-          .map((id) => getItemById(Equipment.collectionName, id) as Equipment)
+          .map((id) => getItemById(id) as Equipment)
           .toList();
     }
     return equipmentUsed;
