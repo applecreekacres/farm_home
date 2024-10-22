@@ -13,15 +13,14 @@ class Animal extends Resource {
   String _animalSpeciesId = "";
   AnimalSpecies? species;
 
-  AnimalSpecies? get animalSpecies {
+  Future<AnimalSpecies?> get animalSpecies async {
     if (_animalSpeciesId != "" && species == null) {
-      species = getItemById(_animalSpeciesId)
-          as AnimalSpecies;
+      species = await getItemById<AnimalSpecies>(_animalSpeciesId, (v) => AnimalSpecies.fromMap(v));
     }
     return species;
   }
 
-  set animalSpecies(AnimalSpecies? a) {
+  void setanimalSpecies(AnimalSpecies? a) {
     species = a;
     _animalSpeciesId = species?.id ?? "";
   }

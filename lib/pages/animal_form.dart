@@ -75,7 +75,7 @@ class _AnimalFormState extends State<AnimalForm> {
                 onChanged: (value) {
                   setState(
                     () {
-                      _animal.animalSpecies = value;
+                      _animal.setanimalSpecies(value);
                     },
                   );
                 },

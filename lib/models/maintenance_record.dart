@@ -4,20 +4,6 @@ class MaintenanceRecord extends Record {
   List<String> _equipmentUsedId = List<String>.empty();
   List<Equipment>? equipmentUsed = List<Equipment>.empty();
 
-  List<Equipment>? get equipment {
-    if (_equipmentUsedId.isNotEmpty && equipmentUsed!.isEmpty) {
-      equipmentUsed = _equipmentUsedId
-          .map((id) => getItemById(id) as Equipment)
-          .toList();
-    }
-    return equipmentUsed;
-  }
-
-  set equipment(List<Equipment>? e) {
-    equipmentUsed = e;
-    _equipmentUsedId = equipmentUsed!.map((e) => e.id).toList();
-  }
-
   MaintenanceRecord(
       {super.title,
       super.timestamp,

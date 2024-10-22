@@ -1,4 +1,3 @@
-import 'package:farm_home/constants/constants.dart';
 import 'package:farm_home/models/models.dart';
 
 class Material extends Resource {
@@ -7,12 +6,8 @@ class Material extends Resource {
   String _materialTypeId = "";
 
   Future<MaterialType?> get material async {
-    var data = await getItemById(_materialTypeId);
-    if (data != null) {
-      return MaterialType.fromMap(data);
-    } else {
-      return null;
-    }
+    return await getItemById<MaterialType>(
+        _materialTypeId, (v) => MaterialType.fromMap(v));
   }
 
   Material({super.name, super.notes, MaterialType? type}) {
