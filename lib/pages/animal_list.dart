@@ -1,3 +1,4 @@
+import 'package:farm_home/constants/constants.dart';
 import 'package:farm_home/pages/animal_form.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,8 @@ class _AnimalListPageState extends State<AnimalListPage> {
   }
 
   Future<void> _getAnimals() async {
-    _animals = await getItems<Animal>((v) => Animal.fromMap(v));
+    _animals = await getItems<Animal>(
+        ResourceConstants.animal, (v) => Animal.fromMap(v));
     setState(() {});
   }
 

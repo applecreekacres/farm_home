@@ -77,9 +77,9 @@ Future<List<T>> getItemsByField<T extends Item>(String field, String value,
   return [];
 }
 
-Future<List<T>> getItems<T extends Item>(
+Future<List<T>> getItems<T extends Item>(String name,
     T Function(Map<String, dynamic>) transform) async {
-  return getItemsByField<T>("itemName", (T as Item).itemName(), transform);
+  return getItemsByField<T>("itemName", name, transform);
 }
 
 Future<List<T>> getItemsByType<T extends Item>(
