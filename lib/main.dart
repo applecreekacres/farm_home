@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:farm_home/auth_gate.dart';
-import 'package:farm_home/models/models.dart';
 import 'package:farm_home/providers/providers.dart';
 
 import 'constants/constants.dart';
