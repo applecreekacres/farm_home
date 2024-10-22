@@ -50,7 +50,7 @@ class _PlantingFormState extends State<PlantingForm> {
                   return const Text("Error loading crop families");
                 }),
             FutureWidget(
-                future: resProvider.crops,
+                future: refProvider.crops,
                 onData: (data) {
                   if (data != null && _selectableCropFamily != null) {
                     var items = data
@@ -58,7 +58,7 @@ class _PlantingFormState extends State<PlantingForm> {
                             item.cropFamilyId == _selectableCropFamily?.id)
                         .toList();
                     return ReferenceDropDownButton<Crop>(
-                      label: ResourceConstants.crop,
+                      label: ReferenceConstants.crop,
                       items: items,
                       onChanged: (value) {
                         if (value != null) {
