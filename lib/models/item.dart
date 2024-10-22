@@ -48,21 +48,22 @@ abstract class Item {
 /// Get an item from Firestore with a specific identification.
 ///
 /// Will return [null] if no item by the given ID exists.
-Future<Map<String, dynamic>?> getItemById(String itemId) async {
+Future<T?> getItemById<T>(
+    String itemId, T Function(Map<String, dynamic>) transform) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var user = prefs.getString("userId");
   if (user != null) {
     final docRef = FirebaseFirestore.instance.collection(user).doc(itemId);
     final docSnapshot = await docRef.get();
     if (docSnapshot.exists) {
-      return docSnapshot.data()!;
+      return transform(docSnapshot.data()!);
     }
   }
   return null;
 }
 
-Future<List<Map<String, dynamic>>> getItemsByField(
-    String field, String value) async {
+Future<List<T>> getItemsByField<T extends Item>(String field, String value,
+    T Function(Map<String, dynamic>) transform) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var user = prefs.getString("userId");
   if (user != null) {
@@ -71,17 +72,19 @@ Future<List<Map<String, dynamic>>> getItemsByField(
         .where(field, isEqualTo: value);
     final docSnapshot = await docRef.get();
     final itemList = docSnapshot.docs.map((doc) => doc.data()).toList();
-    return itemList;
+    return itemList.map((v) => transform(v)).toList();
   }
   return [];
 }
 
-Future<List<Map<String, dynamic>>> getItems<T extends Item>() async {
-  return getItemsByField("itemName", (T as Item).itemName());
+Future<List<T>> getItems<T extends Item>(
+    T Function(Map<String, dynamic>) transform) async {
+  return getItemsByField<T>("itemName", (T as Item).itemName(), transform);
 }
 
-Future<List<Map<String, dynamic>>> getItemsByType(String itemType) async {
-  return getItemsByField("itemType", itemType);
+Future<List<T>> getItemsByType<T extends Item>(
+    String itemType, T Function(Map<String, dynamic>) transform) async {
+  return getItemsByField<T>("itemType", itemType, transform);
 }
 
 /// Upload an item to Firestore. If the item exists it will be updated.

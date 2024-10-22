@@ -8,12 +8,10 @@ class ReferenceProvider extends ChangeNotifier {
   ReferenceProvider();
 
   Future<List<CropFamily>> get cropFamilies async {
-    var items = await getItems<CropFamily>();
-    return items.map((v) => CropFamily.fromMap(v)).toList();
+    return await getItems<CropFamily>((v) => CropFamily.fromMap(v));
   }
 
   Future<List<AnimalSpecies>> get animalSpecies async {
-    var items = await getItems<AnimalSpecies>();
-    return items.map((v) => AnimalSpecies.fromMap(v)).toList();
+    return await getItems<AnimalSpecies>((v) => AnimalSpecies.fromMap(v));
   }
 }

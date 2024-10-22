@@ -8,12 +8,10 @@ class ResourceProvider extends ChangeNotifier {
   ResourceProvider();
 
   Future<List<Animal>> get animals async {
-    var items = await getItems<Animal>();
-    return items.map((v) => Animal.fromMap(v)).toList();
+    return await getItems<Animal>((v) => Animal.fromMap(v));
   }
 
   Future<List<Crop>> get crops async {
-    var items = await getItems<Crop>();
-    return items.map((v) => Crop.fromMap(v)).toList();
+    return await getItems<Crop>((v) => Crop.fromMap(v));
   }
 }
