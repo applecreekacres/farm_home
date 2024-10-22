@@ -56,18 +56,22 @@ class _CropFormState extends State<CropForm> {
         ),
         IntFormField(
           label: "Days to Potting Up",
+          controllerValue: _record.daysToPottingUp,
           onChanged: (value) => _record.daysToPottingUp = value,
         ),
         IntFormField(
           label: "Days to Transplant",
+          controllerValue: _record.daysToTransplant,
           onChanged: (value) => _record.daysToTransplant = value,
         ),
         IntFormField(
           label: "Days to Maturity",
+          controllerValue: _record.daysToMaturity,
           onChanged: (value) => _record.daysToMaturity = value,
         ),
         IntFormField(
           label: "Harvest Window",
+          controllerValue: _record.harvestWindow,
           onChanged: (value) => _record.harvestWindow = value,
         ),
       ],
