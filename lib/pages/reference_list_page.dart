@@ -16,6 +16,17 @@ class ReferenceListPage extends StatefulWidget {
 }
 
 class _ReferenceListPageState extends State<ReferenceListPage> {
+  final List<Map<String, dynamic>> _filterItems =
+      List.from(ReferenceConstants.referenceInfo)
+        ..add({"name": "All", "icon": Icons.all_inclusive});
+  late String _filterName;
+
+  @override
+  void initState() {
+    _filterName = "All";
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final refProvider = Provider.of<ReferenceProvider>(context);
@@ -23,6 +34,29 @@ class _ReferenceListPageState extends State<ReferenceListPage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: const Text("References"),
+        actions: [
+          IconButton(
+              onPressed: () => showModalBottomSheet<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return ListView.builder(
+                      itemCount: _filterItems.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          leading: Icon(_filterItems[index]["icon"]),
+                          title: Text(_filterItems[index]["name"]),
+                          onTap: () {
+                            setState(() {
+                              _filterName = _filterItems[index]["name"];
+                              Navigator.pop(context);
+                            });
+                          },
+                        );
+                      },
+                    );
+                  }),
+              icon: Icon(Icons.filter_list))
+        ],
       ),
       drawer: const FarmHomeDrawer(),
       body: Padding(
@@ -31,6 +65,15 @@ class _ReferenceListPageState extends State<ReferenceListPage> {
             items: refProvider.references,
             title: (data) => Text(data.name),
             trailing: (data) => Text(data.itemName()),
+            filter: (data) {
+              if (_filterName == "All") {
+                return data;
+              } else {
+                return data
+                    .where((element) => element.itemName() == _filterName)
+                    .toList();
+              }
+            },
           )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

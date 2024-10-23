@@ -28,7 +28,7 @@ class ReferenceConstants {
   static const List<Map<String, dynamic>> referenceInfo = [
     {
       "name": animalSpecies,
-      "icon": Icon(Icons.pets),
+      "icon": Icons.pets,
       "form": AnimalSpeciesForm,
     },
   ];
