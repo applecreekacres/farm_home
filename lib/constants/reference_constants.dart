@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
+
+import 'package:material_symbols_icons/symbols.dart';
+
 import 'package:farm_home/pages/animal_species_form.dart';
 import 'package:farm_home/pages/pages.dart';
-import 'package:flutter/material.dart';
-import 'package:material_symbols_icons/symbols.dart';
-import 'package:collection/collection.dart';
 
 class ReferenceInfo {
   Icon icon;

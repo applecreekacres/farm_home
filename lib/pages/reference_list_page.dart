@@ -1,12 +1,11 @@
-import 'package:farm_home/constants/constants.dart';
-import 'package:farm_home/pages/animal_form.dart';
-import 'package:farm_home/pages/home.dart';
-import 'package:farm_home/providers/reference_provider.dart';
 import 'package:flutter/material.dart';
 
-import 'package:farm_home/models/models.dart';
-import 'package:farm_home/widgets/widgets.dart';
 import 'package:provider/provider.dart';
+
+import 'package:farm_home/constants/constants.dart';
+import 'package:farm_home/pages/home.dart';
+import 'package:farm_home/providers/reference_provider.dart';
+import 'package:farm_home/widgets/widgets.dart';
 
 class ReferenceListPage extends StatefulWidget {
   const ReferenceListPage({super.key});
