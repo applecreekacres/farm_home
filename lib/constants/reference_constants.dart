@@ -2,6 +2,7 @@ import 'package:farm_home/pages/animal_species_form.dart';
 import 'package:farm_home/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
+import 'package:collection/collection.dart';
 
 class ReferenceInfo {
   Icon icon;
@@ -27,36 +28,36 @@ class ReferenceConstants {
     crop
   ];
 
-  static const List<Map<String, dynamic>> referenceInfo = [
+  static List<Map<String, dynamic>> referenceInfo = [
     {
       "name": animalSpecies,
       "icon": Icons.pets,
-      "form": AnimalSpeciesForm,
+      "form": () => AnimalSpeciesForm(),
     },
     {
       "name": unit,
       "icon": Icons.scale,
-      // TODO Add form
+      "form": () => UnitForm(),
     },
     {
       "name": season,
       "icon": Icons.sunny_snowing,
-      "form": SeasonForm,
+      "form": () => SeasonForm(),
     },
     {
       "name": materialType,
       "icon": Symbols.household_supplies,
-      "form": MaterialTypeForm,
+      "form": () => MaterialTypeForm(),
     },
     {
       "name": cropFamily,
       "icon": Symbols.park,
-      "form": CropFamilyForm,
+      "form": () => CropFamilyForm(),
     },
     {
       "name": crop,
       "icon": Symbols.grass,
-      "form": CropForm,
+      "form": () => CropForm(),
     },
   ];
 }
