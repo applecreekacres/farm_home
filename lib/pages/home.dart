@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () => showModalBottomSheet<void>(
                 context: context,
                 builder: (BuildContext context) {
-                  return const RecordSelectWidget();
+                  return RecordSelectWidget();
                 }),
             icon: const Icon(Icons.task),
           ),
@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () => showModalBottomSheet<void>(
                 context: context,
                 builder: (BuildContext context) {
-                  return const ResourceSelectWidget();
+                  return ResourceSelectWidget();
                 }),
             icon: const Icon(Icons.yard),
           ),
