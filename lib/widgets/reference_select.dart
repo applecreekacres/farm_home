@@ -13,13 +13,13 @@ class ReferenceSelectWidget extends StatelessWidget {
       itemCount: refItems.length,
       itemBuilder: (context, index) {
         return ListTile(
-          leading: Icon(refItems[index]["icon"]),
-          title: Text(refItems[index]["name"]),
+          leading: Icon(refItems[index].icon),
+          title: Text(refItems[index].name),
           onTap: () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => refItems[index]["form"]()));
+                    builder: (context) => refItems[index].init()));
           },
         );
       },

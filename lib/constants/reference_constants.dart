@@ -6,10 +6,11 @@ import 'package:farm_home/pages/animal_species_form.dart';
 import 'package:farm_home/pages/pages.dart';
 
 class ReferenceInfo {
-  Icon icon;
+  IconData icon;
   String name;
+  Function() init;
 
-  ReferenceInfo(this.name, this.icon);
+  ReferenceInfo(this.name, this.icon, this.init);
 }
 
 class ReferenceConstants {
@@ -29,36 +30,36 @@ class ReferenceConstants {
     crop
   ];
 
-  static List<Map<String, dynamic>> referenceInfo = [
-    {
-      "name": animalSpecies,
-      "icon": Icons.pets,
-      "form": () => AnimalSpeciesForm(),
-    },
-    {
-      "name": unit,
-      "icon": Icons.scale,
-      "form": () => UnitForm(),
-    },
-    {
-      "name": season,
-      "icon": Icons.sunny_snowing,
-      "form": () => SeasonForm(),
-    },
-    {
-      "name": materialType,
-      "icon": Symbols.household_supplies,
-      "form": () => MaterialTypeForm(),
-    },
-    {
-      "name": cropFamily,
-      "icon": Symbols.park,
-      "form": () => CropFamilyForm(),
-    },
-    {
-      "name": crop,
-      "icon": Symbols.grass,
-      "form": () => CropForm(),
-    },
+  static List<ReferenceInfo> referenceInfo = [
+    ReferenceInfo(
+      animalSpecies,
+      Icons.pets,
+      () => AnimalSpeciesForm(),
+    ),
+    ReferenceInfo(
+      unit,
+      Icons.scale,
+      () => UnitForm(),
+    ),
+    ReferenceInfo(
+      season,
+      Icons.sunny_snowing,
+      () => SeasonForm(),
+    ),
+    ReferenceInfo(
+      materialType,
+      Symbols.household_supplies,
+      () => MaterialTypeForm(),
+    ),
+    ReferenceInfo(
+      cropFamily,
+      Symbols.park,
+      () => CropFamilyForm(),
+    ),
+    ReferenceInfo(
+      crop,
+      Symbols.grass,
+      () => CropForm(),
+    ),
   ];
 }

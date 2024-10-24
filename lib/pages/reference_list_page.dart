@@ -15,17 +15,15 @@ class ReferenceListPage extends StatefulWidget {
 }
 
 class _ReferenceListPageState extends State<ReferenceListPage> {
-  final List<Map<String, dynamic>> _filterItems = List.from([
-    {"name": "All", "icon": Icons.all_inclusive}
-  ])
-    ..addAll(ReferenceConstants.referenceInfo);
+  final List<ReferenceInfo> _filterItems =
+      List.from([ReferenceInfo("All", Icons.all_inclusive, () => null)])
+        ..addAll(ReferenceConstants.referenceInfo);
   late String _filterName;
 
   @override
   void initState() {
     _filterName = "All";
-    _filterItems
-        .sort((a, b) => (a["name"] as String).compareTo(b["name"] as String));
+    _filterItems.sort((a, b) => a.name.compareTo(b.name));
     super.initState();
   }
 
@@ -45,14 +43,14 @@ class _ReferenceListPageState extends State<ReferenceListPage> {
                       itemCount: _filterItems.length,
                       itemBuilder: (context, index) {
                         return ListTile(
-                          leading: Icon(_filterItems[index]["icon"]),
-                          title: Text(_filterItems[index]["name"]),
-                          trailing: _filterName == _filterItems[index]["name"]
+                          leading: Icon(_filterItems[index].icon),
+                          title: Text(_filterItems[index].name),
+                          trailing: _filterName == _filterItems[index].name
                               ? Icon(Icons.check)
                               : null,
                           onTap: () {
                             setState(() {
-                              _filterName = _filterItems[index]["name"];
+                              _filterName = _filterItems[index].name;
                               Navigator.pop(context);
                             });
                           },
