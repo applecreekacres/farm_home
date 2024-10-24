@@ -4,14 +4,7 @@ import 'package:material_symbols_icons/symbols.dart';
 
 import 'package:farm_home/pages/animal_species_form.dart';
 import 'package:farm_home/pages/pages.dart';
-
-class ReferenceInfo {
-  IconData icon;
-  String name;
-  Function() init;
-
-  ReferenceInfo(this.name, this.icon, this.init);
-}
+import 'item_info.dart';
 
 class ReferenceConstants {
   static const animalSpecies = "Animal Species";
@@ -30,33 +23,33 @@ class ReferenceConstants {
     crop
   ];
 
-  static List<ReferenceInfo> referenceInfo = [
-    ReferenceInfo(
+  static List<ItemInfo> referenceInfo = [
+    ItemInfo(
       animalSpecies,
       Icons.pets,
       () => AnimalSpeciesForm(),
     ),
-    ReferenceInfo(
+    ItemInfo(
       unit,
       Icons.scale,
       () => UnitForm(),
     ),
-    ReferenceInfo(
+    ItemInfo(
       season,
       Icons.sunny_snowing,
       () => SeasonForm(),
     ),
-    ReferenceInfo(
+    ItemInfo(
       materialType,
       Symbols.household_supplies,
       () => MaterialTypeForm(),
     ),
-    ReferenceInfo(
+    ItemInfo(
       cropFamily,
       Symbols.park,
       () => CropFamilyForm(),
     ),
-    ReferenceInfo(
+    ItemInfo(
       crop,
       Symbols.grass,
       () => CropForm(),

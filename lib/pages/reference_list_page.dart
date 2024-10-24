@@ -15,8 +15,8 @@ class ReferenceListPage extends StatefulWidget {
 }
 
 class _ReferenceListPageState extends State<ReferenceListPage> {
-  final List<ReferenceInfo> _filterItems =
-      List.from([ReferenceInfo("All", Icons.all_inclusive, () => null)])
+  final List<ItemInfo> _filterItems =
+      List.from([ItemInfo("All", Icons.all_inclusive, () => null)])
         ..addAll(ReferenceConstants.referenceInfo);
   late String _filterName;
 
