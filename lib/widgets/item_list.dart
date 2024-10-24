@@ -28,20 +28,20 @@ class _ItemListState<T> extends State<ItemList<T>> {
     return FutureWidget(
       future: widget.items,
       onData: (data) {
-        List<T> _modifiedList;
+        List<T> modifiedList;
         if (data != null) {
           if (widget.filter != null) {
-            _modifiedList = widget.filter!.call(data);
+            modifiedList = widget.filter!.call(data);
           } else {
-            _modifiedList = data;
+            modifiedList = data;
           }
           return ListView.builder(
-            itemCount: _modifiedList.length,
+            itemCount: modifiedList.length,
             itemBuilder: (context, index) {
               return ListTile(
-                leading: widget.leading?.call(data[index]),
-                title: widget.title?.call(data[index]),
-                trailing: widget.trailing?.call(data[index]),
+                leading: widget.leading?.call(modifiedList[index]),
+                title: widget.title?.call(modifiedList[index]),
+                trailing: widget.trailing?.call(modifiedList[index]),
                 onTap: widget.onTap,
               );
             },

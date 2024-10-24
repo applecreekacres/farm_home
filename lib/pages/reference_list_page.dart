@@ -45,6 +45,7 @@ class _ReferenceListPageState extends State<ReferenceListPage> {
                         return ListTile(
                           leading: Icon(_filterItems[index]["icon"]),
                           title: Text(_filterItems[index]["name"]),
+                          trailing: _filterName == _filterItems[index]["name"] ? Icon(Icons.check) : null,
                           onTap: () {
                             setState(() {
                               _filterName = _filterItems[index]["name"];
