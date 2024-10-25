@@ -1,8 +1,6 @@
 import 'package:farm_home/constants/constants.dart';
 import 'package:flutter/material.dart';
 
-import 'package:farm_home/pages/pages.dart';
-
 class RecordSelectWidget extends StatelessWidget {
   RecordSelectWidget({super.key});
 
