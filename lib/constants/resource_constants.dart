@@ -7,6 +7,8 @@ import 'package:farm_home/pages/pages.dart';
 import 'item_info.dart';
 
 class ResourceConstants {
+  static const icon = Icons.yard;
+
   static const animal = "Animal";
   static const equipment = "Equipment";
   static const land = "Land";

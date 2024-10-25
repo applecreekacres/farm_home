@@ -7,6 +7,8 @@ import 'package:farm_home/pages/pages.dart';
 import 'item_info.dart';
 
 class RecordConstants {
+  static const icon = Icons.task;
+
   static const String activity = "Activity";
   static const String harvest = "Harvest";
   static const String input = "Input";

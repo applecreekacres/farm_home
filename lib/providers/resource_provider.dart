@@ -8,6 +8,27 @@ import 'package:farm_home/models/models.dart';
 class ResourceProvider extends ChangeNotifier {
   ResourceProvider();
 
+  Future<List<Resource>> get resources async {
+    return await getItemsByType("Resource", (data) {
+      switch (data["itemName"]) {
+        case ResourceConstants.animal:
+          return Animal.fromMap(data);
+        case ResourceConstants.equipment:
+          return Equipment.fromMap(data);
+        case ResourceConstants.land:
+          return Land.fromMap(data);
+        case ResourceConstants.material:
+          return Material.fromMap(data);
+        case ResourceConstants.planting:
+          return Planting.fromMap(data);
+        case ResourceConstants.seed:
+          return Seed.fromMap(data);
+        default:
+          throw Error();
+      }
+    });
+  }
+
   Future<List<Animal>> get animals async {
     return await getItems<Animal>(
         ResourceConstants.animal, (v) => Animal.fromMap(v));
@@ -19,8 +40,7 @@ class ResourceProvider extends ChangeNotifier {
   }
 
   Future<List<Land>> get land async {
-    return await getItems<Land>(
-        ResourceConstants.land, (v) => Land.fromMap(v));
+    return await getItems<Land>(ResourceConstants.land, (v) => Land.fromMap(v));
   }
 
   Future<List<Material>> get material async {
@@ -37,5 +57,4 @@ class ResourceProvider extends ChangeNotifier {
     return await getItems<Seed>(
         ResourceConstants.equipment, (v) => Seed.fromMap(v));
   }
-
 }

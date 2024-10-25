@@ -7,6 +7,8 @@ import 'package:farm_home/pages/pages.dart';
 import 'item_info.dart';
 
 class ReferenceConstants {
+  static const icon = Icons.abc;
+
   static const animalSpecies = "Animal Species";
   static const unit = "Unit";
   static const season = "Season";
