@@ -1,3 +1,4 @@
+import 'package:farm_home/constants/constants.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:farm_home/models/models.dart';
 
@@ -14,7 +15,7 @@ void main() {
     expect(animal.notes, "");
     expect(animal.species, null);
     expect(animal.itemName(), "Animal");
-    expect(animal.itemType(), "Resource");
+    expect(animal.itemType(), ResourceConstants.title);
   });
 
   test("Create Animal from Map", () {

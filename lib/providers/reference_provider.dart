@@ -39,7 +39,7 @@ class ReferenceProvider extends ChangeNotifier {
   }
 
   Future<List<Reference>> get references async {
-    return await getItemsByType("Reference", (data) {
+    return await getItemsByType(ReferenceConstants.title, (data) {
       switch (data["itemName"]) {
         case ReferenceConstants.animalSpecies:
           return AnimalSpecies.fromMap(data);

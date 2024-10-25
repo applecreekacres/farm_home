@@ -33,7 +33,7 @@ class _ReferenceListPageState extends State<ReferenceListPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title: const Text("References"),
+        title: const Text(ReferenceConstants.titlePlural),
         actions: [
           IconButton(
               onPressed: () => showModalBottomSheet<void>(

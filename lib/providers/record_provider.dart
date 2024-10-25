@@ -9,7 +9,7 @@ class RecordProvider extends ChangeNotifier {
   RecordProvider();
 
   Future<List<Record>> get records async {
-    return await getItemsByType("Record", (data) {
+    return await getItemsByType(RecordConstants.title, (data) {
       switch (data["itemName"]) {
         case RecordConstants.activity:
           return ActivityRecord.fromMap(data);

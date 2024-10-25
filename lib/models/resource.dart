@@ -1,3 +1,5 @@
+import 'package:farm_home/constants/constants.dart';
+
 import 'item.dart';
 
 abstract class Resource extends Item {
@@ -21,6 +23,6 @@ abstract class Resource extends Item {
 
   @override
   String itemType() {
-    return "Resource";
+    return ResourceConstants.title;
   }
 }

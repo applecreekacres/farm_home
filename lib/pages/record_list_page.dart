@@ -33,7 +33,7 @@ class _RecordListPageState extends State<RecordListPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title: const Text("Records"),
+        title: const Text(RecordConstants.titlePlural),
         actions: [
           IconButton(
               onPressed: () => showModalBottomSheet<void>(

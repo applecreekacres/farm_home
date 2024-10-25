@@ -33,7 +33,7 @@ class _ResourceListPageState extends State<ResourceListPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title: const Text("Resources"),
+        title: const Text(ResourceConstants.titlePlural),
         actions: [
           IconButton(
               onPressed: () => showModalBottomSheet<void>(

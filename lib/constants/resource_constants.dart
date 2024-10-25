@@ -9,6 +9,9 @@ import 'item_info.dart';
 class ResourceConstants {
   static const icon = Icons.yard;
 
+  static const String title = "Resource";
+  static const String titlePlural = "Resources";
+
   static const animal = "Animal";
   static const equipment = "Equipment";
   static const land = "Land";

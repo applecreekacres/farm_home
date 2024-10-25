@@ -9,7 +9,7 @@ class ResourceProvider extends ChangeNotifier {
   ResourceProvider();
 
   Future<List<Resource>> get resources async {
-    return await getItemsByType("Resource", (data) {
+    return await getItemsByType(ResourceConstants.title, (data) {
       switch (data["itemName"]) {
         case ResourceConstants.animal:
           return Animal.fromMap(data);

@@ -1,3 +1,5 @@
+import 'package:farm_home/constants/constants.dart';
+
 import 'models.dart';
 
 abstract class Reference extends Item {
@@ -28,6 +30,6 @@ abstract class Reference extends Item {
 
   @override
   String itemType() {
-    return "Reference";
+    return ReferenceConstants.title;
   }
 }

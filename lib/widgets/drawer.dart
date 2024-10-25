@@ -29,7 +29,7 @@ class FarmHomeDrawer extends StatelessWidget {
         ),
         ListTile(
           leading: const Icon(ResourceConstants.icon),
-          title: const Text("Resources"),
+          title: const Text(ResourceConstants.titlePlural),
           onTap: () {
             Navigator.of(context).pushReplacement(MaterialPageRoute(
                 builder: (context) => const ResourceListPage()));
@@ -37,7 +37,7 @@ class FarmHomeDrawer extends StatelessWidget {
         ),
         ListTile(
           leading: Icon(RecordConstants.icon),
-          title: const Text("Records"),
+          title: const Text(RecordConstants.titlePlural),
           onTap: () {
             Navigator.of(context).pushReplacement(MaterialPageRoute(
                 builder: (context) => const RecordListPage()));
@@ -45,7 +45,7 @@ class FarmHomeDrawer extends StatelessWidget {
         ),
         ListTile(
           leading: const Icon(Symbols.abc),
-          title: const Text("References"),
+          title: const Text(ReferenceConstants.titlePlural),
           onTap: () {
             Navigator.of(context).pushReplacement(MaterialPageRoute(
                 builder: (context) => const ReferenceListPage()));

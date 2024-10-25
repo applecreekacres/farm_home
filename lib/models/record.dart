@@ -1,3 +1,5 @@
+import 'package:farm_home/constants/constants.dart';
+
 import 'models.dart';
 
 abstract class Record extends Item {
@@ -26,7 +28,7 @@ abstract class Record extends Item {
     notes = data["notes"];
     isDone = data["isDone"];
     quantities = List<Quantity>.from(data["quantities"]);
-    resources = List<Resource>.from(data["resources"]);
+    resources = List<Resource>.from(data[ResourceConstants.titlePlural]);
     timestamp = DateTime.fromMillisecondsSinceEpoch(data["timestamp"]);
     tags = List<String>.from(data["tags"]);
   }
@@ -48,6 +50,6 @@ abstract class Record extends Item {
 
   @override
   String itemType() {
-    return "Record";
+    return RecordConstants.title;
   }
 }

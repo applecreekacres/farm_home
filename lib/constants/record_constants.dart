@@ -9,6 +9,9 @@ import 'item_info.dart';
 class RecordConstants {
   static const icon = Icons.task;
 
+  static const String title = "Record";
+  static const String titlePlural = "Records";
+
   static const String activity = "Activity";
   static const String harvest = "Harvest";
   static const String input = "Input";

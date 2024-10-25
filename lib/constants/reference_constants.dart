@@ -9,6 +9,9 @@ import 'item_info.dart';
 class ReferenceConstants {
   static const icon = Icons.abc;
 
+  static const String title = "Reference";
+  static const String titlePlural = "References";
+
   static const animalSpecies = "Animal Species";
   static const unit = "Unit";
   static const season = "Season";
