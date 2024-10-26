@@ -33,44 +33,44 @@ class _PlantingFormState extends State<PlantingForm> {
       additionalFields: [
         Column(
           children: [
-            FutureWidget(
-                future: refProvider.cropFamilies,
-                onData: (data) {
-                  if (data != null) {
-                    return ReferenceDropDownButton<CropFamily>(
-                      label: ReferenceConstants.cropFamily,
-                      items: data,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectableCropFamily = value;
-                        });
-                      },
-                    );
-                  }
-                  return const Text("Error loading crop families");
-                }),
-            FutureWidget(
-                future: refProvider.crops,
-                onData: (data) {
-                  if (data != null && _selectableCropFamily != null) {
-                    var items = data
-                        .where((item) =>
-                            item.cropFamilyId == _selectableCropFamily?.id)
-                        .toList();
-                    return ReferenceDropDownButton<Crop>(
-                      label: ReferenceConstants.crop,
-                      items: items,
-                      onChanged: (value) {
-                        if (value != null) {
-                          setState(() {
-                            crop = value;
-                          });
-                        }
-                      },
-                    );
-                  }
-                  return const Text("Select a crop family");
-                }),
+            // FutureWidget(
+            //     future: refProvider.cropFamilies,
+            //     onData: (data) {
+            //       if (data != null) {
+            //         return ReferenceDropDownButton<CropFamily>(
+            //           label: ReferenceConstants.cropFamily,
+            //           items: data,
+            //           onChanged: (value) {
+            //             setState(() {
+            //               _selectableCropFamily = value;
+            //             });
+            //           },
+            //         );
+            //       }
+            //       return const Text("Error loading crop families");
+            //     }),
+            // FutureWidget(
+            //     future: refProvider.crops,
+            //     onData: (data) {
+            //       if (data != null && _selectableCropFamily != null) {
+            //         var items = data
+            //             .where((item) =>
+            //                 item.cropFamilyId == _selectableCropFamily?.id)
+            //             .toList();
+            //         return ReferenceDropDownButton<Crop>(
+            //           label: ReferenceConstants.crop,
+            //           items: items,
+            //           onChanged: (value) {
+            //             if (value != null) {
+            //               setState(() {
+            //                 crop = value;
+            //               });
+            //             }
+            //           },
+            //         );
+            //       }
+            //       return const Text("Select a crop family");
+            //     }),
             IntFormField(
               label: "Length",
               controllerValue: _planting.length,
