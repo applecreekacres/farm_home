@@ -3,11 +3,16 @@ import 'package:flutter/material.dart';
 
 class ReferenceDropDownButton<T extends Reference> extends StatefulWidget {
   final String label;
+  final T? initialValue;
   final List<T> items;
   final ValueChanged<T?>? onChanged;
 
   const ReferenceDropDownButton(
-      {super.key, required this.label, required this.items, this.onChanged});
+      {super.key,
+      required this.initialValue,
+      required this.label,
+      required this.items,
+      this.onChanged});
 
   @override
   State<ReferenceDropDownButton<T>> createState() =>
@@ -16,7 +21,18 @@ class ReferenceDropDownButton<T extends Reference> extends StatefulWidget {
 
 class _ReferenceDropDownButtonState<T extends Reference>
     extends State<ReferenceDropDownButton<T>> {
-  int _selectedIndex = 0;
+  late int _selectedIndex;
+
+  @override
+  void initState() {
+    if (widget.initialValue != null) {
+      _selectedIndex =
+          widget.items.indexWhere((val) => val.id == widget.initialValue!.id);
+    } else {
+      _selectedIndex = 0;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +49,8 @@ class _ReferenceDropDownButtonState<T extends Reference>
           onChanged: (value) {
             if (value != null) {
               setState(() {
-                _selectedIndex = widget.items.indexWhere((item) => item.name == value.name);
+                _selectedIndex =
+                    widget.items.indexWhere((item) => item.name == value.name);
               });
             }
             widget.onChanged?.call(value);

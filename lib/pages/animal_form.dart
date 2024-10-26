@@ -7,7 +7,9 @@ import 'package:farm_home/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class AnimalForm extends StatefulWidget {
-  const AnimalForm({super.key});
+  final Animal? editAnimal;
+
+  const AnimalForm({super.key, this.editAnimal});
 
   @override
   State<StatefulWidget> createState() => _AnimalFormState();
@@ -15,8 +17,19 @@ class AnimalForm extends StatefulWidget {
 
 class _AnimalFormState extends State<AnimalForm> {
   final _formKey = GlobalKey<FormState>();
+  late bool isNew = true;
+  late Animal _animal;
 
-  final Animal _animal = Animal();
+  @override
+  void initState() {
+    if (widget.editAnimal != null) {
+      _animal = widget.editAnimal!;
+      isNew = false;
+    } else {
+      _animal = Animal();
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +37,7 @@ class _AnimalFormState extends State<AnimalForm> {
     return ResourceForm<Animal>(
       resource: _animal,
       key: _formKey,
-      isNew: true,
+      isNew: isNew,
       additionalFields: [
         DateTimeTextField(
             labelText: 'Birth Date',
@@ -69,17 +82,22 @@ class _AnimalFormState extends State<AnimalForm> {
           future: refProvider.animalSpecies,
           onData: (data) {
             if (data != null) {
-              return ReferenceDropDownButton<AnimalSpecies>(
-                label: ReferenceConstants.animalSpecies,
-                items: data,
-                onChanged: (value) {
-                  setState(
-                    () {
-                      _animal.setanimalSpecies(value);
-                    },
-                  );
-                },
-              );
+              return FutureWidget(
+                  future: _animal.animalSpecies,
+                  onData: (species) {
+                    return ReferenceDropDownButton<AnimalSpecies>(
+                      initialValue: species,
+                      label: ReferenceConstants.animalSpecies,
+                      items: data,
+                      onChanged: (value) {
+                        setState(
+                          () {
+                            _animal.setanimalSpecies(value);
+                          },
+                        );
+                      },
+                    );
+                  });
             }
             return const Text("Can't load species");
           },

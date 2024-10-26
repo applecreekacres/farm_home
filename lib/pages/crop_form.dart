@@ -40,13 +40,18 @@ class _CropFormState extends State<CropForm> {
           future: refProvider.cropFamilies,
           onData: (data) {
             if (data != null) {
-              return ReferenceDropDownButton<CropFamily>(
-                label: data.first.itemName(),
-                items: data,
-                onChanged: (value) {
-                  _record.cropFamilyId = value?.id;
-                },
-              );
+              return FutureWidget(
+                  future: _record.cropFamily,
+                  onData: (family) {
+                    return ReferenceDropDownButton<CropFamily>(
+                      initialValue: family,
+                      label: data.first.itemName(),
+                      items: data,
+                      onChanged: (value) {
+                        _record.cropFamilyId = value?.id;
+                      },
+                    );
+                  });
             } else {
               return const Text("No Crop families");
             }
