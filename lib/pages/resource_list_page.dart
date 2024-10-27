@@ -76,13 +76,15 @@ class _ResourceListPageState extends State<ResourceListPage> {
             trailing: (data) => Text(data.itemName()),
             onTap: (data) {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ResourceConstants.resourceInfo
-                          .where((ref) => ref.name == data.itemName())
-                          .first
-                          .edit
-                          .call(data)));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResourceConstants.resourceInfo
+                      .where((ref) => ref.name == data.itemName())
+                      .first
+                      .edit
+                      .call(data),
+                ),
+              );
             },
             filter: (data) {
               if (_filterName == "All") {

@@ -76,13 +76,15 @@ class _RecordListPageState extends State<RecordListPage> {
             trailing: (data) => Text(data.itemName()),
             onTap: (data) {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => RecordConstants.recordInfo
-                          .where((ref) => ref.name == data.itemName())
-                          .first
-                          .edit
-                          .call(data)));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => RecordConstants.recordInfo
+                      .where((ref) => ref.name == data.itemName())
+                      .first
+                      .edit
+                      .call(data),
+                ),
+              );
             },
             filter: (data) {
               if (_filterName == "All") {

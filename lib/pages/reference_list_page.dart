@@ -77,13 +77,15 @@ class _ReferenceListPageState extends State<ReferenceListPage> {
             trailing: (data) => Text(data.itemName()),
             onTap: (data) {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ReferenceConstants.referenceInfo
-                          .where((ref) => ref.name == data.itemName())
-                          .first
-                          .edit
-                          .call(data)));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ReferenceConstants.referenceInfo
+                      .where((ref) => ref.name == data.itemName())
+                      .first
+                      .edit
+                      .call(data),
+                ),
+              );
             },
             filter: (data) {
               if (_filterName == "All") {
