@@ -13,16 +13,25 @@ class MaterialForm extends StatefulWidget {
 }
 
 class _MaterialFormState extends State<MaterialForm> {
-  final _formKey = GlobalKey<FormState>();
+  late Material _material;
+  bool _isNew = false;
 
-  final Material _material = Material();
+  @override
+  void initState() {
+    if (widget.resource == null) {
+      _material = Material();
+      _isNew = true;
+    } else {
+      _material = widget.resource!;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return ResourceForm<Material>(
       resource: _material,
-      isNew: true,
-      key: _formKey,
+      isNew: _isNew,
     );
   }
 }

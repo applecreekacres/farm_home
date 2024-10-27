@@ -13,16 +13,25 @@ class SeedForm extends StatefulWidget {
 }
 
 class _SeedFormState extends State<SeedForm> {
-  final _formKey = GlobalKey<FormState>();
+  late Seed _seed;
+  bool _isNew = false;
 
-  final Seed _seed = Seed();
+  @override
+  void initState() {
+    if (widget.resource == null) {
+      _seed = Seed();
+      _isNew = true;
+    } else {
+      _seed = widget.resource!;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return ResourceForm<Seed>(
       resource: _seed,
-      isNew: true,
-      key: _formKey,
+      isNew: _isNew,
     );
   }
 }

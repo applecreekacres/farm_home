@@ -13,16 +13,25 @@ class EquipmentForm extends StatefulWidget {
 }
 
 class _EquipmentFormState extends State<EquipmentForm> {
-  final _formKey = GlobalKey<FormState>();
+  late Equipment _equipment;
+  bool _isNew = false;
 
-  final Equipment _equipment = Equipment();
+  @override
+  void initState() {
+    if (widget.resource == null) {
+      _equipment = Equipment();
+      _isNew = true;
+    } else {
+      _equipment = widget.resource!;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return ResourceForm<Equipment>(
       resource: _equipment,
-      isNew: true,
-      key: _formKey,
+      isNew: _isNew,
       additionalFields: [
         TextFormField(
           decoration: const InputDecoration(labelText: "Manufacturer"),
