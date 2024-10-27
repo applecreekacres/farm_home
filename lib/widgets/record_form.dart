@@ -19,7 +19,6 @@ class RecordForm<T extends Record> extends StatefulWidget {
 }
 
 class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
-  final _formKey = GlobalKey<FormState>();
   T get record => widget.record;
   List<Widget> get fields => widget.additionalFields ?? List<Widget>.empty();
   String get itemName => record.itemName();
@@ -58,51 +57,9 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            title: Text('New $itemName Record'),
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    if (widget.isNew) {
-                      createItem<T>(record);
-                    } else {
-                      updateItem<T>(record);
-                    }
-                    Navigator.of(context).pop();
-                  },
-                  icon: const Icon(Icons.save))
-            ],
-            bottom: const TabBar(
-              tabs: [
-                Tab(icon: Icon(Icons.notes)),
-                Tab(icon: Icon(Icons.add_chart)),
-              ],
-            ),
-          ),
-          body: TabBarView(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-                child: Column(
-                  children: _buildFields(),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                child: Column(
-                  children: [],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
+    return ItemForm(
+      title: "$itemName Record",
+      editFields: _buildFields(),
     );
   }
 }

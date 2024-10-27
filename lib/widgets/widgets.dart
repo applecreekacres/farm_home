@@ -15,3 +15,4 @@ export 'int_form_field.dart';
 export 'resource_dropdown_button.dart';
 export 'future_widget.dart';
 export 'item_list.dart';
+export 'item_form.dart';
