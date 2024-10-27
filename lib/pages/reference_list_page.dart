@@ -82,8 +82,7 @@ class _ReferenceListPageState extends State<ReferenceListPage> {
                   builder: (context) => ReferenceConstants.referenceInfo
                       .where((ref) => ref.name == data.itemName())
                       .first
-                      .edit
-                      .call(data),
+                      .edit(data)!,
                 ),
               );
             },

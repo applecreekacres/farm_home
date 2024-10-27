@@ -18,7 +18,7 @@ class RecordSelectWidget extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => recItems[index].init()));
+                    builder: (context) => recItems[index].init()!));
           },
         );
       },

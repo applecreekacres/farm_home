@@ -19,7 +19,7 @@ class ReferenceSelectWidget extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => refItems[index].init()));
+                    builder: (context) => refItems[index].init()!));
           },
         );
       },

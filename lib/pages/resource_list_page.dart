@@ -81,8 +81,7 @@ class _ResourceListPageState extends State<ResourceListPage> {
                   builder: (context) => ResourceConstants.resourceInfo
                       .where((ref) => ref.name == data.itemName())
                       .first
-                      .edit
-                      .call(data),
+                      .edit(data)!,
                 ),
               );
             },

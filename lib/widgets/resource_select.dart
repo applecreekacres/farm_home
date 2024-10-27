@@ -18,7 +18,7 @@ class ResourceSelectWidget extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => resItems[index].init()));
+                    builder: (context) => resItems[index].init()!));
           },
         );
       },

@@ -81,8 +81,7 @@ class _RecordListPageState extends State<RecordListPage> {
                   builder: (context) => RecordConstants.recordInfo
                       .where((ref) => ref.name == data.itemName())
                       .first
-                      .edit
-                      .call(data),
+                      .edit(data)!,
                 ),
               );
             },

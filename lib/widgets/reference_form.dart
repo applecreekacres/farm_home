@@ -27,6 +27,7 @@ class _ReferenceFormState<T extends Reference> extends State<ReferenceForm<T>> {
   List<Widget> _buildFields() {
     var fields = [
       TextFormField(
+          initialValue: widget.isNew ? "" : reference.name,
           decoration: const InputDecoration(labelText: "Name"),
           validator: (value) =>
               value?.isEmpty ?? true ? 'Please enter a name' : null,
