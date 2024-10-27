@@ -58,6 +58,7 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
   @override
   Widget build(BuildContext context) {
     return ItemForm(
+      item: record,
       title: "$itemName Record",
       editFields: _buildFields(),
     );

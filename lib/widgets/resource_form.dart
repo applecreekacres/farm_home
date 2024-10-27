@@ -42,6 +42,7 @@ class _ResourceFormState<T extends Resource> extends State<ResourceForm<T>> {
   @override
   Widget build(BuildContext context) {
     return ItemForm(
+      item: resource,
       title: resourceName,
       editFields: _buildFields(),
     );
