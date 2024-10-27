@@ -4,7 +4,9 @@ import 'package:farm_home/models/models.dart';
 import 'package:farm_home/widgets/widgets.dart';
 
 class LandForm extends StatefulWidget {
-  const LandForm({super.key});
+  final Land? resource;
+
+  const LandForm({super.key, this.resource});
 
   @override
   State<StatefulWidget> createState() => _LandFormState();

@@ -15,9 +15,15 @@ class RecordListPage extends StatefulWidget {
 }
 
 class _RecordListPageState extends State<RecordListPage> {
-  final List<ItemInfo> _filterItems =
-      List.from([ItemInfo("All", Icons.all_inclusive, () => null)])
-        ..addAll(RecordConstants.recordInfo);
+  final List<ItemInfo> _filterItems = List.from([
+    ItemInfo(
+      "All",
+      Icons.all_inclusive,
+      () => null,
+      (item) => null,
+    )
+  ])
+    ..addAll(RecordConstants.recordInfo);
   late String _filterName;
 
   @override
@@ -68,6 +74,16 @@ class _RecordListPageState extends State<RecordListPage> {
             items: provider.records,
             title: (data) => Text(data.title),
             trailing: (data) => Text(data.itemName()),
+            onTap: (data) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => RecordConstants.recordInfo
+                          .where((ref) => ref.name == data.itemName())
+                          .first
+                          .edit
+                          .call(data)));
+            },
             filter: (data) {
               if (_filterName == "All") {
                 return data;

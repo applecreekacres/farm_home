@@ -7,7 +7,7 @@ class ItemList<T> extends StatefulWidget {
   final Widget? Function(T)? trailing;
   final Widget? Function(T)? leading;
   final List<T> Function(List<T>)? filter;
-  final void Function()? onTap;
+  final void Function(T)? onTap;
 
   const ItemList(
       {super.key,
@@ -42,7 +42,7 @@ class _ItemListState<T> extends State<ItemList<T>> {
                 leading: widget.leading?.call(modifiedList[index]),
                 title: widget.title?.call(modifiedList[index]),
                 trailing: widget.trailing?.call(modifiedList[index]),
-                onTap: widget.onTap,
+                onTap: () => widget.onTap?.call(modifiedList[index]),
               );
             },
           );

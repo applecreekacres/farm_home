@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:farm_home/models/models.dart';
+import 'package:flutter/material.dart' hide Material;
 
 import 'package:material_symbols_icons/symbols.dart';
 
@@ -29,35 +30,51 @@ class ResourceConstants {
   ];
 
   static List<ItemInfo> resourceInfo = [
-    ItemInfo(
+    ItemInfo<Animal>(
       animal,
       Icons.pets,
       () => AnimalForm(),
+      (item) => AnimalForm(resource: item,),
     ),
-    ItemInfo(
+    ItemInfo<Equipment>(
       equipment,
       Icons.agriculture,
       () => EquipmentForm(),
+      (item) => EquipmentForm(
+        resource: item,
+      ),
     ),
-    ItemInfo(
+    ItemInfo<Land>(
       land,
       Icons.map,
       () => LandForm(),
+      (item) => LandForm(
+        resource: item,
+      ),
     ),
-    ItemInfo(
+    ItemInfo<Material>(
       material,
       Symbols.household_supplies,
       () => MaterialForm(),
+      (item) => MaterialForm(
+        resource: item,
+      ),
     ),
-    ItemInfo(
+    ItemInfo<Planting>(
       planting,
       Symbols.potted_plant,
       () => PlantingForm(),
+      (item) => PlantingForm(
+        resource: item,
+      ),
     ),
-    ItemInfo(
+    ItemInfo<Seed>(
       seed,
       Symbols.psychiatry,
       () => SeedForm(),
+      (item) => SeedForm(
+        resource: item,
+      ),
     ),
   ];
 }

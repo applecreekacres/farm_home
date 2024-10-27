@@ -4,7 +4,9 @@ import 'package:farm_home/models/models.dart';
 import 'package:farm_home/widgets/widgets.dart';
 
 class MaterialForm extends StatefulWidget {
-  const MaterialForm({super.key});
+  final Material? resource;
+
+  const MaterialForm({super.key, this.resource});
 
   @override
   State<StatefulWidget> createState() => _MaterialFormState();

@@ -36,7 +36,7 @@ class _AnimalListPageState extends State<AnimalListPage> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => AnimalForm(
-                                      editAnimal: data[index],
+                                      resource: data[index],
                                     )));
                         setState(() {});
                       },

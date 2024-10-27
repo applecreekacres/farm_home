@@ -4,7 +4,9 @@ import 'package:farm_home/models/models.dart';
 import 'package:farm_home/widgets/widgets.dart';
 
 class EquipmentForm extends StatefulWidget {
-  const EquipmentForm({super.key});
+  final Equipment? resource;
+
+  const EquipmentForm({super.key, this.resource});
 
   @override
   State<StatefulWidget> createState() => _EquipmentFormState();
@@ -24,7 +26,7 @@ class _EquipmentFormState extends State<EquipmentForm> {
       additionalFields: [
         TextFormField(
           decoration: const InputDecoration(labelText: "Manufacturer"),
-          onChanged:(value) => _equipment.manufacturer = value,
+          onChanged: (value) => _equipment.manufacturer = value,
         ),
         TextFormField(
           decoration: const InputDecoration(labelText: "Model"),

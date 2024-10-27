@@ -15,9 +15,15 @@ class ReferenceListPage extends StatefulWidget {
 }
 
 class _ReferenceListPageState extends State<ReferenceListPage> {
-  final List<ItemInfo> _filterItems =
-      List.from([ItemInfo("All", Icons.all_inclusive, () => null)])
-        ..addAll(ReferenceConstants.referenceInfo);
+  final List<ItemInfo> _filterItems = List.from([
+    ItemInfo(
+      "All",
+      Icons.all_inclusive,
+      () => null,
+      (item) => null,
+    )
+  ])
+    ..addAll(ReferenceConstants.referenceInfo);
   late String _filterName;
 
   @override
@@ -38,6 +44,7 @@ class _ReferenceListPageState extends State<ReferenceListPage> {
           IconButton(
               onPressed: () => showModalBottomSheet<void>(
                   context: context,
+                  showDragHandle: true,
                   builder: (BuildContext context) {
                     return ListView.builder(
                       itemCount: _filterItems.length,
@@ -68,6 +75,16 @@ class _ReferenceListPageState extends State<ReferenceListPage> {
             items: refProvider.references,
             title: (data) => Text(data.name),
             trailing: (data) => Text(data.itemName()),
+            onTap: (data) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ReferenceConstants.referenceInfo
+                          .where((ref) => ref.name == data.itemName())
+                          .first
+                          .edit
+                          .call(data)));
+            },
             filter: (data) {
               if (_filterName == "All") {
                 return data;

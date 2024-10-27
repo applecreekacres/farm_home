@@ -1,3 +1,4 @@
+import 'package:farm_home/models/models.dart';
 import 'package:flutter/material.dart';
 
 import 'package:material_symbols_icons/symbols.dart';
@@ -37,55 +38,83 @@ class RecordConstants {
   ];
 
   static List<ItemInfo> recordInfo = [
-    ItemInfo(
+    ItemInfo<ActivityRecord>(
       activity,
       Icons.accessibility_new,
       () => ActivityRecordForm(),
+      (item) => ActivityRecordForm(record: item,),
     ),
-    ItemInfo(
+    ItemInfo<HarvestRecord>(
       harvest,
       Symbols.shopping_basket,
       () => HarvestRecordForm(),
+      (item) => HarvestRecordForm(
+        record: item,
+      ),
     ),
-    ItemInfo(
+    ItemInfo<InputRecord>(
       input,
       Symbols.input,
       () => InputRecordForm(),
+      (item) => InputRecordForm(
+        record: item,
+      ),
     ),
-    ItemInfo(
+    ItemInfo<ObservationRecord>(
       observation,
       Icons.remove_red_eye,
       () => ObservationRecordForm(),
+      (item) => ObservationRecordForm(
+        record: item,
+      ),
     ),
-    ItemInfo(
+    ItemInfo<MaintenanceRecord>(
       maintenance,
       Icons.construction,
       () => MaintenanceRecordForm(),
+      (item) => MaintenanceRecordForm(
+        record: item,
+      ),
     ),
-    ItemInfo(
+    ItemInfo<PottingUpRecord>(
       pottingUp,
       Icons.yard,
       () => PottingUpRecordForm(),
+      (item) => PottingUpRecordForm(
+        record: item,
+      ),
     ),
-    ItemInfo(
+    ItemInfo<PurchaseRecord>(
       purchase,
       Icons.money,
       () => PurchaseRecordForm(),
+      (item) => PurchaseRecordForm(
+        record: item,
+      ),
     ),
-    ItemInfo(
+    ItemInfo<SaleRecord>(
       sale,
       Icons.currency_exchange,
       () => SaleRecordForm(),
+      (item) => SaleRecordForm(
+        record: item,
+      ),
     ),
-    ItemInfo(
+    ItemInfo<SeedingRecord>(
       seeding,
       Symbols.potted_plant,
       () => SeedingRecordForm(),
+      (item) => SeedingRecordForm(
+        record: item,
+      ),
     ),
-    ItemInfo(
+    ItemInfo<TransplantRecord>(
       transplant,
       Icons.yard,
       () => TransplantRecordForm(),
+      (item) => TransplantRecordForm(
+        record: item,
+      ),
     ),
   ];
 }

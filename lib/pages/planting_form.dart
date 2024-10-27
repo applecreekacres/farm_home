@@ -7,7 +7,9 @@ import 'package:farm_home/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class PlantingForm extends StatefulWidget {
-  const PlantingForm({super.key});
+  final Planting? resource;
+  
+  const PlantingForm({super.key, this.resource});
 
   @override
   State<StatefulWidget> createState() => _PlantingFormState();

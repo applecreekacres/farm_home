@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:farm_home/models/models.dart';
+import 'package:flutter/material.dart' hide MaterialType;
 
 import 'package:material_symbols_icons/symbols.dart';
 
@@ -29,35 +30,53 @@ class ReferenceConstants {
   ];
 
   static List<ItemInfo> referenceInfo = [
-    ItemInfo(
+    ItemInfo<AnimalSpecies>(
       animalSpecies,
       Icons.pets,
       () => AnimalSpeciesForm(),
+      (item) => AnimalSpeciesForm(
+        record: item,
+      ),
     ),
-    ItemInfo(
+    ItemInfo<Unit>(
       unit,
       Icons.scale,
       () => UnitForm(),
+      (item) => UnitForm(
+        record: item,
+      ),
     ),
-    ItemInfo(
+    ItemInfo<Season>(
       season,
       Icons.sunny_snowing,
       () => SeasonForm(),
+      (item) => SeasonForm(
+        record: item,
+      ),
     ),
-    ItemInfo(
+    ItemInfo<MaterialType>(
       materialType,
       Symbols.household_supplies,
       () => MaterialTypeForm(),
+      (item) => MaterialTypeForm(
+        record: item,
+      ),
     ),
-    ItemInfo(
+    ItemInfo<CropFamily>(
       cropFamily,
       Symbols.park,
       () => CropFamilyForm(),
+      (item) => CropFamilyForm(
+        record: item,
+      ),
     ),
-    ItemInfo(
+    ItemInfo<Crop>(
       crop,
       Symbols.grass,
       () => CropForm(),
+      (item) => CropForm(
+        record: item,
+      ),
     ),
   ];
 }

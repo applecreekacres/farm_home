@@ -7,9 +7,9 @@ import 'package:farm_home/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class AnimalForm extends StatefulWidget {
-  final Animal? editAnimal;
+  final Animal? resource;
 
-  const AnimalForm({super.key, this.editAnimal});
+  const AnimalForm({super.key, this.resource});
 
   @override
   State<StatefulWidget> createState() => _AnimalFormState();
@@ -22,8 +22,8 @@ class _AnimalFormState extends State<AnimalForm> {
 
   @override
   void initState() {
-    if (widget.editAnimal != null) {
-      _animal = widget.editAnimal!;
+    if (widget.resource != null) {
+      _animal = widget.resource!;
       isNew = false;
     } else {
       _animal = Animal();

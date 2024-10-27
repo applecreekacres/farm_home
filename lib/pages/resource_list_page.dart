@@ -15,9 +15,15 @@ class ResourceListPage extends StatefulWidget {
 }
 
 class _ResourceListPageState extends State<ResourceListPage> {
-  final List<ItemInfo> _filterItems =
-      List.from([ItemInfo("All", Icons.all_inclusive, () => null)])
-        ..addAll(ResourceConstants.resourceInfo);
+  final List<ItemInfo> _filterItems = List.from([
+    ItemInfo(
+      "All",
+      Icons.all_inclusive,
+      () => null,
+      (item) => null,
+    )
+  ])
+    ..addAll(ResourceConstants.resourceInfo);
   late String _filterName;
 
   @override
@@ -68,6 +74,16 @@ class _ResourceListPageState extends State<ResourceListPage> {
             items: provider.resources,
             title: (data) => Text(data.name),
             trailing: (data) => Text(data.itemName()),
+            onTap: (data) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ResourceConstants.resourceInfo
+                          .where((ref) => ref.name == data.itemName())
+                          .first
+                          .edit
+                          .call(data)));
+            },
             filter: (data) {
               if (_filterName == "All") {
                 return data;
