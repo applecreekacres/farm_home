@@ -25,3 +25,4 @@ export 'unit_form.dart';
 export 'animal_species_form.dart';
 export 'record_list_page.dart';
 export 'resource_list_page.dart';
+export 'record_category_form.dart';

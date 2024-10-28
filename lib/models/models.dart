@@ -26,3 +26,4 @@ export 'maintenance_record.dart';
 export 'animal_species.dart';
 export 'potting_up_record.dart';
 export 'unit.dart';
+export 'record_category.dart';
