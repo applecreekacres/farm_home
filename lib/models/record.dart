@@ -28,7 +28,7 @@ abstract class Record extends Item {
     notes = data["notes"];
     isDone = data["isDone"];
     quantities = List<Quantity>.from(data["quantities"]);
-    resources = List<Resource>.from(data[ResourceConstants.titlePlural]);
+    resources = List<Resource>.from(data["resources"]);
     timestamp = DateTime.fromMillisecondsSinceEpoch(data["timestamp"]);
     tags = List<String>.from(data["tags"]);
   }
