@@ -83,21 +83,19 @@ class _AnimalFormState extends State<AnimalForm> {
           onData: (data) {
             if (data != null) {
               return FutureWidget(
-                  future: _animal.animalSpecies,
-                  onData: (species) {
-                    return ReferenceDropDownButton<AnimalSpecies>(
-                      initialValue: species,
-                      label: ReferenceConstants.animalSpecies,
-                      items: data,
-                      onChanged: (value) {
-                        setState(
-                          () {
-                            _animal.setanimalSpecies(value);
-                          },
-                        );
-                      },
-                    );
-                  });
+                future: _animal.animalSpecies,
+                onData: (species) {
+                  return ReferenceDropDownButton<AnimalSpecies>(
+                    initialValue: species,
+                    label: ReferenceConstants.animalSpecies,
+                    items: data,
+                    onChanged: (value) {
+                      _animal.animalSpeciesId = value?.id ?? "";
+                    },
+                  );
+                },
+                onLoading: () => CircularProgressIndicator(),
+              );
             }
             return const Text("Can't load species");
           },
