@@ -27,6 +27,65 @@ class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
   // List<Widget> get view => widget.view;
   String? get itemName => item?.itemName();
 
+  List<Widget> getActions(BuildContext context) {
+    var actions = [
+      IconButton(
+        onPressed: () {
+          if (widget.isNew) {
+            createItem<T>(item!);
+          } else {
+            updateItem<T>(item!);
+          }
+          Navigator.of(context).pop();
+        },
+        icon: const Icon(Icons.save),
+      )
+    ];
+
+    if (!widget.isNew) {
+      actions.add(
+        IconButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text("Delete?"),
+                  content: const Text(
+                      "Are you sure you want to delete this item? There is no reversing this action."),
+                  actions: <Widget>[
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        textStyle: Theme.of(context).textTheme.labelLarge,
+                      ),
+                      child: const Text('Delete'),
+                      onPressed: () {
+                        deleteItem(item!.id);
+                        Navigator.of(context).pop(); // Close dialog
+                        Navigator.of(context).pop(); // Close form page
+                      },
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        textStyle: Theme.of(context).textTheme.labelLarge,
+                      ),
+                      child: const Text('Cancel'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+          icon: const Icon(Icons.delete),
+        ),
+      );
+    }
+    return actions;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -37,18 +96,7 @@ class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
           appBar: AppBar(
             backgroundColor: Theme.of(context).colorScheme.primary,
             title: Text(widget.title),
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    if (widget.isNew) {
-                      createItem<T>(item!);
-                    } else {
-                      updateItem<T>(item!);
-                    }
-                    Navigator.of(context).pop();
-                  },
-                  icon: const Icon(Icons.save))
-            ],
+            actions: getActions(context),
             bottom: const TabBar(
               tabs: [
                 Tab(icon: Icon(Icons.notes)),
