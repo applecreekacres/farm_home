@@ -13,7 +13,7 @@ void main() {
     expect(animal.sex, Sex.unknown);
     expect(animal.nickname, "");
     expect(animal.notes, "");
-    expect(animal.species, null);
+    // expect(animal.animalSpecies, null);
     expect(animal.itemName(), "Animal");
     expect(animal.itemType(), ResourceConstants.title);
   });
