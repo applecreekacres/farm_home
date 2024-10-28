@@ -31,6 +31,9 @@ class _ReferenceDropDownButtonState<T extends Reference>
     } else {
       _selectedIndex = 0;
     }
+
+    widget.items.sort((a, b) => a.name.compareTo(b.name));
+
     super.initState();
   }
 
