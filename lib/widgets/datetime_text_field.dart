@@ -44,16 +44,25 @@ class _DateTimeTextFieldState extends State<DateTimeTextField> {
     }
   }
 
+  String? _getDateString() {
+    if (_dateString == null) {
+      return null;
+    }
+    return _dateString.toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       readOnly: true,
       decoration: InputDecoration(
-          labelText: widget.labelText,
-          suffixIcon: IconButton(
-              onPressed: () => _selectDate(context),
-              icon: const Icon(Icons.calendar_today))),
-      controller: TextEditingController(text: _dateString.toString()),
+        labelText: widget.labelText,
+        suffixIcon: IconButton(
+          onPressed: () => _selectDate(context),
+          icon: const Icon(Icons.calendar_today),
+        ),
+      ),
+      controller: TextEditingController(text: _getDateString()),
     );
   }
 }
