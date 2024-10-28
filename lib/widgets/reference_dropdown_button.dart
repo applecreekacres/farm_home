@@ -40,6 +40,7 @@ class _ReferenceDropDownButtonState<T extends Reference>
       children: [
         Text(widget.label),
         DropdownButton<T>(
+          hint: const Text("Select Item"),
           items: widget.items.map((value) {
             return DropdownMenuItem(
               value: value,
