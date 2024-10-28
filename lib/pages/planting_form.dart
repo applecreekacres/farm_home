@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 
 class PlantingForm extends StatefulWidget {
   final Planting? resource;
-  
+
   const PlantingForm({super.key, this.resource});
 
   @override
@@ -25,8 +25,8 @@ class _PlantingFormState extends State<PlantingForm> {
   @override
   Widget build(BuildContext context) {
     final refProvider = Provider.of<ReferenceProvider>(context);
-    final resProvider = Provider.of<ResourceProvider>(context);
-    Crop crop;
+    // final resProvider = Provider.of<ResourceProvider>(context);
+    Crop? crop;
 
     return ResourceForm<Planting>(
       resource: _planting,
@@ -35,44 +35,47 @@ class _PlantingFormState extends State<PlantingForm> {
       additionalFields: [
         Column(
           children: [
-            // FutureWidget(
-            //     future: refProvider.cropFamilies,
-            //     onData: (data) {
-            //       if (data != null) {
-            //         return ReferenceDropDownButton<CropFamily>(
-            //           label: ReferenceConstants.cropFamily,
-            //           items: data,
-            //           onChanged: (value) {
-            //             setState(() {
-            //               _selectableCropFamily = value;
-            //             });
-            //           },
-            //         );
-            //       }
-            //       return const Text("Error loading crop families");
-            //     }),
-            // FutureWidget(
-            //     future: refProvider.crops,
-            //     onData: (data) {
-            //       if (data != null && _selectableCropFamily != null) {
-            //         var items = data
-            //             .where((item) =>
-            //                 item.cropFamilyId == _selectableCropFamily?.id)
-            //             .toList();
-            //         return ReferenceDropDownButton<Crop>(
-            //           label: ReferenceConstants.crop,
-            //           items: items,
-            //           onChanged: (value) {
-            //             if (value != null) {
-            //               setState(() {
-            //                 crop = value;
-            //               });
-            //             }
-            //           },
-            //         );
-            //       }
-            //       return const Text("Select a crop family");
-            //     }),
+            FutureWidget(
+                future: refProvider.cropFamilies,
+                onData: (data) {
+                  if (data != null) {
+                    return ReferenceDropDownButton<CropFamily>(
+                      initialValue: _selectableCropFamily,
+                      label: ReferenceConstants.cropFamily,
+                      items: data,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectableCropFamily = value;
+                        });
+                      },
+                    );
+                  }
+                  return const Text("Error loading crop families");
+                }),
+            FutureWidget(
+                future: refProvider.crops,
+                onData: (data) {
+                  if (data != null &&
+                      _selectableCropFamily != null) {
+                    var items = data
+                        .where((item) =>
+                            item.cropFamilyId == _selectableCropFamily?.id)
+                        .toList();
+                    return ReferenceDropDownButton<Crop>(
+                      initialValue: crop,
+                      label: ReferenceConstants.crop,
+                      items: items,
+                      onChanged: (value) {
+                        if (value != null) {
+                          setState(() {
+                            crop = value;
+                          });
+                        }
+                      },
+                    );
+                  }
+                  return const Text("Select a crop family");
+                }),
             IntFormField(
               label: "Length",
               controllerValue: _planting.length,
