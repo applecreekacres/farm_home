@@ -8,20 +8,15 @@ class Crop extends Reference {
   int daysToMaturity = 0;
   int harvestWindow = 0;
   CropFamily? family;
-  String? _cropFamilyId;
+  String? cropFamilyId = "";
 
   Future<CropFamily?> get cropFamily async {
-    if (_cropFamilyId != null && family == null) {
-      family = await getItemById<CropFamily>(_cropFamilyId!, (v) => CropFamily.fromMap(v));
+    if (cropFamilyId != "") {
+      return await getItemById<CropFamily>(
+          cropFamilyId!, (v) => CropFamily.fromMap(v));
     }
-    return family;
+    return null;
   }
-
-  set cropFamilyId(String? id) {
-    _cropFamilyId = id;
-  }
-
-  String? get cropFamilyId => _cropFamilyId;
 
   Crop(
       {super.name,
@@ -30,14 +25,14 @@ class Crop extends Reference {
       this.daysToTransplant = 0,
       this.daysToMaturity = 0,
       this.harvestWindow = 0,
-      this.family});
+      this.cropFamilyId = ""});
 
   Crop.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     daysToPottingUp = data["daysToPottingUp"];
     daysToMaturity = data["daysToMaturity"];
     daysToTransplant = data["daysToTransplant"];
     harvestWindow = data["harvestWindow"];
-    _cropFamilyId = data["cropFamilyId"];
+    cropFamilyId = data["cropFamilyId"];
   }
 
   @override
@@ -47,7 +42,7 @@ class Crop extends Reference {
       "daysToTransplant": daysToTransplant,
       "daysToMaturity": daysToMaturity,
       "harvestWindow": harvestWindow,
-      "cropFamilyId": _cropFamilyId
+      "cropFamilyId": cropFamilyId
     };
     map.addAll(super.toMap());
     return map;

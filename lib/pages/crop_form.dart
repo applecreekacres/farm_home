@@ -40,18 +40,22 @@ class _CropFormState extends State<CropForm> {
           future: refProvider.cropFamilies,
           onData: (data) {
             if (data != null) {
+              data.sort((a, b) => a.name.compareTo(b.name));
               return FutureWidget(
-                  future: _record.cropFamily,
-                  onData: (family) {
-                    return ReferenceDropDownButton<CropFamily>(
-                      initialValue: family,
-                      label: data.first.itemName(),
-                      items: data,
-                      onChanged: (value) {
-                        _record.cropFamilyId = value?.id;
-                      },
-                    );
-                  });
+                future: _record.cropFamily,
+                onData: (family) {
+                  return ReferenceDropDownButton<CropFamily>(
+                    initialValue: family,
+                    label: data.first.itemName(),
+                    items: data,
+                    onChanged: (value) {
+                      _record.cropFamilyId = value?.id ?? "";
+                    },
+                  );
+                },
+                onLoading: () => CircularProgressIndicator(),
+                onError: (p0) => const Text("Failed to get field"),
+              );
             } else {
               return const Text("No Crop families");
             }
