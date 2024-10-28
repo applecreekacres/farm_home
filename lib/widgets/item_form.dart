@@ -10,7 +10,11 @@ class ItemForm<T extends Item> extends StatefulWidget {
   final String title;
 
   const ItemForm(
-      {super.key, this.item, required this.isNew, required this.title, required this.editFields});
+      {super.key,
+      this.item,
+      required this.isNew,
+      required this.title,
+      required this.editFields});
 
   @override
   State<ItemForm> createState() => _ItemFormState<T>();
@@ -54,10 +58,14 @@ class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
           ),
           body: TabBarView(
             children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-                child: Column(
-                  children: edit,
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                    child: Column(
+                      children: edit,
+                    ),
+                  ),
                 ),
               ),
               const Padding(
