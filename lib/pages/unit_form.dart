@@ -32,6 +32,23 @@ class _UnitFormState extends State<UnitForm> {
     return ReferenceForm<Unit>(
       reference: _record,
       isNew: _isNew,
+      additionalFields: [
+        const Text(
+          'Unit Type',
+          textAlign: TextAlign.left,
+        ),
+        DropdownButton<UnitType>(
+            value: _record.unitType,
+            items: UnitType.values.map((UnitType value) {
+              return DropdownMenuItem<UnitType>(
+                  value: value, child: Text(value.toString().split('.')[1]));
+            }).toList(),
+            onChanged: (value) {
+              setState(() {
+                _record.unitType = value as UnitType;
+              });
+            }),
+      ],
     );
   }
 }
