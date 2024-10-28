@@ -1,8 +1,8 @@
-import 'package:farm_home/models/models.dart';
 import 'package:flutter/material.dart' hide MaterialType;
 
 import 'package:material_symbols_icons/symbols.dart';
 
+import 'package:farm_home/models/models.dart';
 import 'package:farm_home/pages/pages.dart';
 
 import 'item_info.dart';
@@ -19,6 +19,7 @@ class ReferenceConstants {
   static const materialType = "Material Type";
   static const cropFamily = "Crop Family";
   static const crop = "Crop";
+  static const recordCategory = "Record Category";
 
   static const references = [
     animalSpecies,
@@ -26,7 +27,8 @@ class ReferenceConstants {
     season,
     materialType,
     cropFamily,
-    crop
+    crop,
+    recordCategory,
   ];
 
   static List<ItemInfo> referenceInfo = [
@@ -78,5 +80,11 @@ class ReferenceConstants {
         record: item,
       ),
     ),
+    ItemInfo<RecordCategory>(
+      recordCategory,
+      Icons.category,
+      () => RecordCategoryForm(),
+      (item) => RecordCategoryForm(record: item),
+    )
   ];
 }

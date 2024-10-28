@@ -38,6 +38,11 @@ class ReferenceProvider extends ChangeNotifier {
         ReferenceConstants.materialType, (v) => MaterialType.fromMap(v));
   }
 
+  Future<List<RecordCategory>> get recordCategories async {
+    return await getItems<RecordCategory>(
+        ReferenceConstants.recordCategory, (v) => RecordCategory.fromMap(v));
+  }
+
   Future<List<Reference>> get references async {
     return await getItemsByType(ReferenceConstants.title, (data) {
       switch (data["itemName"]) {
@@ -53,6 +58,8 @@ class ReferenceProvider extends ChangeNotifier {
           return Season.fromMap(data);
         case ReferenceConstants.unit:
           return Unit.fromMap(data);
+        case ReferenceConstants.recordCategory:
+          return RecordCategory.fromMap(data);
         default:
           throw Error();
       }
