@@ -1,7 +1,7 @@
 import 'package:farm_home/models/models.dart';
 import 'package:flutter/material.dart';
 
-class ItemInfo<T> {
+class ItemInfo<T extends Item> {
   IconData icon;
   String name;
   Widget? Function() init;
