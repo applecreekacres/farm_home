@@ -10,19 +10,14 @@ class Animal extends Resource {
   DateTime? deathDate;
   String nickname = "";
   late Sex sex;
-  String _animalSpeciesId = "";
-  AnimalSpecies? species;
+  String animalSpeciesId = "";
 
   Future<AnimalSpecies?> get animalSpecies async {
-    if (_animalSpeciesId != "" && species == null) {
-      species = await getItemById<AnimalSpecies>(_animalSpeciesId, (v) => AnimalSpecies.fromMap(v));
+    if (animalSpeciesId != "") {
+      return await getItemById<AnimalSpecies>(
+          animalSpeciesId, (v) => AnimalSpecies.fromMap(v));
     }
-    return species;
-  }
-
-  void setanimalSpecies(AnimalSpecies? a) {
-    species = a;
-    _animalSpeciesId = species?.id ?? "";
+    return null;
   }
 
   Animal(
@@ -33,24 +28,20 @@ class Animal extends Resource {
       this.deathDate,
       this.nickname = "",
       this.sex = Sex.unknown,
-      this.species}) {
-    _animalSpeciesId = species?.id ?? "";
-  }
+      this.animalSpeciesId = ""});
 
   Animal.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    if (data["birthDate"] != "")
-    {
+    if (data["birthDate"] != "") {
       birthDate = DateTime.fromMillisecondsSinceEpoch(data["birthDate"]);
     }
 
-    if(data["deathDate"] != "")
-    {
+    if (data["deathDate"] != "") {
       deathDate = DateTime.fromMillisecondsSinceEpoch(data["deathDate"]);
     }
     isFixed = data["isFixed"];
     nickname = data["nickname"];
     sex = Sex.values.firstWhere((e) => e.toString() == data['sex']);
-    _animalSpeciesId = data["animalSpeciesId"];
+    animalSpeciesId = data["animalSpeciesId"];
   }
 
   @override
@@ -61,7 +52,7 @@ class Animal extends Resource {
       "deathDate": deathDate?.millisecondsSinceEpoch ?? "",
       "nickname": nickname,
       "sex": sex.toString(),
-      "animalSpeciesId": _animalSpeciesId
+      "animalSpeciesId": animalSpeciesId
     };
     map.addAll(super.toMap());
     return map;
