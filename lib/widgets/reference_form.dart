@@ -44,6 +44,7 @@ class _ReferenceFormState<T extends Reference> extends State<ReferenceForm<T>> {
   @override
   Widget build(BuildContext context) {
     return ItemForm(
+      isNew: isNew,
       item: reference,
       title: referenceName,
       editFields: _buildFields(),

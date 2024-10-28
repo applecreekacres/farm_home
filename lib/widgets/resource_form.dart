@@ -43,6 +43,7 @@ class _ResourceFormState<T extends Resource> extends State<ResourceForm<T>> {
   Widget build(BuildContext context) {
     return ItemForm(
       item: resource,
+      isNew: widget.isNew,
       title: resourceName,
       editFields: _buildFields(),
     );

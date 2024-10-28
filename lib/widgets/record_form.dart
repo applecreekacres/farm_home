@@ -59,6 +59,7 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
   Widget build(BuildContext context) {
     return ItemForm(
       item: record,
+      isNew: widget.isNew,
       title: "$itemName Record",
       editFields: _buildFields(),
     );

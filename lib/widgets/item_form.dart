@@ -4,12 +4,13 @@ import 'package:farm_home/models/models.dart';
 
 class ItemForm<T extends Item> extends StatefulWidget {
   final T? item;
+  final bool isNew;
   // final List<Widget> view;
   final List<Widget> editFields;
   final String title;
 
   const ItemForm(
-      {super.key, this.item, required this.title, required this.editFields});
+      {super.key, this.item, required this.isNew, required this.title, required this.editFields});
 
   @override
   State<ItemForm> createState() => _ItemFormState<T>();
@@ -21,17 +22,6 @@ class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
   List<Widget> get edit => widget.editFields;
   // List<Widget> get view => widget.view;
   String? get itemName => item?.itemName();
-  late bool isNew;
-
-  @override
-  void initState() {
-    if (widget.item == null) {
-      isNew = true;
-    } else {
-      isNew = false;
-    }
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +36,7 @@ class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
             actions: [
               IconButton(
                   onPressed: () {
-                    if (isNew) {
+                    if (widget.isNew) {
                       createItem<T>(item!);
                     } else {
                       updateItem<T>(item!);
