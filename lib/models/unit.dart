@@ -20,9 +20,9 @@ enum UnitType {
 }
 
 class Unit extends Reference {
-  late UnitType unitType;
+  UnitType? unitType = UnitType.count;
 
-  Unit({super.name, super.description, required this.unitType});
+  Unit({super.name, super.description, this.unitType});
 
   Unit.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     unitType = data["unitType"];
