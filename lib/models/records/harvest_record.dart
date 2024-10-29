@@ -1,4 +1,4 @@
-import 'models.dart';
+import '../models.dart';
 
 class HarvestRecord extends Record {
   String lotNumber = "";

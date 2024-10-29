@@ -1,4 +1,4 @@
-import 'models.dart';
+import '../models.dart';
 
 class Planting extends Resource {
   String _cropId = "";

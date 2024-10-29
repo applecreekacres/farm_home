@@ -1,6 +1,6 @@
 import 'package:farm_home/constants/constants.dart';
 
-import 'item.dart';
+import '../item.dart';
 
 abstract class Resource extends Item {
   String name = "";

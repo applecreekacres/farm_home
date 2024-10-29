@@ -1,7 +1,7 @@
-import 'models.dart';
+import '../models.dart';
 
-class ActivityRecord extends Record {
-  ActivityRecord(
+class ObservationRecord extends Record {
+  ObservationRecord(
       {super.title,
       super.timestamp,
       super.notes,
@@ -10,10 +10,10 @@ class ActivityRecord extends Record {
       super.resources,
       super.tags});
 
-  ActivityRecord.fromMap(super.data) : super.fromMap();
+  ObservationRecord.fromMap(super.data) : super.fromMap();
 
   @override
   String itemName() {
-    return "Activity";
+    return "Observation";
   }
 }

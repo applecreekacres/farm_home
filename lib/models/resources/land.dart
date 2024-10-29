@@ -1,4 +1,4 @@
-import 'models.dart';
+import '../models.dart';
 
 enum LandType { bed, field, landmark, paddock, property, other }
 

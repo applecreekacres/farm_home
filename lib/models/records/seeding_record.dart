@@ -1,4 +1,4 @@
-import 'models.dart';
+import '../models.dart';
 
 enum SeedingMethod { direct, greenhouseSown, transplantFromPurchased }
 

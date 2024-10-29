@@ -1,6 +1,6 @@
 import 'package:farm_home/constants/constants.dart';
 
-import 'models.dart';
+import '../models.dart';
 
 class Crop extends Reference {
   int daysToPottingUp = 0;
