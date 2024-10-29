@@ -16,7 +16,7 @@ void main() {
     expect(record.timestamp, now);
     expect(record.title, "New Activity Record");
     expect(record.quantities, List<Quantity>.empty());
-    expect(record.resources, List<Resource>.empty());
+    expect(record.resourceIds, List<String>.empty());
     expect(record.tags.length, 1);
     expect(record.tags[0], "tag");
     expect(record.notes, "Basic Description");
@@ -40,7 +40,7 @@ void main() {
       "timestamp": now,
       "tags": ["tag2"],
       "quantities": [],
-      "resources": [],
+      "resourceIds": [],
       "itemName": "Activity"
     };
 
