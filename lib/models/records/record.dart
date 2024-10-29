@@ -12,7 +12,7 @@ abstract class Record extends Item {
 
   Future<List<dynamic>> get resources async {
     List<dynamic> records = [];
-    for (var id in resourceIds!) {
+    for (var id in resourceIds) {
       var data = await getItemById(id, (data) => data);
       if (data != null) {
         records.add(initResourceByItemName(data));
