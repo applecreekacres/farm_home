@@ -1,6 +1,5 @@
 import 'package:farm_home/constants/constants.dart';
-
-import '../models.dart';
+import 'package:farm_home/models/models.dart';
 
 abstract class Record extends Item {
   String title = "";
