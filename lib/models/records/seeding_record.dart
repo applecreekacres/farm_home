@@ -1,4 +1,6 @@
-import 'models.dart';
+import 'package:farm_home/models/resources/resources.dart';
+
+import 'records.dart';
 
 enum SeedingMethod { direct, greenhouseSown, transplantFromPurchased }
 

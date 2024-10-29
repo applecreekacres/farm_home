@@ -45,24 +45,7 @@ class ReferenceProvider extends ChangeNotifier {
 
   Future<List<Reference>> get references async {
     return await getItemsByType(ReferenceConstants.title, (data) {
-      switch (data["itemName"]) {
-        case ReferenceConstants.animalSpecies:
-          return AnimalSpecies.fromMap(data);
-        case ReferenceConstants.crop:
-          return Crop.fromMap(data);
-        case ReferenceConstants.cropFamily:
-          return CropFamily.fromMap(data);
-        case ReferenceConstants.materialType:
-          return MaterialType.fromMap(data);
-        case ReferenceConstants.season:
-          return Season.fromMap(data);
-        case ReferenceConstants.unit:
-          return Unit.fromMap(data);
-        case ReferenceConstants.recordCategory:
-          return RecordCategory.fromMap(data);
-        default:
-          throw Error();
-      }
+      return initReferenceByItemName(data);
     });
   }
 }
