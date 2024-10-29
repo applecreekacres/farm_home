@@ -1,4 +1,4 @@
-import '../models.dart';
+import 'records.dart';
 
 class ActivityRecord extends Record {
   ActivityRecord(

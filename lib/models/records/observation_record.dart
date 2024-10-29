@@ -1,4 +1,4 @@
-import '../models.dart';
+import 'records.dart';
 
 class ObservationRecord extends Record {
   ObservationRecord(
