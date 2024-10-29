@@ -1,3 +1,4 @@
+import 'package:farm_home/constants/constants.dart';
 import 'package:farm_home/models/models.dart';
 
 class InputRecord extends Record {
@@ -13,7 +14,7 @@ class InputRecord extends Record {
       super.notes,
       super.isDone,
       super.quantities,
-      super.resources,
+      super.resourceIds,
       super.tags,
       Material? material})
       : super() {
@@ -33,6 +34,6 @@ class InputRecord extends Record {
 
   @override
   String itemName() {
-    return "Input";
+    return RecordConstants.input;
   }
 }

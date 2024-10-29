@@ -1,3 +1,4 @@
+import 'package:farm_home/constants/constants.dart';
 import 'package:farm_home/models/resources/resources.dart';
 
 import 'records.dart';
@@ -18,7 +19,7 @@ class SeedingRecord extends Record {
       super.notes,
       super.isDone,
       super.quantities,
-      super.resources,
+      super.resourceIds,
       super.tags,
       this.seedingMethod,
       this.extraSeed,
@@ -38,6 +39,6 @@ class SeedingRecord extends Record {
 
   @override
   String itemName() {
-    return "Seeding";
+    return RecordConstants.seeding;
   }
 }

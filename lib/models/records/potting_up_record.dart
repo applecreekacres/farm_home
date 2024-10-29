@@ -1,3 +1,5 @@
+import 'package:farm_home/constants/constants.dart';
+
 import 'records.dart';
 
 class PottingUpRecord extends Record {
@@ -7,7 +9,7 @@ class PottingUpRecord extends Record {
     super.notes,
     super.isDone,
     super.quantities,
-    super.resources,
+    super.resourceIds,
     super.tags,
   });
 
@@ -15,6 +17,6 @@ class PottingUpRecord extends Record {
 
   @override
   String itemName() {
-    return "Potting Up";
+    return RecordConstants.pottingUp;
   }
 }
