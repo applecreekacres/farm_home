@@ -1,3 +1,4 @@
+import 'package:farm_home/constants/constants.dart';
 import 'package:farm_home/models/models.dart';
 
 class MaintenanceRecord extends Record {
@@ -28,6 +29,6 @@ class MaintenanceRecord extends Record {
 
   @override
   String itemName() {
-    return "Maintenance";
+    return RecordConstants.maintenance;
   }
 }

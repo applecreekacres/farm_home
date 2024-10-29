@@ -1,3 +1,5 @@
+import 'package:farm_home/constants/constants.dart';
+
 import 'records.dart';
 
 class ActivityRecord extends Record {
@@ -14,6 +16,6 @@ class ActivityRecord extends Record {
 
   @override
   String itemName() {
-    return "Activity";
+    return RecordConstants.activity;
   }
 }

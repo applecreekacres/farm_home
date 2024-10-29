@@ -1,3 +1,5 @@
+import 'package:farm_home/constants/constants.dart';
+
 import 'records.dart';
 
 class TransplantRecord extends Record {
@@ -14,6 +16,6 @@ class TransplantRecord extends Record {
 
   @override
   String itemName() {
-    return "Transplant";
+    return RecordConstants.transplant;
   }
 }

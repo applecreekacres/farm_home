@@ -1,3 +1,5 @@
+import 'package:farm_home/constants/constants.dart';
+
 import 'records.dart';
 
 class SaleRecord extends Record {
@@ -33,6 +35,6 @@ class SaleRecord extends Record {
 
   @override
   String itemName() {
-    return "Sale";
+    return RecordConstants.sale;
   }
 }
