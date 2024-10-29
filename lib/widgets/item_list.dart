@@ -27,6 +27,10 @@ class _ItemListState<T> extends State<ItemList<T>> {
   Widget build(BuildContext context) {
     return FutureWidget(
       future: widget.items,
+      onLoading: () => Container(
+        alignment: Alignment.center,
+        child: CircularProgressIndicator(),
+      ),
       onData: (data) {
         List<T> modifiedList;
         if (data != null) {
