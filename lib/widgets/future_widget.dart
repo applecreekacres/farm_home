@@ -19,13 +19,17 @@ class FutureWidget<T> extends StatelessWidget {
     return FutureBuilder<T>(
       future: future,
       builder: (BuildContext context, AsyncSnapshot<T> snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.none:
-          case ConnectionState.active:
-          case ConnectionState.waiting:
-            return this._handleLoading();
-          case ConnectionState.done:
-            return this._handleData(snapshot.data);
+        if (snapshot.hasError) {
+          return this._handleError(snapshot.error);
+        } else {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+            case ConnectionState.active:
+            case ConnectionState.waiting:
+              return this._handleLoading();
+            case ConnectionState.done:
+              return this._handleData(snapshot.data);
+          }
         }
       },
     );
