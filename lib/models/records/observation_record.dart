@@ -7,7 +7,7 @@ class ObservationRecord extends Record {
       super.notes,
       super.isDone,
       super.quantities,
-      super.resources,
+      super.resourceIds,
       super.tags});
 
   ObservationRecord.fromMap(super.data) : super.fromMap();

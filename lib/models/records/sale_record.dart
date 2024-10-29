@@ -11,7 +11,7 @@ class SaleRecord extends Record {
       super.notes,
       super.isDone,
       super.quantities,
-      super.resources,
+      super.resourceIds,
       super.tags,
       this.customer,
       this.invoice,

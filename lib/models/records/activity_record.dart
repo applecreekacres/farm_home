@@ -7,7 +7,7 @@ class ActivityRecord extends Record {
       super.notes,
       super.isDone,
       super.quantities,
-      super.resources,
+      super.resourceIds,
       super.tags});
 
   ActivityRecord.fromMap(super.data) : super.fromMap();

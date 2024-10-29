@@ -11,7 +11,7 @@ class PurchaseRecord extends Record {
       super.notes,
       super.isDone,
       super.quantities,
-      super.resources,
+      super.resourceIds,
       super.tags,
       this.seller,
       this.invoice,

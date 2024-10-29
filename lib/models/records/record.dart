@@ -5,16 +5,17 @@ abstract class Record extends Item {
   String title = "";
   String notes = "";
   bool isDone = false;
-  List<Quantity>? quantities = List<Quantity>.empty();
+  List<Quantity> quantities = List<Quantity>.empty();
   DateTime? timestamp = DateTime.now();
-  List<String>? tags = List<String>.empty();
-  List<String>? resourceIds;
+  List<String> tags = List<String>.empty();
+  List<String> resourceIds = List<String>.empty();
 
-  Future<List<Resource>?> get resources async {
-    List<Resource>? records;
-    if (resourceIds != null) {
-      for (var id in resourceIds!) {
-        records.add(await getItemById(id, (data) => ));
+  Future<List<dynamic>> get resources async {
+    List<dynamic> records = [];
+    for (var id in resourceIds!) {
+      var data = await getItemById(id, (data) => data);
+      if (data != null) {
+        records.add(initResourceByItemName(data));
       }
     }
 
@@ -26,9 +27,9 @@ abstract class Record extends Item {
     this.timestamp,
     this.notes = "",
     this.isDone = false,
-    this.quantities,
-    this.tags,
-    this.resourceIds,
+    this.quantities = const [],
+    this.tags = const [],
+    this.resourceIds = const [],
   }) : super() {
     timestamp ??= DateTime.now();
   }

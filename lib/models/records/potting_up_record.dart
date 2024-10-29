@@ -7,7 +7,7 @@ class PottingUpRecord extends Record {
     super.notes,
     super.isDone,
     super.quantities,
-    super.resources,
+    super.resourceIds,
     super.tags,
   });
 

@@ -18,7 +18,7 @@ class SeedingRecord extends Record {
       super.notes,
       super.isDone,
       super.quantities,
-      super.resources,
+      super.resourceIds,
       super.tags,
       this.seedingMethod,
       this.extraSeed,

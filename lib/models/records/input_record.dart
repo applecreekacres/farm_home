@@ -13,7 +13,7 @@ class InputRecord extends Record {
       super.notes,
       super.isDone,
       super.quantities,
-      super.resources,
+      super.resourceIds,
       super.tags,
       Material? material})
       : super() {

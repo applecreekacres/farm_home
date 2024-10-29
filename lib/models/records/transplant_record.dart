@@ -7,7 +7,7 @@ class TransplantRecord extends Record {
       super.notes,
       super.isDone,
       super.quantities,
-      super.resources,
+      super.resourceIds,
       super.tags});
 
   TransplantRecord.fromMap(super.data) : super.fromMap();
