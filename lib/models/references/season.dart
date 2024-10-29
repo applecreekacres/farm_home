@@ -1,6 +1,6 @@
 import 'package:farm_home/constants/constants.dart';
 
-import 'models.dart';
+import 'references.dart';
 
 class Season extends Reference {
   /// Default to the first day of the current year

@@ -1,7 +1,7 @@
-import 'models.dart';
+import 'records.dart';
 
-class ActivityRecord extends Record {
-  ActivityRecord(
+class TransplantRecord extends Record {
+  TransplantRecord(
       {super.title,
       super.timestamp,
       super.notes,
@@ -10,10 +10,10 @@ class ActivityRecord extends Record {
       super.resources,
       super.tags});
 
-  ActivityRecord.fromMap(super.data) : super.fromMap();
+  TransplantRecord.fromMap(super.data) : super.fromMap();
 
   @override
   String itemName() {
-    return "Activity";
+    return "Transplant";
   }
 }

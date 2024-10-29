@@ -1,11 +1,11 @@
-import 'models.dart';
+import 'records.dart';
 
-class SaleRecord extends Record {
-  String? customer = "";
+class PurchaseRecord extends Record {
+  String? seller = "";
   String? invoice = "";
   String? lotNumber = "";
 
-  SaleRecord(
+  PurchaseRecord(
       {super.title,
       super.timestamp,
       super.notes,
@@ -13,12 +13,12 @@ class SaleRecord extends Record {
       super.quantities,
       super.resources,
       super.tags,
-      this.customer,
+      this.seller,
       this.invoice,
       this.lotNumber});
 
-  SaleRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    customer = data["customer"];
+  PurchaseRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
+    seller = data["seller"];
     invoice = data["invoice"];
     lotNumber = data["lotNumber"];
   }
@@ -26,13 +26,12 @@ class SaleRecord extends Record {
   @override
   Map<String, dynamic> toMap() {
     var map = super.toMap();
-    map.addAll(
-        {"customer": customer, "invoice": invoice, "lotNumber": lotNumber});
+    map.addAll({"seller": seller, "invoice": invoice, "lotNumber": lotNumber});
     return map;
   }
 
   @override
   String itemName() {
-    return "Sale";
+    return "Purchase";
   }
 }

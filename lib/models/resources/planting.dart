@@ -1,4 +1,6 @@
-import 'models.dart';
+import 'package:farm_home/models/references/references.dart';
+
+import 'resources.dart';
 
 class Planting extends Resource {
   String _cropId = "";
