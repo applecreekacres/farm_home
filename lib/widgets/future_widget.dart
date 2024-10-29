@@ -40,6 +40,11 @@ class FutureWidget<T> extends StatelessWidget {
   }
 
   Widget _handleLoading() {
-    return this.onLoading != null ? this.onLoading!() : Container();
+    return this.onLoading != null
+        ? this.onLoading!()
+        : Container(
+            alignment: Alignment.center,
+            child: CircularProgressIndicator(),
+          );
   }
 }
