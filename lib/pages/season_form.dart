@@ -42,6 +42,7 @@ class _SeasonFormState extends State<SeasonForm> {
           initialDate: DateTime(DateTime.now().year),
           firstDate: DateTime(1970),
           lastDate: DateTime(2100),
+          pickTime: false,
         ),
         DateTimeTextField(
           labelText: "End",
@@ -52,6 +53,7 @@ class _SeasonFormState extends State<SeasonForm> {
           initialDate: DateTime(DateTime.now().year, 12, 31, 23, 59, 999),
           firstDate: DateTime(1970),
           lastDate: DateTime(2100),
+          pickTime: false,
         ),
       ],
     );
