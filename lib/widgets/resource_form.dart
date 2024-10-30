@@ -34,6 +34,15 @@ class _ResourceFormState<T extends Resource> extends State<ResourceForm<T>> {
       NotesField(
         modelField: resource.notes,
       ),
+      LabelledCheckbox(
+        label: "Archive",
+        value: resource.archived,
+        onChanged: (value) {
+          setState(() {
+            resource.archived = value!;
+          });
+        },
+      ),
     ];
     fields.addAll(this.fields);
     return fields;
