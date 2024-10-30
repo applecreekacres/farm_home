@@ -1,3 +1,4 @@
+import 'package:farm_home/constants/constants.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:farm_home/models/models.dart';
 import 'package:uuid/uuid.dart';
@@ -46,7 +47,7 @@ void main() {
       "modified":
           DateTime(DateTime.now().year, 5, 4, 3, 2, 1).millisecondsSinceEpoch,
       "itemName": "Animal Species",
-      "itemType": "Reference"
+      "itemType": ReferenceConstants.title
     };
 
     final species = AnimalSpecies.fromMap(map);

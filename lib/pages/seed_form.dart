@@ -4,23 +4,34 @@ import 'package:farm_home/models/models.dart';
 import 'package:farm_home/widgets/widgets.dart';
 
 class SeedForm extends StatefulWidget {
-  const SeedForm({super.key});
+  final Seed? resource;
+
+  const SeedForm({super.key, this.resource});
 
   @override
   State<StatefulWidget> createState() => _SeedFormState();
 }
 
 class _SeedFormState extends State<SeedForm> {
-  final _formKey = GlobalKey<FormState>();
+  late Seed _seed;
+  bool _isNew = false;
 
-  final Seed _seed = Seed();
+  @override
+  void initState() {
+    if (widget.resource == null) {
+      _seed = Seed();
+      _isNew = true;
+    } else {
+      _seed = widget.resource!;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return ResourceForm<Seed>(
       resource: _seed,
-      isNew: true,
-      key: _formKey,
+      isNew: _isNew,
     );
   }
 }

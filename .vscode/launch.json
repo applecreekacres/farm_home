@@ -4,6 +4,12 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
+        {
+            "name": "Flutter: Attach to Device",
+            "type": "dart",
+            "request": "attach"
+        },
         {
             "name": "farm_home",
             "request": "launch",
@@ -14,6 +20,12 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
+        },
+        {
+            "name": "farm_home (debug mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug"
         },
         {
             "name": "farm_home (release mode)",

@@ -1,3 +1,4 @@
+import 'package:farm_home/providers/record_provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,7 +9,6 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:farm_home/auth_gate.dart';
-import 'package:farm_home/models/models.dart';
 import 'package:farm_home/providers/providers.dart';
 
 import 'constants/constants.dart';
@@ -51,8 +51,12 @@ class FarmHome extends StatelessWidget {
                 prefs: prefs,
                 firebaseFirestore: _firebaseFirestore),
           ),
-          ChangeNotifierProvider<ResourceProvider<Animal>>(
-              create: (_) => ResourceProvider<Animal>()),
+          ChangeNotifierProvider<ResourceProvider>(
+              create: (_) => ResourceProvider()),
+          ChangeNotifierProvider<ReferenceProvider>(
+              create: (_) => ReferenceProvider()),
+          ChangeNotifierProvider<RecordProvider>(
+              create: (_) => RecordProvider()),
         ],
         child: MaterialApp(
           title: AppConstants.appTitle,

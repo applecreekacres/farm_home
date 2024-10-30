@@ -18,7 +18,12 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: const Text(AppConstants.appTitle),
       ),
-      body: const Center(),
+      body: Padding(
+        padding: EdgeInsets.all(10),
+        child: Column(children: [
+          const Text("Open Records"),
+        ],),
+      ),
       drawer: const FarmHomeDrawer(),
       floatingActionButton: ExpandableFab(
         distance: 112,
@@ -27,7 +32,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () => showModalBottomSheet<void>(
                 context: context,
                 builder: (BuildContext context) {
-                  return const RecordSelectWidget();
+                  return RecordSelectWidget();
                 }),
             icon: const Icon(Icons.task),
           ),
@@ -35,7 +40,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () => showModalBottomSheet<void>(
                 context: context,
                 builder: (BuildContext context) {
-                  return const ResourceSelectWidget();
+                  return ResourceSelectWidget();
                 }),
             icon: const Icon(Icons.yard),
           ),
@@ -43,7 +48,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () => showModalBottomSheet<void>(
                 context: context,
                 builder: (BuildContext context) {
-                  return const ReferenceSelectWidget();
+                  return ReferenceSelectWidget();
                 }),
             icon: const Icon(Icons.abc),
           ),

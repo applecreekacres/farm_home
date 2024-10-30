@@ -19,7 +19,6 @@ class ReferenceForm<T extends Reference> extends StatefulWidget {
 }
 
 class _ReferenceFormState<T extends Reference> extends State<ReferenceForm<T>> {
-  final _formKey = GlobalKey<FormState>();
   T get reference => widget.reference;
   bool get isNew => widget.isNew;
   List<Widget> get fields => widget.additionalFields ?? List<Widget>.empty();
@@ -28,6 +27,7 @@ class _ReferenceFormState<T extends Reference> extends State<ReferenceForm<T>> {
   List<Widget> _buildFields() {
     var fields = [
       TextFormField(
+          initialValue: widget.isNew ? "" : reference.name,
           decoration: const InputDecoration(labelText: "Name"),
           validator: (value) =>
               value?.isEmpty ?? true ? 'Please enter a name' : null,
@@ -43,32 +43,11 @@ class _ReferenceFormState<T extends Reference> extends State<ReferenceForm<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          title: Text('New $referenceName'),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  if (widget.isNew) {
-                    createItem<T>(reference);
-                  } else {
-                    updateItem<T>(reference);
-                  }
-                  Navigator.of(context).pop();
-                },
-                icon: const Icon(Icons.save))
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-          child: Column(
-            children: _buildFields(),
-          ),
-        ),
-      ),
+    return ItemForm(
+      isNew: isNew,
+      item: reference,
+      title: referenceName,
+      editFields: _buildFields(),
     );
   }
 }
