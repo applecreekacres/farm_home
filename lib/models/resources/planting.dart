@@ -1,28 +1,22 @@
-import 'package:farm_home/models/references/references.dart';
-
-import 'resources.dart';
+import 'package:farm_home/constants/resource_constants.dart';
+import 'package:farm_home/models/models.dart';
 
 class Planting extends Resource {
-  String _cropId = "";
-  List<String> _bedsId = List<String>.empty();
-  String _seasonId = "";
-  late Season? season;
-  late Crop? crop;
-  late List<Land>? beds;
-  late int length;
-  late int rows;
-  late int inRowSpacing;
-  late int daysToPottingUp;
-  late int daysToTransplant;
-  late int daysToHarvest;
-  late int harvestWindow;
+  String cropId = "";
+  String seasonId = "";
+  int length = 0;
+  int rows = 0;
+  int inRowSpacing = 0;
+  int daysToPottingUp = 0;
+  int daysToTransplant = 0;
+  int daysToHarvest = 0;
+  int harvestWindow = 0;
 
   Planting(
       {super.name,
       super.notes,
-      this.crop,
-      this.beds,
-      this.season,
+      this.seasonId = "",
+      this.cropId = "",
       this.length = 0,
       this.rows = 0,
       this.inRowSpacing = 0,
@@ -32,10 +26,23 @@ class Planting extends Resource {
       this.harvestWindow = 0})
       : super();
 
+  Future<Crop?> get crop async {
+    if (cropId != "") {
+      return getItemById(cropId, (map) => Crop.fromMap(map));
+    }
+    return null;
+  }
+
+  Future<Season?> get season async {
+    if (seasonId != "") {
+      return getItemById(seasonId, (map) => Season.fromMap(map));
+    }
+    return null;
+  }
+
   Planting.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    _cropId = data["cropId"];
-    _bedsId = List.from(data["bedsId"]);
-    _seasonId = data["seasonId"];
+    cropId = data["cropId"];
+    seasonId = data["seasonId"];
     length = data["length"];
     rows = data["rows"];
     inRowSpacing = data["inRowSpacing"];
@@ -49,9 +56,8 @@ class Planting extends Resource {
   Map<String, dynamic> toMap() {
     var map = super.toMap();
     map.addAll({
-      "cropId": _cropId,
-      "bedsId": _bedsId,
-      "seasonId": _seasonId,
+      "cropId": cropId,
+      "seasonId": seasonId,
       "length": length,
       "rows": rows,
       "inRowSpacing": inRowSpacing,
@@ -65,6 +71,6 @@ class Planting extends Resource {
 
   @override
   String itemName() {
-    return "Planting";
+    return ResourceConstants.planting;
   }
 }
