@@ -18,15 +18,24 @@ class PlantingForm extends StatefulWidget {
 class _PlantingFormState extends State<PlantingForm> {
   final _formKey = GlobalKey<FormState>();
 
-  final Planting _planting = Planting();
+  late Planting _planting;
+  late Season? _season;
 
   CropFamily? _selectableCropFamily;
 
   @override
+  void initState() {
+    if (widget.resource != null) {
+      _planting = widget.resource!;
+    } else {
+      _planting = Planting();
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final refProvider = Provider.of<ReferenceProvider>(context);
-    // final resProvider = Provider.of<ResourceProvider>(context);
-    Crop? crop;
 
     return ResourceForm<Planting>(
       resource: _planting,
@@ -36,45 +45,26 @@ class _PlantingFormState extends State<PlantingForm> {
         Column(
           children: [
             FutureWidget(
-                future: refProvider.cropFamilies,
+                future: refProvider.seasons,
                 onData: (data) {
                   if (data != null) {
-                    return ReferenceDropDownButton<CropFamily>(
-                      initialValue: _selectableCropFamily,
-                      label: ReferenceConstants.cropFamily,
+                    if (_planting.seasonId == "") {
+                      _season = data.first;
+                      _planting.seasonId = data.first.id;
+                    }
+                    return ReferenceDropDownButton<Season>(
+                      initialValue: _season,
+                      label: ReferenceConstants.season,
                       items: data,
-                      onChanged: (value) {
+                      onChanged: (data) {
+                        _planting.seasonId = data!.id;
                         setState(() {
-                          _selectableCropFamily = value;
+                          _season = data;
                         });
                       },
                     );
                   }
-                  return const Text("Error loading crop families");
-                }),
-            FutureWidget(
-                future: refProvider.crops,
-                onData: (data) {
-                  if (data != null &&
-                      _selectableCropFamily != null) {
-                    var items = data
-                        .where((item) =>
-                            item.cropFamilyId == _selectableCropFamily?.id)
-                        .toList();
-                    return ReferenceDropDownButton<Crop>(
-                      initialValue: crop,
-                      label: ReferenceConstants.crop,
-                      items: items,
-                      onChanged: (value) {
-                        if (value != null) {
-                          setState(() {
-                            crop = value;
-                          });
-                        }
-                      },
-                    );
-                  }
-                  return const Text("Select a crop family");
+                  return Text("No Seasons to load");
                 }),
             IntFormField(
               label: "Length",
