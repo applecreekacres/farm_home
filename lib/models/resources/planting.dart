@@ -34,7 +34,7 @@ class Planting extends Resource {
 
   Planting.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     _cropId = data["cropId"];
-    _bedsId = data["bedsId"];
+    _bedsId = List.from(data["bedsId"]);
     _seasonId = data["seasonId"];
     length = data["length"];
     rows = data["rows"];
