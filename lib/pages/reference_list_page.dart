@@ -46,22 +46,13 @@ class _ReferenceListPageState extends State<ReferenceListPage> {
                   context: context,
                   showDragHandle: true,
                   builder: (BuildContext context) {
-                    return ListView.builder(
-                      itemCount: _filterItems.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          leading: Icon(_filterItems[index].icon),
-                          title: Text(_filterItems[index].name),
-                          trailing: _filterName == _filterItems[index].name
-                              ? Icon(Icons.check)
-                              : null,
-                          onTap: () {
-                            setState(() {
-                              _filterName = _filterItems[index].name;
-                              Navigator.pop(context);
-                            });
-                          },
-                        );
+                    return ItemInfoList(
+                      items: _filterItems,
+                      onTap: (item) {
+                        setState(() {
+                          _filterName = item.name;
+                          Navigator.pop(context); // close the modal sheet
+                        });
                       },
                     );
                   }),
@@ -98,9 +89,18 @@ class _ReferenceListPageState extends State<ReferenceListPage> {
           )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const HomePage()));
-          setState(() {});
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return ItemInfoList(
+                items: ReferenceConstants.referenceInfo,
+                onTap: (item) {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => item.init()!));
+                },
+              );
+            },
+          );
         },
         child: const Icon(Icons.add),
       ),

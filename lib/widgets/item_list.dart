@@ -54,6 +54,7 @@ class _ItemListState<T> extends State<ItemList<T>> {
           return const Text("Failed to load items");
         }
       },
+    onError: (data) => const Text("Failed to load items"),
     );
   }
 }
