@@ -36,6 +36,7 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
     var resProvider = Provider.of<ResourceProvider>(context);
     List<Widget> fields = [
       TextFormField(
+          initialValue: record.title,
           decoration: const InputDecoration(labelText: "Name"),
           validator: (value) =>
               value?.isEmpty ?? true ? 'Please enter a name' : null,
@@ -78,6 +79,7 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
                   ),
                 ),
               ),
+              initialPickedItems: getInitialItems(data!),
               onSearchChanged: (text) {},
               controller: controller,
               itemsVisibility: ShowedItemsVisibility.onType,
@@ -166,6 +168,16 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
 
     fields.addAll(this.fields);
     return fields;
+  }
+
+  List<Resource>? getInitialItems(List<Resource> data) {
+    if (record.resourceIds.isNotEmpty) {
+      return data
+          .where((i) => record.resourceIds.contains(i.id))
+          .toList();
+    } else {
+      return null;
+    }
   }
 
   @override
