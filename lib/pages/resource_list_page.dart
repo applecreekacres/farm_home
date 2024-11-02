@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:farm_home/constants/constants.dart';
-import 'package:farm_home/pages/home.dart';
 import 'package:farm_home/providers/resource_provider.dart';
 import 'package:farm_home/widgets/widgets.dart';
 
