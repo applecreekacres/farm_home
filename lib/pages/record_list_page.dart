@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -63,6 +65,14 @@ class _RecordListPageState extends State<RecordListPage> {
           child: ItemList(
             items: provider.records,
             title: (data) => Text(data.title),
+            subtitle: (data) {
+              if (data.notes == "") {
+                return null;
+              } else {
+                return Text(
+                    "${data.notes.substring(0, min(20, data.notes.length))}...");
+              }
+            },
             trailing: (data) => Text(data.itemName()),
             onTap: (data) {
               Navigator.push(
@@ -87,7 +97,7 @@ class _RecordListPageState extends State<RecordListPage> {
           )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-         showModalBottomSheet(
+          showModalBottomSheet(
             context: context,
             builder: (context) {
               return ItemInfoList(
