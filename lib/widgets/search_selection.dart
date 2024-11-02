@@ -7,6 +7,7 @@ class SearchSelection<T> extends StatefulWidget {
   final String? hintText;
   final String title;
   final List<T> items;
+  final List<T>? initialPickedItems;
   final String Function(T) fieldToCheck;
   final Widget Function(T, int, bool) itemView;
   final Widget Function(T) pickedItemView;
@@ -26,6 +27,7 @@ class SearchSelection<T> extends StatefulWidget {
     required this.fieldToCheck,
     required this.itemView,
     required this.pickedItemView,
+    this.initialPickedItems,
     this.onItemRemoved,
     this.onTapClearAll,
     this.onPickedChange,
@@ -51,6 +53,7 @@ class _SearchSelectionState<T> extends State<SearchSelection> {
   Widget build(BuildContext context) {
     return MultipleSearchSelection<T>(
       items: widget.items as List<T>,
+      initialPickedItems: widget.initialPickedItems as List<T>,
       controller: controller,
       maxSelectedItems: widget.maxSelectedItems,
       sortShowedItems: widget.sortShowedItems,
