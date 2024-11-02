@@ -53,7 +53,8 @@ abstract class Record extends Item {
       "quantities": quantities,
       "recordType": itemName(),
       "resourceIds": resourceIds,
-      "timestamp": timestamp?.millisecondsSinceEpoch
+      "timestamp": timestamp?.millisecondsSinceEpoch,
+      "tags": tags,
     };
     map.addAll(super.toMap());
     return map;
