@@ -94,7 +94,7 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
                 controller.getPickedItems();
               },
               clearSearchFieldOnSelect: true,
-              items: data!,
+              items: data,
               fieldToCheck: (c) {
                 return c.name;
               },
