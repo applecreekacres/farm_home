@@ -58,6 +58,9 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
           initialDate: DateTime.now()),
       NotesField(
         modelField: record.notes,
+        onChanged: (data) {
+          record.notes = data;
+        },
       ),
       FutureWidget(
           future: resProvider.resources,
