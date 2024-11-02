@@ -47,12 +47,12 @@ Future<List<T>> getItemsByField<T extends Item>(String field, String value,
 
 Future<List<T>> getItems<T extends Item>(
     String name, T Function(Map<String, dynamic>) transform) async {
-  return getItemsByField<T>("itemName", name, transform);
+  return await getItemsByField<T>("itemName", name, transform);
 }
 
 Future<List<T>> getItemsByType<T extends Item>(
     String itemType, T Function(Map<String, dynamic>) transform) async {
-  return getItemsByField<T>("itemType", itemType, transform);
+  return await getItemsByField<T>("itemType", itemType, transform);
 }
 
 void deleteItem<T extends Item>(String id) async {
