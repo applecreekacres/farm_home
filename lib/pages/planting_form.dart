@@ -21,8 +21,6 @@ class _PlantingFormState extends State<PlantingForm> {
   late Planting _planting;
   late Season? _season;
 
-  CropFamily? _selectableCropFamily;
-
   @override
   void initState() {
     if (widget.resource != null) {
