@@ -87,6 +87,9 @@ class _PlantingFormState extends State<PlantingForm> {
                     items: data,
                     onChanged: (data) {
                       _planting.cropId = data!.id;
+                      _planting.daysToPottingUp = data.daysToPottingUp;
+                      _planting.daysToTransplant = data.daysToTransplant;
+                      _planting.daysToHarvest = data.daysToMaturity;
                       setState(() {
                         _crop = data;
                       });
