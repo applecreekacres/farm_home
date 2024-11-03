@@ -25,6 +25,7 @@ class _ReferenceDropDownButtonState<T extends Reference>
 
   @override
   void initState() {
+    widget.items.sort((a, b) => a.name.compareTo(b.name));
     if (widget.initialValue != null) {
       _selectedIndex =
           widget.items.indexWhere((val) => val.id == widget.initialValue!.id);
@@ -32,7 +33,6 @@ class _ReferenceDropDownButtonState<T extends Reference>
       _selectedIndex = 0;
     }
 
-    widget.items.sort((a, b) => a.name.compareTo(b.name));
 
     super.initState();
   }

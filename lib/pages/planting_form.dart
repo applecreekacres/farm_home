@@ -19,7 +19,6 @@ class _PlantingFormState extends State<PlantingForm> {
   final _formKey = GlobalKey<FormState>();
 
   late Planting _planting;
-  late Season? _season;
 
   @override
   void initState() {
@@ -34,36 +33,70 @@ class _PlantingFormState extends State<PlantingForm> {
   @override
   Widget build(BuildContext context) {
     final refProvider = Provider.of<ReferenceProvider>(context);
+    Season? season;
+    Crop? _crop;
 
     return ResourceForm<Planting>(
       resource: _planting,
-      isNew: true,
+      isNew: widget.resource != null ? false : true,
       key: _formKey,
       additionalFields: [
         Column(
           children: [
             FutureWidget(
-                future: refProvider.seasons,
-                onData: (data) {
-                  if (data != null) {
-                    if (_planting.seasonId == "") {
-                      _season = data.first;
-                      _planting.seasonId = data.first.id;
-                    }
-                    return ReferenceDropDownButton<Season>(
-                      initialValue: _season,
-                      label: ReferenceConstants.season,
-                      items: data,
-                      onChanged: (data) {
-                        _planting.seasonId = data!.id;
-                        setState(() {
-                          _season = data;
-                        });
-                      },
-                    );
+              future: refProvider.seasons,
+              onData: (data) {
+                if (data != null) {
+                  if (_planting.seasonId == "") {
+                    season = data.first;
+                    _planting.seasonId = data.first.id;
+                  } else {
+                    season ??= data
+                        .where((item) => item.id == _planting.seasonId)
+                        .first;
                   }
-                  return Text("No Seasons to load");
-                }),
+                  return ReferenceDropDownButton<Season>(
+                    initialValue: season,
+                    label: ReferenceConstants.season,
+                    items: data,
+                    onChanged: (data) {
+                      _planting.seasonId = data!.id;
+                      setState(() {
+                        season = data;
+                      });
+                    },
+                  );
+                }
+                return Text("No Seasons to load");
+              },
+            ),
+            FutureWidget(
+              future: refProvider.crops,
+              onData: (data) {
+                if (data != null) {
+                  if (_planting.cropId == "") {
+                    _crop = data.first;
+                    _planting.cropId = data.first.id;
+                  } else {
+                    _crop ??=
+                        data.where((item) => item.id == _planting.cropId).first;
+                  }
+                  return ReferenceDropDownButton(
+                    initialValue: _crop,
+                    label: ReferenceConstants.crop,
+                    items: data,
+                    onChanged: (data) {
+                      _planting.cropId = data!.id;
+                      setState(() {
+                        _crop = data;
+                      });
+                    },
+                  );
+                } else {
+                  return Text("No crop to load");
+                }
+              },
+            ),
             IntFormField(
               label: "Length",
               controllerValue: _planting.length,
@@ -82,24 +115,28 @@ class _PlantingFormState extends State<PlantingForm> {
                 onChanged: (value) => _planting.inRowSpacing = value),
             IntFormField(
               label: "Days to Potting Up",
+              controllerValue: _planting.daysToPottingUp,
               onChanged: (value) {
                 _planting.daysToPottingUp = value;
               },
             ),
             IntFormField(
               label: "Days to Transplant",
+              controllerValue: _planting.daysToTransplant,
               onChanged: (value) {
                 _planting.daysToTransplant = value;
               },
             ),
             IntFormField(
               label: "Days to Harvest",
+              controllerValue: _planting.daysToHarvest,
               onChanged: (value) {
                 _planting.daysToHarvest = value;
               },
             ),
             IntFormField(
               label: "Harvest Window",
+              controllerValue: _planting.harvestWindow,
               onChanged: (value) {
                 _planting.harvestWindow = value;
               },
