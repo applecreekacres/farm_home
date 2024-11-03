@@ -33,7 +33,6 @@ class _ReferenceDropDownButtonState<T extends Reference>
       _selectedIndex = 0;
     }
 
-
     super.initState();
   }
 
@@ -41,7 +40,10 @@ class _ReferenceDropDownButtonState<T extends Reference>
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(widget.label),
+        Padding(
+          padding: EdgeInsets.all(6),
+          child: Text(widget.label),
+        ),
         DropdownButton<T>(
           hint: const Text("Select Item"),
           items: widget.items.map((value) {
