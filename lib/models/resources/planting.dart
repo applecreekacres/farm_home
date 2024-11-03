@@ -1,9 +1,12 @@
 import 'package:farm_home/constants/resource_constants.dart';
 import 'package:farm_home/models/models.dart';
 
+enum PlantingMethod { directSow, greenhouseSow, transplantFromPurchased }
+
 class Planting extends Resource {
   String cropId = "";
   String seasonId = "";
+  PlantingMethod plantingMethod = PlantingMethod.directSow;
   int length = 0;
   int rows = 0;
   int inRowSpacing = 0;
@@ -17,6 +20,7 @@ class Planting extends Resource {
       super.notes,
       this.seasonId = "",
       this.cropId = "",
+      this.plantingMethod = PlantingMethod.directSow,
       this.length = 0,
       this.rows = 0,
       this.inRowSpacing = 0,
@@ -46,6 +50,8 @@ class Planting extends Resource {
     length = data["length"];
     rows = data["rows"];
     inRowSpacing = data["inRowSpacing"];
+    plantingMethod = PlantingMethod.values
+        .firstWhere((e) => e.toString() == data['plantingMethod']);
     daysToPottingUp = data["daysToPottingUp"];
     daysToTransplant = data["daysToTransplant"];
     daysToHarvest = data["daysToHarvest"];
@@ -61,6 +67,7 @@ class Planting extends Resource {
       "length": length,
       "rows": rows,
       "inRowSpacing": inRowSpacing,
+      "plantingMethod": plantingMethod,
       "daysToPottingUp": daysToPottingUp,
       "daysToTransplant": daysToTransplant,
       "daysToHarvest": daysToHarvest,
