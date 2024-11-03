@@ -100,22 +100,41 @@ class _PlantingFormState extends State<PlantingForm> {
                 }
               },
             ),
-            IntFormField(
-              label: "Length",
-              controllerValue: _planting.length,
-              onChanged: (value) {
-                _planting.length = value;
-              },
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(6),
+                    child: IntFormField(
+                      label: "Length",
+                      controllerValue: _planting.length,
+                      onChanged: (value) {
+                        _planting.length = value;
+                      },
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(6),
+                    child: IntFormField(
+                      label: "Rows",
+                      onChanged: (value) => _planting.rows = value,
+                      controllerValue: _planting.rows,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(6),
+                    child: IntFormField(
+                        label: "In-Row Spacing",
+                        controllerValue: _planting.inRowSpacing,
+                        onChanged: (value) => _planting.inRowSpacing = value),
+                  ),
+                ),
+              ],
             ),
-            IntFormField(
-              label: "Rows",
-              onChanged: (value) => _planting.rows = value,
-              controllerValue: _planting.rows,
-            ),
-            IntFormField(
-                label: "In-Row Spacing",
-                controllerValue: _planting.inRowSpacing,
-                onChanged: (value) => _planting.inRowSpacing = value),
             IntFormField(
               label: "Days to Potting Up",
               controllerValue: _planting.daysToPottingUp,
