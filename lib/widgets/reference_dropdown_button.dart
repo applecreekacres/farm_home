@@ -1,4 +1,5 @@
 import 'package:farm_home/models/models.dart';
+import 'package:farm_home/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class ReferenceDropDownButton<T extends Reference> extends StatefulWidget {
@@ -21,49 +22,14 @@ class ReferenceDropDownButton<T extends Reference> extends StatefulWidget {
 
 class _ReferenceDropDownButtonState<T extends Reference>
     extends State<ReferenceDropDownButton<T>> {
-  late int _selectedIndex;
-
-  @override
-  void initState() {
-    widget.items.sort((a, b) => a.name.compareTo(b.name));
-    if (widget.initialValue != null) {
-      _selectedIndex =
-          widget.items.indexWhere((val) => val.id == widget.initialValue!.id);
-    } else {
-      _selectedIndex = 0;
-    }
-
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Padding(
-          padding: EdgeInsets.all(6),
-          child: Text(widget.label),
-        ),
-        DropdownButton<T>(
-          hint: const Text("Select Item"),
-          items: widget.items.map((value) {
-            return DropdownMenuItem(
-              value: value,
-              child: Text(value.name),
-            );
-          }).toList(),
-          onChanged: (value) {
-            if (value != null) {
-              setState(() {
-                _selectedIndex =
-                    widget.items.indexWhere((item) => item.name == value.name);
-              });
-            }
-            widget.onChanged?.call(value);
-          },
-          value: widget.items[_selectedIndex],
-        )
-      ],
+    widget.items.sort((a, b) => a.name.compareTo(b.name));
+    return LabeledDropdownButton(
+      initialValue: widget.initialValue,
+      label: widget.label,
+      items: widget.items,
+      itemView: (value) => Text((value as Reference).name),
     );
   }
 }
