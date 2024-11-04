@@ -1,3 +1,5 @@
+import 'package:farm_home/constants/constants.dart';
+
 import 'resources.dart';
 
 enum LandType { bed, field, landmark, paddock, property, other }
@@ -8,7 +10,7 @@ class Land extends Resource {
   Land({super.name, super.notes, this.landType}) : super();
 
   Land.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    landType = data["landmark"];
+    landType = data["landType"];
   }
 
   @override
@@ -20,6 +22,6 @@ class Land extends Resource {
 
   @override
   String itemName() {
-    return "Land";
+    return ResourceConstants.land;
   }
 }
