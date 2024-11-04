@@ -1,25 +1,27 @@
+import 'package:farm_home/constants/constants.dart';
 import 'package:farm_home/models/models.dart';
 
 class Material extends Resource {
-  static const collectionName = "Material";
 
-  String _materialTypeId = "";
+  String materialTypeId = "";
 
   Future<MaterialType?> get material async {
     return await getItemById<MaterialType>(
-        _materialTypeId, (v) => MaterialType.fromMap(v));
+        materialTypeId, (v) => MaterialType.fromMap(v));
   }
 
-  Material({super.name, super.notes, MaterialType? type}) {
-    _materialTypeId = type?.id ?? "";
-  }
+  Material({
+    super.name,
+    super.notes,
+    this.materialTypeId = "",
+  }) : super();
 
   Material.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    _materialTypeId = data["materialTypeId"];
+    materialTypeId = data["materialTypeId"];
   }
 
   @override
   String itemName() {
-    return collectionName;
+    return ResourceConstants.material;
   }
 }
