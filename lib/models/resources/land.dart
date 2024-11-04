@@ -2,7 +2,7 @@ import 'package:farm_home/constants/constants.dart';
 
 import 'resources.dart';
 
-enum LandType { bed, field, landmark, paddock, property, other }
+enum LandType { bed, field, orchard, landmark, paddock, property, other }
 
 class Land extends Resource {
   LandType? landType = LandType.other;
