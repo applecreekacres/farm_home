@@ -32,9 +32,8 @@ class _PlantingFormState extends State<PlantingForm> {
 
   List<Widget> buildFields(BuildContext context) {
     final refProvider = Provider.of<ReferenceProvider>(context);
-    var theme = Theme.of(context);
     Season? season;
-    Crop? _crop;
+    Crop? crop;
 
     var fields = [
       FutureWidget(
@@ -68,13 +67,13 @@ class _PlantingFormState extends State<PlantingForm> {
         onData: (data) {
           if (data != null) {
             if (_planting.cropId == "") {
-              _crop = data.first;
+              crop = data.first;
               _planting.cropId = data.first.id;
             } else {
-              _crop ??= data.where((item) => item.id == _planting.cropId).first;
+              crop ??= data.where((item) => item.id == _planting.cropId).first;
             }
             return ReferenceDropDownButton(
-              initialValue: _crop,
+              initialValue: crop,
               label: ReferenceConstants.crop,
               items: data,
               onChanged: (data) {
@@ -83,7 +82,7 @@ class _PlantingFormState extends State<PlantingForm> {
                 _planting.daysToTransplant = data.daysToTransplant;
                 _planting.daysToHarvest = data.daysToMaturity;
                 setState(() {
-                  _crop = data;
+                  crop = data;
                 });
               },
             );
