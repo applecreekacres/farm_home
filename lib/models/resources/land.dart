@@ -10,7 +10,8 @@ class Land extends Resource {
   Land({super.name, super.notes, this.landType}) : super();
 
   Land.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    landType = data["landType"];
+    landType =
+        LandType.values.firstWhere((e) => e.toString() == data['landType']);
   }
 
   @override
