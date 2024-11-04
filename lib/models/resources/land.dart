@@ -1,6 +1,5 @@
 import 'package:farm_home/constants/constants.dart';
-
-import 'resources.dart';
+import 'package:farm_home/models/models.dart';
 
 enum LandType { bed, field, orchard, landmark, paddock, property, other }
 
@@ -17,7 +16,7 @@ class Land extends Resource {
   @override
   Map<String, dynamic> toMap() {
     var map = super.toMap();
-    map.addAll({"landType": landType});
+    map.addAll({"landType": landType.toString()});
     return map;
   }
 
