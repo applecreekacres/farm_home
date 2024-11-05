@@ -1,9 +1,6 @@
-import 'package:farm_home/providers/providers.dart';
-import 'package:farm_home/widgets/item_list.dart';
 import 'package:flutter/material.dart';
 
 import 'package:farm_home/models/models.dart';
-import 'package:provider/provider.dart';
 
 class ItemForm<T extends Item> extends StatefulWidget {
   final T? item;
@@ -93,8 +90,6 @@ class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
 
   @override
   Widget build(BuildContext context) {
-    var recProvider = Provider.of<RecordProvider>(context);
-
     return Form(
       key: _formKey,
       child: DefaultTabController(
