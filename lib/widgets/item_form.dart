@@ -99,8 +99,8 @@ class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
             actions: getActions(context),
             bottom: const TabBar(
               tabs: [
+                Tab(icon: Icon(Icons.edit_document)),
                 Tab(icon: Icon(Icons.notes)),
-                Tab(icon: Icon(Icons.add_chart)),
               ],
             ),
           ),
