@@ -109,7 +109,7 @@ class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                    padding: const EdgeInsets.all(20),
                     child: Column(
                       children: edit,
                     ),
