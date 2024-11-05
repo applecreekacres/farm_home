@@ -117,7 +117,7 @@ class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                padding: EdgeInsets.all(20),
                 child: Column(
                   children: [],
                 ),
