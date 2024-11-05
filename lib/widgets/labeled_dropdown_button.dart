@@ -4,7 +4,7 @@ class LabeledDropdownButton<T> extends StatefulWidget {
   final String label;
   final T? initialValue;
   final List<T> items;
-  final ValueChanged<T?>? onChanged;
+  final ValueChanged<dynamic>? onChanged;
   final Widget Function(dynamic) itemView;
 
   const LabeledDropdownButton({

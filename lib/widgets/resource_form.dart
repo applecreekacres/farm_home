@@ -1,7 +1,10 @@
+import 'package:farm_home/constants/constants.dart';
+import 'package:farm_home/providers/providers.dart';
 import 'package:flutter/material.dart';
 
 import 'package:farm_home/models/models.dart';
 import 'package:farm_home/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 class ResourceForm<T extends Resource> extends StatefulWidget {
   final T resource;
@@ -48,13 +51,47 @@ class _ResourceFormState<T extends Resource> extends State<ResourceForm<T>> {
     return fields;
   }
 
+  Widget buildRecords(BuildContext context) {
+    var recProvider = Provider.of<RecordProvider>(context);
+    return ItemList(
+      items: recProvider.records,
+      filter: (items) {
+        var filtered = items
+            .where((item) => item.resourceIds.contains(resource.id))
+            .toList();
+        return filtered;
+      },
+      leading: (item) {
+        if (item.isDone) {
+          return Icon(Icons.check_box);
+        }
+        return Icon(Icons.check_box_outline_blank);
+      },
+      title: (item) => Text(item.title),
+      subtitle: (item) => Text(item.timestamp.toString()),
+      trailing: (item) => Text(item.itemName()),
+      onTap: (item) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => RecordConstants.recordInfo
+                .where((ref) => ref.name == item.itemName())
+                .first
+                .edit(item)!,
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ItemForm(
       item: resource,
       isNew: widget.isNew,
       title: resourceName,
-      editFields: _buildFields(),
+      firstTab: _buildFields(),
+      secondTab: buildRecords(context),
     );
   }
 }

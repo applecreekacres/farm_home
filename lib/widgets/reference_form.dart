@@ -47,7 +47,8 @@ class _ReferenceFormState<T extends Reference> extends State<ReferenceForm<T>> {
       isNew: isNew,
       item: reference,
       title: referenceName,
-      editFields: _buildFields(),
+      firstTab: _buildFields(),
+      secondTab: Container(),
     );
   }
 }

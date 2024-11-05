@@ -1,12 +1,16 @@
+import 'package:farm_home/providers/providers.dart';
+import 'package:farm_home/widgets/item_list.dart';
 import 'package:flutter/material.dart';
 
 import 'package:farm_home/models/models.dart';
+import 'package:provider/provider.dart';
 
 class ItemForm<T extends Item> extends StatefulWidget {
   final T? item;
   final bool isNew;
   // final List<Widget> view;
-  final List<Widget> editFields;
+  final List<Widget> firstTab;
+  final Widget secondTab;
   final String title;
 
   const ItemForm(
@@ -14,7 +18,8 @@ class ItemForm<T extends Item> extends StatefulWidget {
       this.item,
       required this.isNew,
       required this.title,
-      required this.editFields});
+      required this.firstTab,
+      required this.secondTab});
 
   @override
   State<ItemForm> createState() => _ItemFormState<T>();
@@ -23,7 +28,7 @@ class ItemForm<T extends Item> extends StatefulWidget {
 class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
   final _formKey = GlobalKey<FormState>();
   T? get item => widget.item;
-  List<Widget> get edit => widget.editFields;
+  List<Widget> get edit => widget.firstTab;
   // List<Widget> get view => widget.view;
   String? get itemName => item?.itemName();
 
@@ -88,6 +93,8 @@ class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
 
   @override
   Widget build(BuildContext context) {
+    var recProvider = Provider.of<RecordProvider>(context);
+
     return Form(
       key: _formKey,
       child: DefaultTabController(
@@ -116,12 +123,7 @@ class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  children: [],
-                ),
-              )
+              Container(child: widget.secondTab),
             ],
           ),
         ),

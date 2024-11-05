@@ -67,7 +67,7 @@ class Planting extends Resource {
       "length": length,
       "rows": rows,
       "inRowSpacing": inRowSpacing,
-      "plantingMethod": plantingMethod,
+      "plantingMethod": plantingMethod.toString(),
       "daysToPottingUp": daysToPottingUp,
       "daysToTransplant": daysToTransplant,
       "daysToHarvest": daysToHarvest,

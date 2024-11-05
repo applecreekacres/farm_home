@@ -6,7 +6,7 @@ class ReferenceDropDownButton<T extends Reference> extends StatefulWidget {
   final String label;
   final T? initialValue;
   final List<T> items;
-  final ValueChanged<T?>? onChanged;
+  final ValueChanged<dynamic>? onChanged;
 
   const ReferenceDropDownButton(
       {super.key,
@@ -30,6 +30,7 @@ class _ReferenceDropDownButtonState<T extends Reference>
       label: widget.label,
       items: widget.items,
       itemView: (value) => Text((value as Reference).name),
+      onChanged: widget.onChanged,
     );
   }
 }
