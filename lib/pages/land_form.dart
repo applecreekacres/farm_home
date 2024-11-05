@@ -36,6 +36,9 @@ class _LandFormState extends State<LandForm> {
         itemView: (item) {
           return Text(item.toString().split('.')[1]);
         },
+        onChanged: (item) {
+          _land.landType = item!;
+        },
       ),
     ];
   }
