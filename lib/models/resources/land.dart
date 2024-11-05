@@ -1,6 +1,7 @@
-import 'resources.dart';
+import 'package:farm_home/constants/constants.dart';
+import 'package:farm_home/models/models.dart';
 
-enum LandType { bed, field, landmark, paddock, property, other }
+enum LandType { bed, field, orchard, landmark, paddock, property, other }
 
 class Land extends Resource {
   LandType? landType = LandType.other;
@@ -8,18 +9,19 @@ class Land extends Resource {
   Land({super.name, super.notes, this.landType}) : super();
 
   Land.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    landType = data["landmark"];
+    landType =
+        LandType.values.firstWhere((e) => e.toString() == data['landType']);
   }
 
   @override
   Map<String, dynamic> toMap() {
     var map = super.toMap();
-    map.addAll({"landType": landType});
+    map.addAll({"landType": landType.toString()});
     return map;
   }
 
   @override
   String itemName() {
-    return "Land";
+    return ResourceConstants.land;
   }
 }
