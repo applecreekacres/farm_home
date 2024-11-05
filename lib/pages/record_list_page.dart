@@ -61,9 +61,16 @@ class _RecordListPageState extends State<RecordListPage> {
       ),
       drawer: const FarmHomeDrawer(),
       body: Padding(
-          padding: EdgeInsets.all(15),
+          padding: EdgeInsets.all(8),
           child: ItemList(
             items: provider.records,
+            leading: (item) {
+              if (item.isDone) {
+                return Icon(Icons.check_box);
+              } else {
+                return Icon(Icons.check_box_outline_blank);
+              }
+            },
             title: (data) => Text(data.title),
             subtitle: (data) {
               if (data.notes == "") {
@@ -73,7 +80,12 @@ class _RecordListPageState extends State<RecordListPage> {
                     "${data.notes.substring(0, min(20, data.notes.length))}...");
               }
             },
-            trailing: (data) => Text(data.itemName()),
+            trailing: (data) => Column(
+              children: [
+                Text(data.itemName()),
+                Text(data.timestamp.toString().substring(0, 10)),
+              ],
+            ),
             onTap: (data) {
               Navigator.push(
                 context,
