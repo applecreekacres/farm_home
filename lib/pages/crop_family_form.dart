@@ -27,11 +27,34 @@ class _CropFamilyFormState extends State<CropFamilyForm> {
     super.initState();
   }
 
+  List<Widget> buildFields() {
+    return [
+      SearchSelection<GrowingCycle>(
+        title: "Growing Cycles",
+        items: GrowingCycle.values,
+        clearSearchFieldOnSelect: true,
+        initialPickedItems: _record.growingCycles,
+        fieldToCheck: (item) => item.toString(),
+        itemView: (item, index, picked) => Text(item .toString().split(".")[1]),
+        pickedItemView: (item) => Text(item.toString().split(".")[1]),
+        onPickedChange: (items) {
+          _record.growingCycles = List<GrowingCycle>.from(items);
+        },
+        onItemRemoved: (item) {
+          _record.growingCycles?.remove(item);
+        },
+        onTapClearAll: () => _record.growingCycles?.clear(),
+        showSelectAllButton: true,
+      ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return ReferenceForm<CropFamily>(
       reference: _record,
       isNew: _isNew,
+      additionalFields: buildFields(),
     );
   }
 }
