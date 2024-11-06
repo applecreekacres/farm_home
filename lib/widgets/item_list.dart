@@ -1,7 +1,7 @@
 import 'package:farm_home/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
-class ItemList<T> extends StatefulWidget {
+class ItemList<T> extends StatelessWidget {
   final Future<List<T>> items;
   final Widget? Function(T)? title;
   final Widget? Function(T)? subtitle;
@@ -21,14 +21,9 @@ class ItemList<T> extends StatefulWidget {
       this.filter});
 
   @override
-  State<ItemList<T>> createState() => _ItemListState<T>();
-}
-
-class _ItemListState<T> extends State<ItemList<T>> {
-  @override
   Widget build(BuildContext context) {
     return FutureWidget(
-      future: widget.items,
+      future: items,
       onLoading: () => Container(
         alignment: Alignment.center,
         child: CircularProgressIndicator(),
@@ -36,8 +31,8 @@ class _ItemListState<T> extends State<ItemList<T>> {
       onData: (data) {
         List<T> modifiedList;
         if (data != null) {
-          if (widget.filter != null) {
-            modifiedList = widget.filter!.call(data);
+          if (filter != null) {
+            modifiedList = filter!.call(data);
           } else {
             modifiedList = data;
           }
@@ -46,11 +41,11 @@ class _ItemListState<T> extends State<ItemList<T>> {
             itemBuilder: (context, index) {
               return Card(
                 child: ListTile(
-                  leading: widget.leading?.call(modifiedList[index]),
-                  title: widget.title?.call(modifiedList[index]),
-                  subtitle: widget.subtitle?.call(modifiedList[index]),
-                  trailing: widget.trailing?.call(modifiedList[index]),
-                  onTap: () => widget.onTap?.call(modifiedList[index]),
+                  leading: leading?.call(modifiedList[index]),
+                  title: title?.call(modifiedList[index]),
+                  subtitle: subtitle?.call(modifiedList[index]),
+                  trailing: trailing?.call(modifiedList[index]),
+                  onTap: () => onTap?.call(modifiedList[index]),
                 ),
               );
             },

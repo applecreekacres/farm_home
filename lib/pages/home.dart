@@ -30,78 +30,26 @@ class _HomePageState extends State<HomePage> {
             const Text("Open Records"),
             SizedBox(
               height: MediaQuery.of(context).size.height / 3,
-              child: ItemList(
+              child: RecordList(
                 items: recProvider.records,
-                title: (item) => Text(item.title),
                 filter: (items) {
                   return items
                       .where((item) => (item.isDone == false &&
                           item.timestamp!.isAfter(DateTime.now())))
                       .toList();
                 },
-                subtitle: (data) {
-                  if (data.notes == "") {
-                    return null;
-                  } else {
-                    return Text(
-                        "${data.notes.substring(0, min(20, data.notes.length))}...");
-                  }
-                },
-                trailing: (data) => Column(
-                  children: [
-                    Text(data.itemName()),
-                    Text(data.timestamp.toString().substring(0, 10)),
-                  ],
-                ),
-                onTap: (data) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => RecordConstants.recordInfo
-                          .where((ref) => ref.name == data.itemName())
-                          .first
-                          .edit(data)!,
-                    ),
-                  );
-                },
               ),
             ),
             const Text("Overdue Records"),
             SizedBox(
               height: MediaQuery.of(context).size.height / 3,
-              child: ItemList(
+              child: RecordList(
                 items: recProvider.records,
-                title: (item) => Text(item.title),
                 filter: (items) {
                   return items
                       .where((item) => (item.isDone == false &&
                           item.timestamp!.isBefore(DateTime.now())))
                       .toList();
-                },
-                subtitle: (data) {
-                  if (data.notes == "") {
-                    return null;
-                  } else {
-                    return Text(
-                        "${data.notes.substring(0, min(20, data.notes.length))}...");
-                  }
-                },
-                trailing: (data) => Column(
-                  children: [
-                    Text(data.itemName()),
-                    Text(data.timestamp.toString().substring(0, 10)),
-                  ],
-                ),
-                onTap: (data) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => RecordConstants.recordInfo
-                          .where((ref) => ref.name == data.itemName())
-                          .first
-                          .edit(data)!,
-                    ),
-                  );
                 },
               ),
             ),

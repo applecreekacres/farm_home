@@ -62,41 +62,8 @@ class _RecordListPageState extends State<RecordListPage> {
       drawer: const FarmHomeDrawer(),
       body: Padding(
           padding: EdgeInsets.all(8),
-          child: ItemList(
+          child: RecordList(
             items: provider.records,
-            leading: (item) {
-              if (item.isDone) {
-                return Icon(Icons.check_box);
-              } else {
-                return Icon(Icons.check_box_outline_blank);
-              }
-            },
-            title: (data) => Text(data.title),
-            subtitle: (data) {
-              if (data.notes == "") {
-                return null;
-              } else {
-                return Text(
-                    "${data.notes.substring(0, min(20, data.notes.length))}...");
-              }
-            },
-            trailing: (data) => Column(
-              children: [
-                Text(data.itemName()),
-                Text(data.timestamp.toString().substring(0, 10)),
-              ],
-            ),
-            onTap: (data) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => RecordConstants.recordInfo
-                      .where((ref) => ref.name == data.itemName())
-                      .first
-                      .edit(data)!,
-                ),
-              );
-            },
             filter: (data) {
               if (_filterName == "All") {
                 return data;
