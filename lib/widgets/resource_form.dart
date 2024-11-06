@@ -53,33 +53,13 @@ class _ResourceFormState<T extends Resource> extends State<ResourceForm<T>> {
 
   Widget buildRecords(BuildContext context) {
     var recProvider = Provider.of<RecordProvider>(context);
-    return ItemList(
+    return RecordList(
       items: recProvider.records,
       filter: (items) {
         var filtered = items
             .where((item) => item.resourceIds.contains(resource.id))
             .toList();
         return filtered;
-      },
-      leading: (item) {
-        if (item.isDone) {
-          return Icon(Icons.check_box);
-        }
-        return Icon(Icons.check_box_outline_blank);
-      },
-      title: (item) => Text(item.title),
-      subtitle: (item) => Text(item.timestamp.toString()),
-      trailing: (item) => Text(item.itemName()),
-      onTap: (item) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => RecordConstants.recordInfo
-                .where((ref) => ref.name == item.itemName())
-                .first
-                .edit(item)!,
-          ),
-        );
       },
     );
   }

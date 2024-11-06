@@ -21,3 +21,5 @@ export 'search_selection.dart';
 export 'labeled_dropdown_button.dart';
 export 'expanded_row_box.dart';
 export 'record_list.dart';
+export 'resource_list.dart';
+export 'reference_list.dart';

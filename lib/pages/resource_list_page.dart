@@ -60,21 +60,8 @@ class _ResourceListPageState extends State<ResourceListPage> {
       drawer: const FarmHomeDrawer(),
       body: Padding(
           padding: EdgeInsets.all(15),
-          child: ItemList(
+          child: ResourceList(
             items: provider.resources,
-            title: (data) => Text(data.name),
-            trailing: (data) => Text(data.itemName()),
-            onTap: (data) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ResourceConstants.resourceInfo
-                      .where((ref) => ref.name == data.itemName())
-                      .first
-                      .edit(data)!,
-                ),
-              );
-            },
             filter: (data) {
               if (_filterName == "All") {
                 return data;
