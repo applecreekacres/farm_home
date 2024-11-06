@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:farm_home/providers/providers.dart';
 import 'package:flutter/material.dart';
 
@@ -37,6 +39,31 @@ class _HomePageState extends State<HomePage> {
                           item.timestamp!.isAfter(DateTime.now())))
                       .toList();
                 },
+                subtitle: (data) {
+                  if (data.notes == "") {
+                    return null;
+                  } else {
+                    return Text(
+                        "${data.notes.substring(0, min(20, data.notes.length))}...");
+                  }
+                },
+                trailing: (data) => Column(
+                  children: [
+                    Text(data.itemName()),
+                    Text(data.timestamp.toString().substring(0, 10)),
+                  ],
+                ),
+                onTap: (data) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RecordConstants.recordInfo
+                          .where((ref) => ref.name == data.itemName())
+                          .first
+                          .edit(data)!,
+                    ),
+                  );
+                },
               ),
             ),
             const Text("Overdue Records"),
@@ -50,6 +77,31 @@ class _HomePageState extends State<HomePage> {
                       .where((item) => (item.isDone == false &&
                           item.timestamp!.isBefore(DateTime.now())))
                       .toList();
+                },
+                subtitle: (data) {
+                  if (data.notes == "") {
+                    return null;
+                  } else {
+                    return Text(
+                        "${data.notes.substring(0, min(20, data.notes.length))}...");
+                  }
+                },
+                trailing: (data) => Column(
+                  children: [
+                    Text(data.itemName()),
+                    Text(data.timestamp.toString().substring(0, 10)),
+                  ],
+                ),
+                onTap: (data) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RecordConstants.recordInfo
+                          .where((ref) => ref.name == data.itemName())
+                          .first
+                          .edit(data)!,
+                    ),
+                  );
                 },
               ),
             ),
