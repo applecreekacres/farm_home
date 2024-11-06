@@ -77,6 +77,11 @@ class _ReferenceListPageState extends State<ReferenceListPage> {
               );
             },
             filter: (data) {
+              data.sort((
+                a,
+                b,
+              ) =>
+                  a.name.compareTo(b.name));
               if (_filterName == "All") {
                 return data;
               } else {

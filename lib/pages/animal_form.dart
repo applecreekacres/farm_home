@@ -62,7 +62,7 @@ class _AnimalFormState extends State<AnimalForm> {
           label: "Sex",
           items: Sex.values,
           itemView: (item) {
-            return Text(item.toString().split('.')[1]);
+            return item.toString().split('.')[1];
           },
           onChanged: (item) {
             _animal.sex = item!;
