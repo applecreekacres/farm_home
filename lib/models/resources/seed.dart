@@ -1,20 +1,26 @@
-import '../references/crop.dart';
-import 'resource.dart';
+import 'package:farm_home/models/models.dart';
 
 class Seed extends Resource {
-  Crop? crop;
-  String? _cropId;
+  String cropId = "";
 
-  Seed({super.name, super.notes, this.crop}) : super();
+  Seed({super.name, super.notes, this.cropId = ""}) : super();
 
   Seed.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    _cropId = data["cropId"];
+    cropId = data["cropId"];
+  }
+
+  Future<Crop?> get crop async {
+    if (cropId != "") {
+      return getItemById<Crop>(cropId, (data) => Crop.fromMap(data));
+    } else {
+      return null;
+    }
   }
 
   @override
   Map<String, dynamic> toMap() {
     var map = super.toMap();
-    map.addAll({"cropId": _cropId});
+    map.addAll({"cropId": cropId});
     return map;
   }
 
