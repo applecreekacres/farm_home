@@ -61,6 +61,7 @@ class _HomePageState extends State<HomePage> {
           ActionButton(
             onPressed: () => showModalBottomSheet<void>(
                 context: context,
+                showDragHandle: true,
                 builder: (BuildContext context) {
                   return RecordSelectWidget();
                 }),
@@ -69,6 +70,7 @@ class _HomePageState extends State<HomePage> {
           ActionButton(
             onPressed: () => showModalBottomSheet<void>(
                 context: context,
+                showDragHandle: true,
                 builder: (BuildContext context) {
                   return ResourceSelectWidget();
                 }),
@@ -77,6 +79,7 @@ class _HomePageState extends State<HomePage> {
           ActionButton(
             onPressed: () => showModalBottomSheet<void>(
                 context: context,
+                showDragHandle: true,
                 builder: (BuildContext context) {
                   return ReferenceSelectWidget();
                 }),

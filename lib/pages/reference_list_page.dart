@@ -82,6 +82,7 @@ class _ReferenceListPageState extends State<ReferenceListPage> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
+            showDragHandle: true,
             builder: (context) {
               return ItemInfoList(
                 items: ReferenceConstants.referenceInfo,

@@ -43,6 +43,7 @@ class _RecordListPageState extends State<RecordListPage> {
           IconButton(
               onPressed: () => showModalBottomSheet<void>(
                   context: context,
+                  showDragHandle: true,
                   builder: (BuildContext context) {
                     return ItemInfoList(
                       items: _filterItems,
@@ -76,6 +77,7 @@ class _RecordListPageState extends State<RecordListPage> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
+            showDragHandle: true,
             builder: (context) {
               return ItemInfoList(
                 items: RecordConstants.recordInfo,
