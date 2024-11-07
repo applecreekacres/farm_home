@@ -53,6 +53,14 @@ class FarmHomeDrawer extends StatelessWidget {
         ),
         Divider(),
         ListTile(
+          leading: const Icon(Icons.calendar_month),
+          title: const Text("Calendar"),
+          onTap:() {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => const CalendarPage()));
+          },
+        ),
+        ListTile(
           leading: const Icon(Icons.pets),
           title: const Text("Animals"),
           onTap: () {
