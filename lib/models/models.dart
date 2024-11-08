@@ -12,7 +12,6 @@ export 'references/references.dart';
 export 'records/records.dart';
 export 'item.dart';
 
-
 /// Get an item from Firestore with a specific identification.
 ///
 /// Will return [null] if no item by the given ID exists.
@@ -28,6 +27,22 @@ Future<T?> getItemById<T>(
     }
   }
   return null;
+}
+
+Future<List<T>> getItemsWithQuery<T>(
+    Query<Map<String, dynamic>> Function(
+            CollectionReference<Map<String, dynamic>>)
+        query,
+    T Function(Map<String, dynamic>) transform) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var user = prefs.getString("userId");
+  if (user != null) {
+    final docRef = query(FirebaseFirestore.instance.collection(user));
+    final docSnapshot = await docRef.get();
+    final itemList = docSnapshot.docs.map((doc) => doc.data()).toList();
+    return itemList.map((v) => transform(v)).toList();
+  }
+  return [];
 }
 
 Future<List<T>> getItemsByField<T extends Item>(String field, String value,
@@ -91,7 +106,7 @@ dynamic initRecordByItemName(Map<String, dynamic> data) {
 }
 
 dynamic initReferenceByItemName(Map<String, dynamic> data) {
-    switch (data["itemName"]) {
+  switch (data["itemName"]) {
     case ReferenceConstants.animalSpecies:
       return AnimalSpecies.fromMap(data);
     case ReferenceConstants.crop:
@@ -112,7 +127,7 @@ dynamic initReferenceByItemName(Map<String, dynamic> data) {
 }
 
 dynamic initResourceByItemName(Map<String, dynamic> data) {
-    switch (data["itemName"]) {
+  switch (data["itemName"]) {
     case ResourceConstants.animal:
       return Animal.fromMap(data);
     case ResourceConstants.equipment:
