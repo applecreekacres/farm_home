@@ -24,13 +24,43 @@ void main() {
     );
   });
 
-  test("Load ActivityRecord from Map", () {
+  test("Load Activity Record from Map", () {
     Map<String, dynamic> map = basicRecordMap;
 
     final record = ActivityRecord.fromMap(map);
 
     expectBasicRecord(record,
       itemName: RecordConstants.activity,
+    );
+  });
+
+  test("Create a new Observation Record", () {
+    var map = basicRecordMap;
+    final record = ObservationRecord(
+        title: map["title"],
+        timestamp: DateTime.fromMillisecondsSinceEpoch(map["timestamp"]),
+        notes: map["notes"],
+        isDone: map["isDone"],
+        tags: ["tag"]);
+
+    expectBasicRecordMap(
+      record.toMap(),
+      id: record.id,
+      userId: record.userId,
+      created: record.created.millisecondsSinceEpoch,
+      modified: record.modified.millisecondsSinceEpoch,
+      itemName: RecordConstants.observation,
+    );
+  });
+
+  test("Load Observation Record from Map", () {
+    Map<String, dynamic> map = basicRecordMap;
+
+    final record = ObservationRecord.fromMap(map);
+
+    expectBasicRecord(
+      record,
+      itemName: RecordConstants.observation,
     );
   });
 }
