@@ -2,7 +2,7 @@ import 'package:farm_home/constants/constants.dart';
 import 'package:farm_home/models/models.dart';
 
 class InputRecord extends Record {
-  String _materialId = "";
+  String materialId = "";
 
   InputRecord(
       {super.title,
@@ -12,19 +12,17 @@ class InputRecord extends Record {
       super.quantities,
       super.resourceIds,
       super.tags,
-      Material? material})
-      : super() {
-    _materialId = material?.id ?? "";
-  }
+      this.materialId = ""})
+      : super();
 
   InputRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    _materialId = data["materialId"];
+    materialId = data["materialId"];
   }
 
   @override
   Map<String, dynamic> toMap() {
     var map = super.toMap();
-    map.addAll({"materialId": _materialId});
+    map.addAll({"materialId": materialId});
     return map;
   }
 
