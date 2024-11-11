@@ -4,8 +4,8 @@ class LabeledDropdownButton<T> extends StatefulWidget {
   final String label;
   final T? initialValue;
   final List<T> items;
-  final ValueChanged<T?>? onChanged;
-  final Widget Function(dynamic) itemView;
+  final ValueChanged<dynamic>? onChanged;
+  final String Function(dynamic) itemView;
 
   const LabeledDropdownButton({
     super.key,
@@ -22,46 +22,21 @@ class LabeledDropdownButton<T> extends StatefulWidget {
 }
 
 class _LabeledDropdownButtonState<T> extends State<LabeledDropdownButton> {
-  late T _selectedItem;
 
-  @override
-  void initState() {
-    if (widget.initialValue != null) {
-      _selectedItem = widget.initialValue;
-    } else {
-      _selectedItem = widget.items.first;
-    }
-
-    super.initState();
-  }
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Padding(
-          padding: EdgeInsets.all(6),
-          child: Text(widget.label),
-        ),
-        DropdownButton<T>(
-          hint: const Text("Select Item"),
-          items: widget.items.map((value) {
-            return DropdownMenuItem<T>(
-              value: value,
-              child: widget.itemView(value),
-            );
-          }).toList(),
-          onChanged: (value) {
-            widget.onChanged?.call(value);
-            if (value != null) {
-              setState(() {
-                _selectedItem = value;
-              });
-            }
-          },
-          value: _selectedItem,
-        )
-      ],
+    return DropdownMenu(
+      label: Text(widget.label),
+      controller: controller,
+      initialSelection: widget.initialValue,
+      dropdownMenuEntries: widget.items.map((item) {
+        return DropdownMenuEntry(value: item, label: widget.itemView(item));
+      }).toList(),
+      onSelected: (value) {
+        widget.onChanged?.call(value);
+      },
     );
   }
 }

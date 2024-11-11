@@ -36,32 +36,35 @@ class _CropFormState extends State<CropForm> {
       reference: _record,
       isNew: _isNew,
       additionalFields: [
-        FutureWidget<List<CropFamily>>(
-          future: refProvider.cropFamilies,
-          onData: (data) {
-            if (data != null) {
-              data.sort((a, b) => a.name.compareTo(b.name));
-              return FutureWidget(
-                future: _record.cropFamily,
-                onData: (family) {
-                  return ReferenceDropDownButton<CropFamily>(
-                    initialValue: family,
-                    label: data.first.itemName(),
-                    items: data,
-                    onChanged: (value) {
-                      _record.cropFamilyId = value?.id ?? "";
-                    },
-                  );
-                },
-                onLoading: () => CircularProgressIndicator(),
-                onError: (p0) => const Text("Failed to get field"),
-              );
-            } else {
-              return const Text("No Crop families");
-            }
-          },
-          onLoading: () => CircularProgressIndicator(),
-          onError: (p0) => const Text("Failed to load crop families"),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: FutureWidget<List<CropFamily>>(
+            future: refProvider.cropFamilies,
+            onData: (data) {
+              if (data != null) {
+                data.sort((a, b) => a.name.compareTo(b.name));
+                return FutureWidget(
+                  future: refProvider.access.getItemById<CropFamily>(_record.cropFamilyId, (item) => CropFamily.fromMap(item)),
+                  onData: (family) {
+                    return ReferenceDropDownButton<CropFamily>(
+                      initialValue: family,
+                      label: data.first.itemName(),
+                      items: data,
+                      onChanged: (value) {
+                        _record.cropFamilyId = value?.id ?? "";
+                      },
+                    );
+                  },
+                  onLoading: () => CircularProgressIndicator(),
+                  onError: (p0) => const Text("Failed to get field"),
+                );
+              } else {
+                return const Text("No Crop families");
+              }
+            },
+            onLoading: () => CircularProgressIndicator(),
+            onError: (p0) => const Text("Failed to load crop families"),
+          ),
         ),
         IntFormField(
           label: "Days to Potting Up",

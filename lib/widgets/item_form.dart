@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:farm_home/models/models.dart';
+import 'package:provider/provider.dart';
 
 class ItemForm<T extends Item> extends StatefulWidget {
   final T? item;
   final bool isNew;
   // final List<Widget> view;
-  final List<Widget> editFields;
+  final List<Widget> firstTab;
+  final Widget secondTab;
   final String title;
 
   const ItemForm(
@@ -14,7 +16,8 @@ class ItemForm<T extends Item> extends StatefulWidget {
       this.item,
       required this.isNew,
       required this.title,
-      required this.editFields});
+      required this.firstTab,
+      required this.secondTab});
 
   @override
   State<ItemForm> createState() => _ItemFormState<T>();
@@ -23,18 +26,19 @@ class ItemForm<T extends Item> extends StatefulWidget {
 class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
   final _formKey = GlobalKey<FormState>();
   T? get item => widget.item;
-  List<Widget> get edit => widget.editFields;
+  List<Widget> get edit => widget.firstTab;
   // List<Widget> get view => widget.view;
   String? get itemName => item?.itemName();
 
   List<Widget> getActions(BuildContext context) {
+    var access = Provider.of<ItemAccess>(context);
     var actions = [
       IconButton(
         onPressed: () {
           if (widget.isNew) {
-            createItem<T>(item!);
+            access.createItem<T>(item!);
           } else {
-            updateItem<T>(item!);
+            access.updateItem<T>(item!);
           }
           Navigator.of(context).pop();
         },
@@ -60,7 +64,7 @@ class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
                       ),
                       child: const Text('Delete'),
                       onPressed: () {
-                        deleteItem(item!.id);
+                        access.deleteItem(item!.id);
                         Navigator.of(context).pop(); // Close dialog
                         Navigator.of(context).pop(); // Close form page
                       },
@@ -99,8 +103,8 @@ class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
             actions: getActions(context),
             bottom: const TabBar(
               tabs: [
+                Tab(icon: Icon(Icons.edit_document)),
                 Tab(icon: Icon(Icons.notes)),
-                Tab(icon: Icon(Icons.add_chart)),
               ],
             ),
           ),
@@ -109,19 +113,14 @@ class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                    padding: const EdgeInsets.all(20),
                     child: Column(
                       children: edit,
                     ),
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                child: Column(
-                  children: [],
-                ),
-              )
+              Container(child: widget.secondTab),
             ],
           ),
         ),

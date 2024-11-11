@@ -5,11 +5,6 @@ class Material extends Resource {
 
   String materialTypeId = "";
 
-  Future<MaterialType?> get material async {
-    return await getItemById<MaterialType>(
-        materialTypeId, (v) => MaterialType.fromMap(v));
-  }
-
   Material({
     super.name,
     super.notes,

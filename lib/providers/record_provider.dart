@@ -6,18 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:farm_home/models/models.dart';
 
 class RecordProvider extends ChangeNotifier {
-  RecordProvider();
+  final ItemAccess _access;
 
-
+  RecordProvider(this._access);
 
   Future<List<Record>> get records async {
-    return await getItemsByType(RecordConstants.title, (data) {
+    return await _access.getItemsByType(RecordConstants.title, (data) {
       return initRecordByItemName(data);
     });
   }
 
   Future<List<Record>> get activities async {
-    return await getItems<ActivityRecord>(
+    return await _access.getItems<ActivityRecord>(
         RecordConstants.activity, (v) => ActivityRecord.fromMap(v));
   }
 }

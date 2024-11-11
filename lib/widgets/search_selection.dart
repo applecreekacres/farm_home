@@ -8,12 +8,12 @@ class SearchSelection<T> extends StatefulWidget {
   final String title;
   final List<T> items;
   final List<T>? initialPickedItems;
-  final String Function(T) fieldToCheck;
-  final Widget Function(T, int, bool) itemView;
-  final Widget Function(T) pickedItemView;
-  final void Function(T)? onItemRemoved;
+  final String Function(dynamic) fieldToCheck;
+  final Widget Function(dynamic, int, bool) itemView;
+  final Widget Function(dynamic) pickedItemView;
+  final void Function(dynamic)? onItemRemoved;
   final void Function()? onTapClearAll;
-  final void Function(List<T>)? onPickedChange;
+  final void Function(List<dynamic>)? onPickedChange;
   final bool sortShowedItems;
   final bool sortPickedItems;
   final bool clearSearchFieldOnSelect;
@@ -86,7 +86,7 @@ class _SearchSelectionState<T> extends State<SearchSelection> {
         controller.getPickedItems();
       },
       fieldToCheck: (c) {
-        return widget.fieldToCheck.call(c);
+        return widget.fieldToCheck(c);
       },
       itemBuilder: (item, index, isPicked) {
         return Padding(
@@ -141,9 +141,7 @@ class _SearchSelectionState<T> extends State<SearchSelection> {
         widget.onItemRemoved?.call(data);
       },
       onTapClearAll: () => widget.onTapClearAll?.call(),
-      onPickedChange: (items) {
-        widget.onPickedChange?.call(items);
-      },
+      onPickedChange: (items) => widget.onPickedChange?.call(items),
     );
   }
 }

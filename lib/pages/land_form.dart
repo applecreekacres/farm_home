@@ -27,11 +27,28 @@ class _LandFormState extends State<LandForm> {
     super.initState();
   }
 
+  List<Widget> buildFields() {
+    return [
+      LabeledDropdownButton<LandType>(
+        initialValue: _land.landType,
+        label: "Land Type",
+        items: LandType.values,
+        itemView: (item) {
+          return item.toString().split('.')[1];
+        },
+        onChanged: (item) {
+          _land.landType = item!;
+        },
+      ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return ResourceForm<Land>(
       resource: _land,
       isNew: _isNew,
+      additionalFields: buildFields(),
     );
   }
 }

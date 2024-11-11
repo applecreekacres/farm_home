@@ -61,22 +61,14 @@ class _ReferenceListPageState extends State<ReferenceListPage> {
       drawer: const FarmHomeDrawer(),
       body: Padding(
           padding: EdgeInsets.all(15),
-          child: ItemList(
+          child: ReferenceList(
             items: refProvider.references,
-            title: (data) => Text(data.name),
-            trailing: (data) => Text(data.itemName()),
-            onTap: (data) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ReferenceConstants.referenceInfo
-                      .where((ref) => ref.name == data.itemName())
-                      .first
-                      .edit(data)!,
-                ),
-              );
-            },
             filter: (data) {
+              data.sort((
+                a,
+                b,
+              ) =>
+                  a.name.compareTo(b.name));
               if (_filterName == "All") {
                 return data;
               } else {
@@ -90,6 +82,7 @@ class _ReferenceListPageState extends State<ReferenceListPage> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
+            showDragHandle: true,
             builder: (context) {
               return ItemInfoList(
                 items: ReferenceConstants.referenceInfo,

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -45,6 +43,7 @@ class _RecordListPageState extends State<RecordListPage> {
           IconButton(
               onPressed: () => showModalBottomSheet<void>(
                   context: context,
+                  showDragHandle: true,
                   builder: (BuildContext context) {
                     return ItemInfoList(
                       items: _filterItems,
@@ -61,30 +60,9 @@ class _RecordListPageState extends State<RecordListPage> {
       ),
       drawer: const FarmHomeDrawer(),
       body: Padding(
-          padding: EdgeInsets.all(15),
-          child: ItemList(
+          padding: EdgeInsets.all(8),
+          child: RecordList(
             items: provider.records,
-            title: (data) => Text(data.title),
-            subtitle: (data) {
-              if (data.notes == "") {
-                return null;
-              } else {
-                return Text(
-                    "${data.notes.substring(0, min(20, data.notes.length))}...");
-              }
-            },
-            trailing: (data) => Text(data.itemName()),
-            onTap: (data) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => RecordConstants.recordInfo
-                      .where((ref) => ref.name == data.itemName())
-                      .first
-                      .edit(data)!,
-                ),
-              );
-            },
             filter: (data) {
               if (_filterName == "All") {
                 return data;
@@ -99,6 +77,7 @@ class _RecordListPageState extends State<RecordListPage> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
+            showDragHandle: true,
             builder: (context) {
               return ItemInfoList(
                 items: RecordConstants.recordInfo,

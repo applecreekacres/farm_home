@@ -10,18 +10,6 @@ abstract class Record extends Item {
   List<String> tags = List<String>.empty();
   List<String> resourceIds = List<String>.empty();
 
-  Future<List<dynamic>> get resources async {
-    List<dynamic> records = [];
-    for (var id in resourceIds) {
-      var data = await getItemById(id, (data) => data);
-      if (data != null) {
-        records.add(initResourceByItemName(data));
-      }
-    }
-
-    return records;
-  }
-
   Record({
     this.title = "",
     this.timestamp,

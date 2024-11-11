@@ -172,9 +172,7 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
 
   List<Resource>? getInitialItems(List<Resource> data) {
     if (record.resourceIds.isNotEmpty) {
-      return data
-          .where((i) => record.resourceIds.contains(i.id))
-          .toList();
+      return data.where((i) => record.resourceIds.contains(i.id)).toList();
     } else {
       return null;
     }
@@ -186,7 +184,8 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
       item: record,
       isNew: widget.isNew,
       title: "$itemName Record",
-      editFields: _buildFields(),
+      firstTab: _buildFields(),
+      secondTab: Container(),
     );
   }
 }

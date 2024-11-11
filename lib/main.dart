@@ -1,4 +1,5 @@
-import 'package:farm_home/providers/record_provider.dart';
+import 'package:farm_home/firebase_access.dart';
+import 'package:farm_home/models/models.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -21,15 +22,21 @@ void main() async {
   );
   await Firebase.app().setAutomaticDataCollectionEnabled(true);
   SharedPreferences prefs = await SharedPreferences.getInstance();
+
   runApp(FarmHome(prefs: prefs));
 }
 
 class FarmHome extends StatelessWidget {
   final SharedPreferences prefs;
-
   final _firebaseFirestore = FirebaseFirestore.instance;
 
-  FarmHome({super.key, required this.prefs});
+  late final FirebaseAccess firebase;
+  late final ItemAccess access;
+
+  FarmHome({super.key, required this.prefs}) {
+    firebase = FirebaseAccess(_firebaseFirestore);
+    access = ItemAccess(firebase, prefs);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +59,12 @@ class FarmHome extends StatelessWidget {
                 firebaseFirestore: _firebaseFirestore),
           ),
           ChangeNotifierProvider<ResourceProvider>(
-              create: (_) => ResourceProvider()),
+              create: (_) => ResourceProvider(access)),
           ChangeNotifierProvider<ReferenceProvider>(
-              create: (_) => ReferenceProvider()),
+              create: (_) => ReferenceProvider(access)),
           ChangeNotifierProvider<RecordProvider>(
-              create: (_) => RecordProvider()),
+              create: (_) => RecordProvider(access)),
+          Provider<ItemAccess>(create: (_) => access),
         ],
         child: MaterialApp(
           title: AppConstants.appTitle,

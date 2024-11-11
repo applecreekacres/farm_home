@@ -36,60 +36,64 @@ class _PlantingFormState extends State<PlantingForm> {
     Crop? crop;
 
     var fields = [
-      FutureWidget(
-        future: refProvider.seasons,
-        onData: (data) {
-          if (data != null) {
-            if (_planting.seasonId == "") {
-              season = data.first;
-              _planting.seasonId = data.first.id;
-            } else {
-              season ??=
-                  data.where((item) => item.id == _planting.seasonId).first;
-            }
-            return ReferenceDropDownButton<Season>(
-              initialValue: season,
-              label: ReferenceConstants.season,
-              items: data,
-              onChanged: (data) {
-                _planting.seasonId = data!.id;
-                setState(() {
-                  season = data;
-                });
-              },
-            );
-          }
-          return Text("No Seasons to load");
-        },
-      ),
-      FutureWidget(
-        future: refProvider.crops,
-        onData: (data) {
-          if (data != null) {
-            if (_planting.cropId == "") {
-              crop = data.first;
-              _planting.cropId = data.first.id;
-            } else {
-              crop ??= data.where((item) => item.id == _planting.cropId).first;
-            }
-            return ReferenceDropDownButton(
-              initialValue: crop,
-              label: ReferenceConstants.crop,
-              items: data,
-              onChanged: (data) {
-                _planting.cropId = data!.id;
-                _planting.daysToPottingUp = data.daysToPottingUp;
-                _planting.daysToTransplant = data.daysToTransplant;
-                _planting.daysToHarvest = data.daysToMaturity;
-                setState(() {
-                  crop = data;
-                });
-              },
-            );
-          } else {
-            return Text("No crop to load");
-          }
-        },
+      ExpandedRowBox(
+        children: [
+          FutureWidget(
+            future: refProvider.seasons,
+            onData: (data) {
+              if (data != null) {
+                if (_planting.seasonId == "") {
+                  season = data.first;
+                  _planting.seasonId = data.first.id;
+                } else {
+                  season ??=
+                      data.where((item) => item.id == _planting.seasonId).first;
+                }
+                return ReferenceDropDownButton<Season>(
+                  initialValue: season,
+                  label: ReferenceConstants.season,
+                  items: data,
+                  onChanged: (data) {
+                    _planting.seasonId = data!.id;
+                    setState(() {
+                      season = data;
+                    });
+                  },
+                );
+              }
+              return Text("No Seasons to load");
+            },
+          ),
+          FutureWidget(
+            future: refProvider.crops,
+            onData: (data) {
+              if (data != null) {
+                if (_planting.cropId == "") {
+                  crop = data.first;
+                  _planting.cropId = data.first.id;
+                } else {
+                  crop ??= data.where((item) => item.id == _planting.cropId).first;
+                }
+                return ReferenceDropDownButton(
+                  initialValue: crop,
+                  label: ReferenceConstants.crop,
+                  items: data,
+                  onChanged: (data) {
+                    _planting.cropId = data!.id;
+                    _planting.daysToPottingUp = data.daysToPottingUp;
+                    _planting.daysToTransplant = data.daysToTransplant;
+                    _planting.daysToHarvest = data.daysToMaturity;
+                    setState(() {
+                      crop = data;
+                    });
+                  },
+                );
+              } else {
+                return Text("No crop to load");
+              }
+            },
+          ),
+        ],
       ),
       ExpandedRowBox(
         children: [
