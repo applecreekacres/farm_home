@@ -12,14 +12,6 @@ class Animal extends Resource {
   late Sex sex;
   String animalSpeciesId = "";
 
-  Future<AnimalSpecies?> get animalSpecies async {
-    if (animalSpeciesId != "") {
-      return await getItemById<AnimalSpecies>(
-          animalSpeciesId, (v) => AnimalSpecies.fromMap(v));
-    }
-    return null;
-  }
-
   Animal(
       {super.name,
       super.notes,

@@ -9,14 +9,6 @@ class Seed extends Resource {
     cropId = data["cropId"];
   }
 
-  Future<Crop?> get crop async {
-    if (cropId != "") {
-      return getItemById<Crop>(cropId, (data) => Crop.fromMap(data));
-    } else {
-      return null;
-    }
-  }
-
   @override
   Map<String, dynamic> toMap() {
     var map = super.toMap();

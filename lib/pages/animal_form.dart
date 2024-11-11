@@ -79,7 +79,9 @@ class _AnimalFormState extends State<AnimalForm> {
           onData: (data) {
             if (data != null) {
               return FutureWidget(
-                future: _animal.animalSpecies,
+                future: refProvider.access.getItemById<AnimalSpecies>(
+                    _animal.animalSpeciesId,
+                    (item) => initReferenceByItemName(item)),
                 onData: (species) {
                   return ReferenceDropDownButton<AnimalSpecies>(
                     initialValue: species,

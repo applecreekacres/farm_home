@@ -4,10 +4,6 @@ import 'package:farm_home/models/models.dart';
 class InputRecord extends Record {
   String _materialId = "";
 
-  Future<Material?> get material async {
-    return await getItemById<Material>(_materialId, (v) => Material.fromMap(v));
-  }
-
   InputRecord(
       {super.title,
       super.timestamp,

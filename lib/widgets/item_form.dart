@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:farm_home/models/models.dart';
+import 'package:provider/provider.dart';
 
 class ItemForm<T extends Item> extends StatefulWidget {
   final T? item;
@@ -30,13 +31,14 @@ class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
   String? get itemName => item?.itemName();
 
   List<Widget> getActions(BuildContext context) {
+    var access = Provider.of<ItemAccess>(context);
     var actions = [
       IconButton(
         onPressed: () {
           if (widget.isNew) {
-            createItem<T>(item!);
+            access.createItem<T>(item!);
           } else {
-            updateItem<T>(item!);
+            access.updateItem<T>(item!);
           }
           Navigator.of(context).pop();
         },
@@ -62,7 +64,7 @@ class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
                       ),
                       child: const Text('Delete'),
                       onPressed: () {
-                        deleteItem(item!.id);
+                        access.deleteItem(item!.id);
                         Navigator.of(context).pop(); // Close dialog
                         Navigator.of(context).pop(); // Close form page
                       },

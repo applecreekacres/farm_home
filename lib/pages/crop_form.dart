@@ -44,7 +44,7 @@ class _CropFormState extends State<CropForm> {
               if (data != null) {
                 data.sort((a, b) => a.name.compareTo(b.name));
                 return FutureWidget(
-                  future: _record.cropFamily,
+                  future: refProvider.access.getItemById<CropFamily>(_record.cropFamilyId, (item) => CropFamily.fromMap(item)),
                   onData: (family) {
                     return ReferenceDropDownButton<CropFamily>(
                       initialValue: family,

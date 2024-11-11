@@ -7,15 +7,7 @@ class Crop extends Reference {
   int daysToMaturity = 0;
   int harvestWindow = 0;
   CropFamily? family;
-  String? cropFamilyId = "";
-
-  Future<CropFamily?> get cropFamily async {
-    if (cropFamilyId != "") {
-      return await getItemById<CropFamily>(
-          cropFamilyId!, (v) => CropFamily.fromMap(v));
-    }
-    return null;
-  }
+  String cropFamilyId = "";
 
   Crop(
       {super.name,

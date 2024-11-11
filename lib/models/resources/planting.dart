@@ -30,20 +30,6 @@ class Planting extends Resource {
       this.harvestWindow = 0})
       : super();
 
-  Future<Crop?> get crop async {
-    if (cropId != "") {
-      return getItemById(cropId, (map) => Crop.fromMap(map));
-    }
-    return null;
-  }
-
-  Future<Season?> get season async {
-    if (seasonId != "") {
-      return getItemById(seasonId, (map) => Season.fromMap(map));
-    }
-    return null;
-  }
-
   Planting.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
     cropId = data["cropId"];
     seasonId = data["seasonId"];
