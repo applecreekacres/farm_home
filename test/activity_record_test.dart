@@ -1,64 +1,36 @@
+import 'package:farm_home/constants/constants.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:farm_home/models/models.dart';
-import 'package:uuid/uuid.dart';
+
+import 'test_setup.dart';
 
 void main() {
   test("Create a new Activity Record", () {
-    final now = DateTime.now();
+    var map = basicRecordMap;
     final record = ActivityRecord(
-        title: "New Activity Record",
-        timestamp: now,
-        notes: "Basic Description",
-        isDone: false,
+        title: map["title"],
+        timestamp: DateTime.fromMillisecondsSinceEpoch(map["timestamp"]),
+        notes: map["notes"],
+        isDone: map["isDone"],
         tags: ["tag"]);
 
-    expect(record.isDone, false);
-    expect(record.timestamp, now);
-    expect(record.title, "New Activity Record");
-    expect(record.quantities, List<Quantity>.empty());
-    expect(record.resourceIds, List<String>.empty());
-    expect(record.tags.length, 1);
-    expect(record.tags[0], "tag");
-    expect(record.notes, "Basic Description");
-    expect(record.itemName(), "Activity");
+    expectBasicRecordMap(
+      record.toMap(),
+      id: record.id,
+      userId: record.userId,
+      created: record.created.millisecondsSinceEpoch,
+      modified: record.modified.millisecondsSinceEpoch,
+      itemName: RecordConstants.activity,
+    );
   });
 
   test("Load ActivityRecord from Map", () {
-    final now = DateTime.now().millisecondsSinceEpoch;
-    final id = const Uuid().v4();
-    final userId = const Uuid().v4();
-    Map<String, dynamic> map = {
-      "id": id,
-      "userId": userId,
-      "created":
-          DateTime(DateTime.now().year, 1, 2, 3, 4, 5).millisecondsSinceEpoch,
-      "modified":
-          DateTime(DateTime.now().year, 5, 4, 3, 2, 1).millisecondsSinceEpoch,
-      "title": "title",
-      "notes": "description",
-      "isDone": false,
-      "timestamp": now,
-      "tags": ["tag2"],
-      "quantities": [],
-      "resourceIds": [],
-      "itemName": "Activity"
-    };
+    Map<String, dynamic> map = basicRecordMap;
 
     final record = ActivityRecord.fromMap(map);
 
-    expect(record.title, "title");
-  });
-
-  test("Get Map from ActivityRecord", () {
-    final now = DateTime.now();
-    final record = ActivityRecord(
-        title: "Activity Record",
-        timestamp: now,
-        notes: "",
-        isDone: true,
-        tags: ["test"]);
-    final map = record.toMap();
-
-    expect(map["title"], "Activity Record");
+    expectBasicRecord(record,
+      itemName: RecordConstants.activity,
+    );
   });
 }
