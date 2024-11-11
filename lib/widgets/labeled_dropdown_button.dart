@@ -27,16 +27,20 @@ class _LabeledDropdownButtonState<T> extends State<LabeledDropdownButton> {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownMenu(
-      label: Text(widget.label),
-      controller: controller,
-      initialSelection: widget.initialValue,
-      dropdownMenuEntries: widget.items.map((item) {
-        return DropdownMenuEntry(value: item, label: widget.itemView(item));
-      }).toList(),
-      onSelected: (value) {
-        widget.onChanged?.call(value);
-      },
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+      child: DropdownMenu(
+        expandedInsets: EdgeInsets.zero,
+        label: Text(widget.label),
+        controller: controller,
+        initialSelection: widget.initialValue,
+        dropdownMenuEntries: widget.items.map((item) {
+          return DropdownMenuEntry(value: item, label: widget.itemView(item));
+        }).toList(),
+        onSelected: (value) {
+          widget.onChanged?.call(value);
+        },
+      ),
     );
   }
 }

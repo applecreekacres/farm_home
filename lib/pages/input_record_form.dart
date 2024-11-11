@@ -31,11 +31,15 @@ class _InputRecordFormState extends State<InputRecordForm> {
     super.initState();
   }
 
-  MaterialType selectInitial(List<MaterialType> data) {
-    if (_record.materialId == "") {
-      return data.first;
+  MaterialType? selectInitial(List<MaterialType> data) {
+    if (data.isNotEmpty) {
+      if (_record.materialId == "") {
+        return data.first;
+      } else {
+        return data.where((item) => item.id == _record.materialId).first;
+      }
     } else {
-      return data.where((item) => item.id == _record.materialId).first;
+      return null;
     }
   }
 

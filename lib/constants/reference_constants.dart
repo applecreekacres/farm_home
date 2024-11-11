@@ -77,7 +77,7 @@ class ReferenceConstants {
       Symbols.grass,
       () => CropForm(),
       (item) => CropForm(
-        record: item,
+        crop: item,
       ),
     ),
     ItemInfo<RecordCategory>(

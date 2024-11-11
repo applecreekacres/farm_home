@@ -53,7 +53,7 @@ class _SearchSelectionState<T> extends State<SearchSelection> {
   Widget build(BuildContext context) {
     return MultipleSearchSelection<T>(
       items: widget.items as List<T>,
-      initialPickedItems: widget.initialPickedItems as List<T>,
+      initialPickedItems: widget.initialPickedItems as List<T>?,
       controller: controller,
       maxSelectedItems: widget.maxSelectedItems,
       sortShowedItems: widget.sortShowedItems,

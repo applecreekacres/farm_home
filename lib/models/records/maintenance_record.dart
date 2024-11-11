@@ -17,7 +17,7 @@ class MaintenanceRecord extends Record {
       : super();
 
   MaintenanceRecord.fromMap(Map<String, dynamic> data) : super.fromMap(data) {
-    _equipmentUsedId = data["equipmentUsedId"];
+    _equipmentUsedId = List<String>.from(data["equipmentUsedId"]);
   }
 
   @override

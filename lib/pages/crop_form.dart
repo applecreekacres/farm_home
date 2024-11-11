@@ -6,25 +6,25 @@ import 'package:farm_home/providers/providers.dart';
 import 'package:provider/provider.dart';
 
 class CropForm extends StatefulWidget {
-  final Crop? record;
+  final Crop? crop;
 
-  const CropForm({this.record, super.key});
+  const CropForm({this.crop, super.key});
 
   @override
   State<CropForm> createState() => _CropFormState();
 }
 
 class _CropFormState extends State<CropForm> {
-  late Crop _record;
+  late Crop _crop;
   bool _isNew = false;
 
   @override
   void initState() {
-    if (widget.record == null) {
-      _record = Crop();
+    if (widget.crop == null) {
+      _crop = Crop();
       _isNew = true;
     } else {
-      _record = widget.record!;
+      _crop = widget.crop!;
     }
     super.initState();
   }
@@ -33,7 +33,7 @@ class _CropFormState extends State<CropForm> {
   Widget build(BuildContext context) {
     final refProvider = Provider.of<ReferenceProvider>(context);
     return ReferenceForm<Crop>(
-      reference: _record,
+      reference: _crop,
       isNew: _isNew,
       additionalFields: [
         Padding(
@@ -43,21 +43,14 @@ class _CropFormState extends State<CropForm> {
             onData: (data) {
               if (data != null) {
                 data.sort((a, b) => a.name.compareTo(b.name));
-                return FutureWidget(
-                  future: refProvider.access.getItemById<CropFamily>(_record.cropFamilyId, (item) => CropFamily.fromMap(item)),
-                  onData: (family) {
                     return ReferenceDropDownButton<CropFamily>(
-                      initialValue: family,
+                      initialValue: data.where((item) => item.id == _crop.cropFamilyId).firstOrNull,
                       label: data.first.itemName(),
                       items: data,
                       onChanged: (value) {
-                        _record.cropFamilyId = value?.id ?? "";
+                        _crop.cropFamilyId = value?.id ?? "";
                       },
                     );
-                  },
-                  onLoading: () => CircularProgressIndicator(),
-                  onError: (p0) => const Text("Failed to get field"),
-                );
               } else {
                 return const Text("No Crop families");
               }
@@ -68,23 +61,23 @@ class _CropFormState extends State<CropForm> {
         ),
         IntFormField(
           label: "Days to Potting Up",
-          controllerValue: _record.daysToPottingUp,
-          onChanged: (value) => _record.daysToPottingUp = value,
+          controllerValue: _crop.daysToPottingUp,
+          onChanged: (value) => _crop.daysToPottingUp = value,
         ),
         IntFormField(
           label: "Days to Transplant",
-          controllerValue: _record.daysToTransplant,
-          onChanged: (value) => _record.daysToTransplant = value,
+          controllerValue: _crop.daysToTransplant,
+          onChanged: (value) => _crop.daysToTransplant = value,
         ),
         IntFormField(
           label: "Days to Maturity",
-          controllerValue: _record.daysToMaturity,
-          onChanged: (value) => _record.daysToMaturity = value,
+          controllerValue: _crop.daysToMaturity,
+          onChanged: (value) => _crop.daysToMaturity = value,
         ),
         IntFormField(
           label: "Harvest Window",
-          controllerValue: _record.harvestWindow,
-          onChanged: (value) => _record.harvestWindow = value,
+          controllerValue: _crop.harvestWindow,
+          onChanged: (value) => _crop.harvestWindow = value,
         ),
       ],
     );
