@@ -9,6 +9,7 @@ abstract class Record extends Item {
   DateTime? timestamp = DateTime.now();
   List<String> tags = List<String>.empty();
   List<String> resourceIds = List<String>.empty();
+  String categoryId = "";
 
   Record({
     this.title = "",
@@ -30,6 +31,11 @@ abstract class Record extends Item {
     quantities = List<Quantity>.from(data["quantities"]);
     timestamp = DateTime.fromMillisecondsSinceEpoch(data["timestamp"]);
     tags = List<String>.from(data["tags"]);
+    if (data.containsKey("categoryId")) {
+      categoryId = data["categoryId"];
+    } else {
+      categoryId = "";
+    }
   }
 
   @override
@@ -43,6 +49,7 @@ abstract class Record extends Item {
       "resourceIds": resourceIds,
       "timestamp": timestamp?.millisecondsSinceEpoch,
       "tags": tags,
+      "categoryId": categoryId,
     };
     map.addAll(super.toMap());
     return map;

@@ -34,6 +34,8 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
 
   List<Widget> _buildFields() {
     var resProvider = Provider.of<ResourceProvider>(context);
+    var refProvider = Provider.of<ReferenceProvider>(context);
+
     List<Widget> fields = [
       TextFormField(
           initialValue: record.title,
@@ -64,106 +66,122 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
         },
       ),
       FutureWidget(
-          future: resProvider.resources,
-          onData: (data) {
-            return MultipleSearchSelection<Resource>(
-              searchField: TextField(
-                decoration: InputDecoration(
-                  hintText: ResourceConstants.titlePlural,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  suffixIcon: IconButton(
-                    onPressed: controller.clearSearchField,
-                    icon: const Icon(Icons.clear),
-                  ),
+        future: resProvider.resources,
+        onData: (data) {
+          return MultipleSearchSelection<Resource>(
+            searchField: TextField(
+              decoration: InputDecoration(
+                hintText: ResourceConstants.titlePlural,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                suffixIcon: IconButton(
+                  onPressed: controller.clearSearchField,
+                  icon: const Icon(Icons.clear),
                 ),
               ),
-              initialPickedItems: getInitialItems(data!),
-              onSearchChanged: (text) {},
-              controller: controller,
-              itemsVisibility: ShowedItemsVisibility.onType,
-              title: Padding(
-                padding: const EdgeInsets.all(12),
-                child: Text(
-                  ResourceConstants.titlePlural,
-                ),
+            ),
+            initialPickedItems: getInitialItems(data!),
+            onSearchChanged: (text) {},
+            controller: controller,
+            itemsVisibility: ShowedItemsVisibility.onType,
+            title: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Text(
+                ResourceConstants.titlePlural,
               ),
-              onItemAdded: (c) {
-                controller.getAllItems();
-                controller.getPickedItems();
-              },
-              clearSearchFieldOnSelect: true,
-              items: data,
-              fieldToCheck: (c) {
-                return c.name;
-              },
-              itemBuilder: (resource, index, isPicked) {
-                return Padding(
-                  padding: const EdgeInsets.all(6),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                        color: Colors.white),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 12),
-                      child: Text(resource.name),
-                    ),
-                  ),
-                );
-              },
-              pickedItemBuilder: (resource) {
-                return Container(
+            ),
+            onItemAdded: (c) {
+              controller.getAllItems();
+              controller.getPickedItems();
+            },
+            clearSearchFieldOnSelect: true,
+            items: data,
+            fieldToCheck: (c) {
+              return c.name;
+            },
+            itemBuilder: (resource, index, isPicked) {
+              return Padding(
+                padding: const EdgeInsets.all(6),
+                child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.grey[400]!),
-                  ),
+                      borderRadius: BorderRadius.circular(6),
+                      color: Colors.white),
                   child: Padding(
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 12),
                     child: Text(resource.name),
                   ),
-                );
-              },
-              sortShowedItems: true,
-              sortPickedItems: true,
-              selectAllButton: Padding(
-                padding: const EdgeInsets.all(12),
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blue),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Text('Select All'),
-                  ),
+                ),
+              );
+            },
+            pickedItemBuilder: (resource) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.grey[400]!),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text(resource.name),
+                ),
+              );
+            },
+            sortShowedItems: true,
+            sortPickedItems: true,
+            selectAllButton: Padding(
+              padding: const EdgeInsets.all(12),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text('Select All'),
                 ),
               ),
-              clearAllButton: Padding(
-                padding: const EdgeInsets.all(12),
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.red),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Text('Clear All'),
-                  ),
+            ),
+            clearAllButton: Padding(
+              padding: const EdgeInsets.all(12),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.red),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text('Clear All'),
                 ),
               ),
-              caseSensitiveSearch: false,
-              fuzzySearch: FuzzySearch.none,
-              showSelectAllButton: false,
-              maximumShowItemsHeight: 200,
-              onItemRemoved: (data) {
-                record.resourceIds.remove(data.id);
-              },
-              onTapClearAll: () => record.resourceIds.clear(),
-              onPickedChange: (items) {
-                record.resourceIds = items.map((i) => i.id).toList();
-              },
-            );
-          }),
+            ),
+            caseSensitiveSearch: false,
+            fuzzySearch: FuzzySearch.none,
+            showSelectAllButton: false,
+            maximumShowItemsHeight: 200,
+            onItemRemoved: (data) {
+              record.resourceIds.remove(data.id);
+            },
+            onTapClearAll: () => record.resourceIds.clear(),
+            onPickedChange: (items) {
+              record.resourceIds = items.map((i) => i.id).toList();
+            },
+          );
+        },
+      ),
+      FutureWidget(
+        future: refProvider.recordCategories,
+        onData: (data) {
+          if (data != null) {
+            return ReferenceDropDownButton(
+                initialValue: data
+                    .where((item) => item.id == record.categoryId)
+                    .firstOrNull,
+                label: ReferenceConstants.recordCategory,
+                items: data);
+          } else {
+            return const Text("Failed to load categorie");
+          }
+        },
+      ),
     ];
 
     fields.addAll(this.fields);
