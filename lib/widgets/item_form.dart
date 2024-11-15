@@ -110,13 +110,11 @@ class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
           ),
           body: TabBarView(
             children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      children: edit,
-                    ),
+              SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    children: edit,
                   ),
                 ),
               ),
