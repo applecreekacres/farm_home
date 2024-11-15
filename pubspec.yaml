@@ -48,6 +48,8 @@ dependencies:
   material_symbols_icons: ^4.2785.1
   firebase_performance: ^0.10.0+8
   multiple_search_selection: ^2.7.0
+  google_maps_flutter: ^2.9.0
+  geolocator: ^13.0.2
 
 dev_dependencies:
   flutter_test:
