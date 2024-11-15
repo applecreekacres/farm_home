@@ -3,7 +3,7 @@ import 'package:farm_home/models/models.dart';
 
 enum LandType { bed, field, orchard, landmark, paddock, property, other }
 
-class Land extends Resource {
+class Land extends Location {
   LandType? landType = LandType.other;
 
   Land({super.name, super.notes, this.landType}) : super();

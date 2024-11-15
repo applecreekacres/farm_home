@@ -6,3 +6,4 @@ export 'equipment.dart';
 export 'land.dart';
 export 'material.dart';
 export 'resource.dart';
+export 'location.dart';
