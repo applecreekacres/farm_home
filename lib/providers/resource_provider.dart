@@ -45,4 +45,9 @@ class ResourceProvider extends ChangeNotifier {
     return await _access.getItems<Seed>(
         ResourceConstants.equipment, (v) => Seed.fromMap(v));
   }
+
+  Future<List<Structure>> get structures async {
+    return await _access.getItems<Structure>(
+        ResourceConstants.structure, (v) => Structure.fromMap(v));
+  }
 }
