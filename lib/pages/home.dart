@@ -23,35 +23,41 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Padding(
         padding: EdgeInsets.all(10),
-        child: Column(
-          children: [
-            const Text("Open Records"),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 3,
-              child: RecordList(
-                items: recProvider.records,
-                filter: (items) {
-                  return items
-                      .where((item) => (item.isDone == false &&
-                          item.timestamp!.isAfter(DateTime.now())))
-                      .toList();
-                },
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const Text("Open Records"),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 3,
+                child: RecordList(
+                  items: recProvider.records,
+                  filter: (items) {
+                    return items
+                        .where((item) => (item.isDone == false &&
+                            item.timestamp!.isAfter(DateTime.now())))
+                        .toList();
+                  },
+                ),
               ),
-            ),
-            const Text("Overdue Records"),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 3,
-              child: RecordList(
-                items: recProvider.records,
-                filter: (items) {
-                  return items
-                      .where((item) => (item.isDone == false &&
-                          item.timestamp!.isBefore(DateTime.now())))
-                      .toList();
-                },
+              const Text("Overdue Records"),
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 3,
+                child: RecordList(
+                  items: recProvider.records,
+                  filter: (items) {
+                    return items
+                        .where((item) => (item.isDone == false &&
+                            item.timestamp!.isBefore(DateTime.now())))
+                        .toList();
+                  },
+                ),
               ),
-            ),
-          ],
+              SizedBox.square(
+                dimension: MediaQuery.of(context).size.width,
+                child: MapDraw(),
+              ),
+            ],
+          ),
         ),
       ),
       drawer: const FarmHomeDrawer(),
