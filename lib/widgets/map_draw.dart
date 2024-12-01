@@ -15,16 +15,16 @@ class _MapDrawState extends State<MapDraw> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
-  LatLng? currentPosition;
+  LatLng? currentPosition = LatLng(46.7730432, -100.6764032);
 
   @override
   void initState() {
     super.initState();
-    Geolocator.getCurrentPosition().then((location) {
-      setState(() {
-        currentPosition = LatLng(location.latitude, location.longitude);
-      });
-    });
+    // Geolocator.getCurrentPosition().then((location) {
+    //   setState(() {
+    //     currentPosition = LatLng(location.latitude, location.longitude);
+    //   });
+    // });
   }
 
   @override
@@ -36,7 +36,10 @@ class _MapDrawState extends State<MapDraw> {
             )
           : GoogleMap(
               initialCameraPosition: CameraPosition(target: currentPosition!),
-              mapType: MapType.hybrid,
+              zoomControlsEnabled: true,
+              mapType: MapType.normal,
+              myLocationButtonEnabled: true,
+              myLocationEnabled: true,
               onMapCreated: (controller) {
                 _controller.complete(controller);
               },
