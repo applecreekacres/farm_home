@@ -115,8 +115,20 @@ class _PlantingFormState extends State<PlantingForm> {
               onChanged: (value) => _planting.inRowSpacing = value),
         ],
       ),
+      LabeledDropdownButton<PlantingMethod>(
+          initialValue: _planting.plantingMethod,
+          label: "Planting Method",
+          items: PlantingMethod.values,
+          itemView: (item) {
+            return item.toString().split('.')[1];
+          },
+          onChanged: (item) {
+            _planting.plantingMethod = item!;
+          },
+        ),
     ];
 
+    
     if (_planting.plantingMethod == PlantingMethod.greenhouseSow) {
       fields.add(
         ExpandedRowBox(
