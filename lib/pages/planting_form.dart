@@ -72,7 +72,8 @@ class _PlantingFormState extends State<PlantingForm> {
                   crop = data.first;
                   _planting.cropId = data.first.id;
                 } else {
-                  crop ??= data.where((item) => item.id == _planting.cropId).first;
+                  crop ??=
+                      data.where((item) => item.id == _planting.cropId).first;
                 }
                 return ReferenceDropDownButton(
                   initialValue: crop,
@@ -116,19 +117,18 @@ class _PlantingFormState extends State<PlantingForm> {
         ],
       ),
       LabeledDropdownButton<PlantingMethod>(
-          initialValue: _planting.plantingMethod,
-          label: "Planting Method",
-          items: PlantingMethod.values,
-          itemView: (item) {
-            return item.toString().split('.')[1];
-          },
-          onChanged: (item) {
-            _planting.plantingMethod = item!;
-          },
-        ),
+        initialValue: _planting.plantingMethod,
+        label: "Planting Method",
+        items: PlantingMethod.values,
+        itemView: (item) {
+          return item.toString().split('.')[1];
+        },
+        onChanged: (item) {
+          _planting.plantingMethod = item!;
+        },
+      ),
     ];
 
-    
     if (_planting.plantingMethod == PlantingMethod.greenhouseSow) {
       fields.add(
         ExpandedRowBox(
