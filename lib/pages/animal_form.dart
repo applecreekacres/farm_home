@@ -39,6 +39,12 @@ class _AnimalFormState extends State<AnimalForm> {
       key: _formKey,
       isNew: isNew,
       additionalFields: [
+        TextFormField(
+          decoration: const InputDecoration(labelText: 'Nickname'),
+          initialValue: _animal.nickname,
+          onChanged: (value) {
+            _animal.nickname = value;
+          }),
         DateTimeTextField(
             labelText: 'Birth Date',
             firstDate: DateTime(1970),
