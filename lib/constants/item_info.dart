@@ -1,5 +1,5 @@
 import 'package:farm_home/models/models.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ItemInfo<T extends Item> {
   IconData icon;

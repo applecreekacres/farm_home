@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' hide MaterialType;
+import 'package:material_ui/material_ui.dart' hide MaterialType;
 
 import 'package:material_symbols_icons/symbols.dart';
 

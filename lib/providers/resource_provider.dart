@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:farm_home/constants/constants.dart';
-import 'package:flutter/material.dart' hide Material;
+import 'package:material_ui/material_ui.dart' hide Material;
 
 import 'package:farm_home/models/models.dart';
 
@@ -38,12 +38,12 @@ class ResourceProvider extends ChangeNotifier {
 
   Future<List<Planting>> get planting async {
     return await _access.getItems<Planting>(
-        ResourceConstants.equipment, (v) => Planting.fromMap(v));
+        ResourceConstants.planting, (v) => Planting.fromMap(v));
   }
 
   Future<List<Seed>> get seed async {
     return await _access.getItems<Seed>(
-        ResourceConstants.equipment, (v) => Seed.fromMap(v));
+        ResourceConstants.seed, (v) => Seed.fromMap(v));
   }
 
   Future<List<Structure>> get structures async {

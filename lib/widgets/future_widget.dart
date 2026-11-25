@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FutureWidget<T> extends StatelessWidget {
   final Future<T> future;
@@ -20,15 +20,15 @@ class FutureWidget<T> extends StatelessWidget {
       future: future,
       builder: (BuildContext context, AsyncSnapshot<T> snapshot) {
         if (snapshot.hasError) {
-          return this._handleError(snapshot.error);
+          return _handleError(snapshot.error);
         } else {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
             case ConnectionState.active:
             case ConnectionState.waiting:
-              return this._handleLoading();
+              return _handleLoading();
             case ConnectionState.done:
-              return this._handleData(snapshot.data);
+              return _handleData(snapshot.data);
           }
         }
       },
@@ -36,16 +36,16 @@ class FutureWidget<T> extends StatelessWidget {
   }
 
   Widget _handleData(T? data) {
-    return this.onData(data);
+    return onData(data);
   }
 
   Widget _handleError(dynamic error) {
-    return this.onError != null ? this.onError!(error) : Container();
+    return onError != null ? onError!(error) : Container();
   }
 
   Widget _handleLoading() {
-    return this.onLoading != null
-        ? this.onLoading!()
+    return onLoading != null
+        ? onLoading!()
         : Container(
             alignment: Alignment.center,
             child: CircularProgressIndicator(),

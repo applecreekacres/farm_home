@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' hide Material, MaterialType;
+import 'package:material_ui/material_ui.dart' hide Material, MaterialType;
 
 import 'package:provider/provider.dart';
 

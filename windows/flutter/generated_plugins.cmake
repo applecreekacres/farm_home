@@ -3,13 +3,17 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  cloud_firestore
-  desktop_webview_auth
-  firebase_auth
+  app_links
+  desktop_webview_window
   firebase_core
+  cloud_firestore
+  firebase_auth
+  url_launcher_windows
+  window_to_front
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
+  jni
 )
 
 set(PLUGIN_BUNDLED_LIBRARIES)

@@ -53,6 +53,33 @@ void main() {
     );
   });
 
+  test("Quantity lists round-trip as maps and stay growable", () {
+    final record = ActivityRecord(
+      title: "Harvest prep",
+      quantities: [Quantity("kg", 2.5)],
+      tags: ["tag"],
+    );
+
+    final map = record.toMap();
+    expect(map["quantities"], [
+      {"unit": "kg", "value": 2.5},
+    ]);
+
+    final loaded = ActivityRecord.fromMap({
+      ...basicRecordMap,
+      ...map,
+      "itemName": RecordConstants.activity,
+    });
+    expect(loaded.quantities.single.unit, "kg");
+    expect(loaded.quantities.single.value, 2.5);
+    loaded.quantities.add(Quantity("g", 1));
+    loaded.tags.add("extra");
+    loaded.resourceIds.add("resource-1");
+    expect(loaded.quantities, hasLength(2));
+    expect(loaded.tags, ["tag", "extra"]);
+    expect(loaded.resourceIds, ["resource-1"]);
+  });
+
   test("Load Observation Record from Map", () {
     Map<String, dynamic> map = basicRecordMap;
 
