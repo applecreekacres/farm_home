@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:farm_home/constants/constants.dart';
-import 'package:flutter/material.dart' hide MaterialType;
+import 'package:material_ui/material_ui.dart' hide MaterialType;
 
 import 'package:farm_home/models/models.dart';
 

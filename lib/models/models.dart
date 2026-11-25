@@ -71,6 +71,8 @@ dynamic initResourceByItemName(Map<String, dynamic> data) {
       return Planting.fromMap(data);
     case ResourceConstants.seed:
       return Seed.fromMap(data);
+    case ResourceConstants.structure:
+      return Structure.fromMap(data);
     default:
       return null;
   }

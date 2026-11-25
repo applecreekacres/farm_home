@@ -1,11 +1,11 @@
 {
-    "name": "farm_home",
-    "short_name": "farm_home",
+    "name": "Farm Home",
+    "short_name": "Farm Home",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#F1F4F8",
+    "theme_color": "#48986C",
+    "description": "A farm log for records, resources, and reference data.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

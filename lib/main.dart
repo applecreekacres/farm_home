@@ -1,11 +1,9 @@
 import 'package:farm_home/firebase_access.dart';
 import 'package:farm_home/models/models.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart' hide AuthProvider;
 import 'package:firebase_core/firebase_core.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -42,22 +40,6 @@ class FarmHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          Provider<HomeProvider>(
-              create: (_) =>
-                  HomeProvider(firebaseFirestore: _firebaseFirestore)),
-          Provider<SettingProvider>(
-            create: (_) => SettingProvider(
-                prefs: prefs, firebaseFirestore: _firebaseFirestore),
-          ),
-          ChangeNotifierProvider<AuthProvider>(
-            create: (_) => AuthProvider(
-                firebaseAuth: FirebaseAuth.instance,
-                googleSignIn: GoogleSignIn(
-                    clientId:
-                        "151592527578-mp8p672pkcmog3sl1bdfi46scipalhlj.apps.googleusercontent.com"),
-                prefs: prefs,
-                firebaseFirestore: _firebaseFirestore),
-          ),
           ChangeNotifierProvider<ResourceProvider>(
               create: (_) => ResourceProvider(access)),
           ChangeNotifierProvider<ReferenceProvider>(
