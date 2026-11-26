@@ -1,28 +1,29 @@
 import 'package:farm_home/constants/constants.dart';
 import 'package:farm_home/providers/providers.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:farm_home/models/models.dart';
 import 'package:farm_home/widgets/widgets.dart';
 import 'package:multiple_search_selection/multiple_search_selection.dart';
-import 'package:provider/provider.dart';
 
-class RecordForm<T extends Record> extends StatefulWidget {
+class RecordForm<T extends Record> extends ConsumerStatefulWidget {
   final T record;
   final List<Widget>? additionalFields;
   final bool isNew;
 
-  const RecordForm(
-      {required this.record,
-      required this.isNew,
-      this.additionalFields,
-      super.key});
+  const RecordForm({
+    required this.record,
+    required this.isNew,
+    this.additionalFields,
+    super.key,
+  });
 
   @override
-  State<RecordForm> createState() => _RecordFormState<T>();
+  ConsumerState<RecordForm<T>> createState() => _RecordFormState<T>();
 }
 
-class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
+class _RecordFormState<T extends Record> extends ConsumerState<RecordForm<T>> {
   T get record => widget.record;
   List<Widget> get fields => widget.additionalFields ?? List<Widget>.empty();
   String get itemName => record.itemName();
@@ -33,16 +34,17 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
   );
 
   List<Widget> _buildFields() {
-    var resProvider = Provider.of<ResourceProvider>(context);
-    var refProvider = Provider.of<ReferenceProvider>(context);
+    final resources = ref.watch(resourcesProvider);
+    final categories = ref.watch(recordCategoriesProvider);
 
     List<Widget> fields = [
       TextFormField(
-          initialValue: record.title,
-          decoration: const InputDecoration(labelText: "Name"),
-          validator: (value) =>
-              value?.isEmpty ?? true ? 'Please enter a name' : null,
-          onChanged: (value) => record.title = value),
+        initialValue: record.title,
+        decoration: const InputDecoration(labelText: "Name"),
+        validator: (value) =>
+            value?.isEmpty ?? true ? 'Please enter a name' : null,
+        onChanged: (value) => record.title = value,
+      ),
       LabelledCheckbox(
         label: 'Done',
         value: record.isDone,
@@ -51,22 +53,23 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
         },
       ),
       DateTimeTextField(
-          labelText: 'Timestamp',
-          firstDate: DateTime(1970),
-          lastDate: DateTime(2100),
-          value: record.timestamp,
-          onChanged: (value) {
-            record.timestamp = value!;
-          },
-          initialDate: DateTime.now()),
+        labelText: 'Timestamp',
+        firstDate: DateTime(1970),
+        lastDate: DateTime(2100),
+        value: record.timestamp,
+        onChanged: (value) {
+          record.timestamp = value!;
+        },
+        initialDate: DateTime.now(),
+      ),
       NotesField(
         modelField: record.notes,
         onChanged: (data) {
           record.notes = data;
         },
       ),
-      FutureWidget(
-        future: resProvider.resources,
+      AsyncValueView<List<Resource>>(
+        value: resources,
         onData: (data) {
           return MultipleSearchSelection<Resource>(
             searchField: TextField(
@@ -81,15 +84,13 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
                 ),
               ),
             ),
-            initialPickedItems: getInitialItems(data!),
+            initialPickedItems: getInitialItems(data),
             onSearchChanged: (text) {},
             controller: controller,
             itemsVisibility: ShowedItemsVisibility.onType,
             title: Padding(
               padding: const EdgeInsets.all(12),
-              child: Text(
-                ResourceConstants.titlePlural,
-              ),
+              child: Text(ResourceConstants.titlePlural),
             ),
             onItemAdded: (c) {
               controller.getAllItems();
@@ -105,11 +106,14 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
                 padding: const EdgeInsets.all(6),
                 child: Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      color: Colors.white),
+                    borderRadius: BorderRadius.circular(6),
+                    color: Colors.white,
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 20, horizontal: 12),
+                      vertical: 20,
+                      horizontal: 12,
+                    ),
                     child: Text(resource.name),
                   ),
                 ),
@@ -167,20 +171,18 @@ class _RecordFormState<T extends Record> extends State<RecordForm<T>> {
           );
         },
       ),
-      FutureWidget(
-        future: refProvider.recordCategories,
+      AsyncValueView<List<RecordCategory>>(
+        value: categories,
         onData: (data) {
-          if (data != null) {
-            return ReferenceDropDownButton(
-                initialValue: data
-                    .where((item) => item.id == record.categoryId)
-                    .firstOrNull,
-                label: ReferenceConstants.recordCategory,
-                items: data);
-          } else {
-            return const Text("Failed to load categorie");
-          }
+          return ReferenceDropDownButton(
+            initialValue: data
+                .where((item) => item.id == record.categoryId)
+                .firstOrNull,
+            label: ReferenceConstants.recordCategory,
+            items: data,
+          );
         },
+        onError: (error) => const Text("Failed to load categorie"),
       ),
     ];
 

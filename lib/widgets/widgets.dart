@@ -14,6 +14,7 @@ export 'reference_dropdown_button.dart';
 export 'int_form_field.dart';
 export 'resource_dropdown_button.dart';
 export 'future_widget.dart';
+export 'async_value_view.dart';
 export 'item_list.dart';
 export 'item_form.dart';
 export 'item_info_list.dart';

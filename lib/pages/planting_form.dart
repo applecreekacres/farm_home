@@ -1,21 +1,21 @@
 import 'package:farm_home/constants/constants.dart';
 import 'package:farm_home/providers/providers.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:farm_home/models/models.dart';
 import 'package:farm_home/widgets/widgets.dart';
-import 'package:provider/provider.dart';
 
-class PlantingForm extends StatefulWidget {
+class PlantingForm extends ConsumerStatefulWidget {
   final Planting? resource;
 
   const PlantingForm({super.key, this.resource});
 
   @override
-  State<StatefulWidget> createState() => _PlantingFormState();
+  ConsumerState<PlantingForm> createState() => _PlantingFormState();
 }
 
-class _PlantingFormState extends State<PlantingForm> {
+class _PlantingFormState extends ConsumerState<PlantingForm> {
   final _formKey = GlobalKey<FormState>();
 
   late Planting _planting;
@@ -31,67 +31,69 @@ class _PlantingFormState extends State<PlantingForm> {
   }
 
   List<Widget> buildFields(BuildContext context) {
-    final refProvider = Provider.of<ReferenceProvider>(context);
+    final seasons = ref.watch(seasonsProvider);
+    final crops = ref.watch(cropsProvider);
     Season? season;
     Crop? crop;
 
     var fields = [
       ExpandedRowBox(
         children: [
-          FutureWidget(
-            future: refProvider.seasons,
+          AsyncValueView<List<Season>>(
+            value: seasons,
             onData: (data) {
-              if (data != null) {
-                if (_planting.seasonId == "") {
-                  season = data.first;
-                  _planting.seasonId = data.first.id;
-                } else {
-                  season ??=
-                      data.where((item) => item.id == _planting.seasonId).first;
-                }
-                return ReferenceDropDownButton<Season>(
-                  initialValue: season,
-                  label: ReferenceConstants.season,
-                  items: data,
-                  onChanged: (data) {
-                    _planting.seasonId = data!.id;
-                    setState(() {
-                      season = data;
-                    });
-                  },
-                );
+              if (data.isEmpty) {
+                return const Text("No Seasons to load");
               }
-              return Text("No Seasons to load");
+              if (_planting.seasonId == "") {
+                season = data.first;
+                _planting.seasonId = data.first.id;
+              } else {
+                season ??= data
+                    .where((item) => item.id == _planting.seasonId)
+                    .first;
+              }
+              return ReferenceDropDownButton<Season>(
+                initialValue: season,
+                label: ReferenceConstants.season,
+                items: data,
+                onChanged: (data) {
+                  _planting.seasonId = data!.id;
+                  setState(() {
+                    season = data;
+                  });
+                },
+              );
             },
           ),
-          FutureWidget(
-            future: refProvider.crops,
+          AsyncValueView<List<Crop>>(
+            value: crops,
             onData: (data) {
-              if (data != null) {
-                if (_planting.cropId == "") {
-                  crop = data.first;
-                  _planting.cropId = data.first.id;
-                } else {
-                  crop ??=
-                      data.where((item) => item.id == _planting.cropId).first;
-                }
-                return ReferenceDropDownButton(
-                  initialValue: crop,
-                  label: ReferenceConstants.crop,
-                  items: data,
-                  onChanged: (data) {
-                    _planting.cropId = data!.id;
-                    _planting.daysToPottingUp = data.daysToPottingUp;
-                    _planting.daysToTransplant = data.daysToTransplant;
-                    _planting.daysToHarvest = data.daysToMaturity;
-                    setState(() {
-                      crop = data;
-                    });
-                  },
-                );
-              } else {
-                return Text("No crop to load");
+              if (data.isEmpty) {
+                return const Text("No crop to load");
               }
+              if (_planting.cropId == "") {
+                crop = data.first;
+                _planting.cropId = data.first.id;
+              } else {
+                crop ??= data
+                    .where((item) => item.id == _planting.cropId)
+                    .first;
+              }
+              return ReferenceDropDownButton(
+                initialValue: crop,
+                label: ReferenceConstants.crop,
+                items: data,
+                onChanged: (data) {
+                  _planting.cropId = data!.id;
+                  _planting.daysToPottingUp = data.daysToPottingUp;
+                  _planting.daysToTransplant = data.daysToTransplant;
+                  _planting.daysToHarvest = data.daysToMaturity;
+                  setState(() {
+                    crop = data;
+                  });
+                },
+              );
             },
           ),
         ],
@@ -111,9 +113,10 @@ class _PlantingFormState extends State<PlantingForm> {
             controllerValue: _planting.rows,
           ),
           IntFormField(
-              label: "In-Row Spacing",
-              controllerValue: _planting.inRowSpacing,
-              onChanged: (value) => _planting.inRowSpacing = value),
+            label: "In-Row Spacing",
+            controllerValue: _planting.inRowSpacing,
+            onChanged: (value) => _planting.inRowSpacing = value,
+          ),
         ],
       ),
       LabeledDropdownButton<PlantingMethod>(
@@ -183,11 +186,7 @@ class _PlantingFormState extends State<PlantingForm> {
       ),
     );
 
-    return [
-      Column(
-        children: fields,
-      ),
-    ];
+    return [Column(children: fields)];
   }
 
   @override

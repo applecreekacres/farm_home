@@ -54,13 +54,13 @@ class ItemAccess {
   ItemAccess(this._dataAccess, this._prefs);
 
   /// Upload an item to Firestore. If the item exists it will be updated.
-  void createItem<T extends Item>(T model) async {
+  Future<void> createItem<T extends Item>(T model) async {
     model._userId = _prefs.getString("userId")!;
     model._modified = DateTime.now();
     await _dataAccess.createItem(model._userId, model._id, model.toMap());
   }
 
-  void updateItem<T extends Item>(T model) async {
+  Future<void> updateItem<T extends Item>(T model) async {
     model._userId = _prefs.getString("userId")!;
     model._modified = DateTime.now();
     await _dataAccess.updateItem(model._userId, model._id, model.toMap());
@@ -70,7 +70,9 @@ class ItemAccess {
   ///
   /// Will return [null] if no item by the given ID exists.
   Future<T?> getItemById<T>(
-      String itemId, T Function(Map<String, dynamic>) transform) async {
+    String itemId,
+    T Function(Map<String, dynamic>) transform,
+  ) async {
     var user = _prefs.getString("userId");
     if (user != null) {
       var data = await _dataAccess.getItem(user, itemId);
@@ -81,23 +83,31 @@ class ItemAccess {
     return null;
   }
 
-  Future<List<T>> getItemsByField<T extends Item>(String field, String value,
-      T Function(Map<String, dynamic>) transform) async {
-    return await getItemsWithFilter(
-        [Filter(field, FilterOperator.isEqual, value)], transform);
+  Future<List<T>> getItemsByField<T extends Item>(
+    String field,
+    String value,
+    T Function(Map<String, dynamic>) transform,
+  ) async {
+    return await getItemsWithFilter([
+      Filter(field, FilterOperator.isEqual, value),
+    ], transform);
   }
 
   Future<List<T>> getItems<T extends Item>(
-      String name, T Function(Map<String, dynamic>) transform) async {
+    String name,
+    T Function(Map<String, dynamic>) transform,
+  ) async {
     return await getItemsByField<T>("itemName", name, transform);
   }
 
   Future<List<T>> getItemsByType<T extends Item>(
-      String itemType, T Function(Map<String, dynamic>) transform) async {
+    String itemType,
+    T Function(Map<String, dynamic>) transform,
+  ) async {
     return await getItemsByField<T>("itemType", itemType, transform);
   }
 
-  void deleteItem<T extends Item>(String id) async {
+  Future<void> deleteItem<T extends Item>(String id) async {
     var user = _prefs.getString("userId");
     if (user != null) {
       await _dataAccess.deleteItem(user, id);
@@ -105,7 +115,9 @@ class ItemAccess {
   }
 
   Future<List<T>> getItemsWithFilter<T>(
-      List<Filter> query, T Function(Map<String, dynamic>) transform) async {
+    List<Filter> query,
+    T Function(Map<String, dynamic>) transform,
+  ) async {
     var user = _prefs.getString("userId");
     if (user != null) {
       var data = await _dataAccess.getItemsByFilter(user, query);

@@ -1,88 +1,130 @@
+import 'package:farm_home/models/models.dart';
+import 'package:farm_home/providers/providers.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
-import 'package:farm_home/models/models.dart';
-import 'package:provider/provider.dart';
-
-class ItemForm<T extends Item> extends StatefulWidget {
+class ItemForm<T extends Item> extends ConsumerStatefulWidget {
   final T? item;
   final bool isNew;
-  // final List<Widget> view;
   final List<Widget> firstTab;
   final Widget secondTab;
   final String title;
 
-  const ItemForm(
-      {super.key,
-      this.item,
-      required this.isNew,
-      required this.title,
-      required this.firstTab,
-      required this.secondTab});
+  const ItemForm({
+    super.key,
+    this.item,
+    required this.isNew,
+    required this.title,
+    required this.firstTab,
+    required this.secondTab,
+  });
 
   @override
-  State<ItemForm> createState() => _ItemFormState<T>();
+  ConsumerState<ItemForm<T>> createState() => _ItemFormState<T>();
 }
 
-class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
+class _ItemFormState<T extends Item> extends ConsumerState<ItemForm<T>> {
   final _formKey = GlobalKey<FormState>();
+  bool _busy = false;
+
   T? get item => widget.item;
   List<Widget> get edit => widget.firstTab;
-  // List<Widget> get view => widget.view;
   String? get itemName => item?.itemName();
 
+  Future<void> _save() async {
+    final current = item;
+    if (_busy || current == null) {
+      return;
+    }
+    setState(() => _busy = true);
+    try {
+      await ref.saveItem(current, isNew: widget.isNew);
+      if (!mounted) {
+        return;
+      }
+      Navigator.of(context).pop();
+    } catch (_) {
+      if (!mounted) {
+        return;
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Could not save this item.')),
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _busy = false);
+      }
+    }
+  }
+
+  Future<void> _delete() async {
+    final current = item;
+    if (_busy || current == null) {
+      return;
+    }
+    final navigator = Navigator.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    setState(() => _busy = true);
+    try {
+      await ref.deleteItem(current);
+      navigator.pop();
+      navigator.pop();
+    } catch (_) {
+      if (!mounted) {
+        return;
+      }
+      navigator.pop();
+      messenger.showSnackBar(
+        const SnackBar(content: Text('Could not delete this item.')),
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _busy = false);
+      }
+    }
+  }
+
   List<Widget> getActions(BuildContext context) {
-    var access = Provider.of<ItemAccess>(context);
     var actions = [
-      IconButton(
-        onPressed: () {
-          if (widget.isNew) {
-            access.createItem<T>(item!);
-          } else {
-            access.updateItem<T>(item!);
-          }
-          Navigator.of(context).pop();
-        },
-        icon: const Icon(Icons.save),
-      )
+      IconButton(onPressed: _busy ? null : _save, icon: const Icon(Icons.save)),
     ];
 
     if (!widget.isNew) {
       actions.add(
         IconButton(
-          onPressed: () {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: const Text("Delete?"),
-                  content: const Text(
-                      "Are you sure you want to delete this item? There is no reversing this action."),
-                  actions: <Widget>[
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        textStyle: Theme.of(context).textTheme.labelLarge,
-                      ),
-                      child: const Text('Delete'),
-                      onPressed: () {
-                        access.deleteItem(item!.id);
-                        Navigator.of(context).pop(); // Close dialog
-                        Navigator.of(context).pop(); // Close form page
-                      },
-                    ),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        textStyle: Theme.of(context).textTheme.labelLarge,
-                      ),
-                      child: const Text('Cancel'),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ],
-                );
-              },
-            );
-          },
+          onPressed: _busy
+              ? null
+              : () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("Delete?"),
+                        content: const Text(
+                          "Are you sure you want to delete this item? There is no reversing this action.",
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              textStyle: Theme.of(context).textTheme.labelLarge,
+                            ),
+                            onPressed: _delete,
+                            child: const Text('Delete'),
+                          ),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              textStyle: Theme.of(context).textTheme.labelLarge,
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('Cancel'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
           icon: const Icon(Icons.delete),
         ),
       );
@@ -113,9 +155,7 @@ class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
               SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(20),
-                  child: Column(
-                    children: edit,
-                  ),
+                  child: Column(children: edit),
                 ),
               ),
               Container(child: widget.secondTab),

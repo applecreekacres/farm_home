@@ -2,11 +2,12 @@ import 'dart:math';
 
 import 'package:farm_home/constants/constants.dart';
 import 'package:farm_home/widgets/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:farm_home/models/models.dart';
 
 class ReferenceList extends StatelessWidget {
-  final Future<List<Reference>> items;
+  final AsyncValue<List<Reference>> items;
   final Widget? Function(Reference)? title;
   final Widget? Function(Reference)? subtitle;
   final Widget? Function(Reference)? trailing;
@@ -14,15 +15,16 @@ class ReferenceList extends StatelessWidget {
   final List<Reference> Function(List<Reference>)? filter;
   final void Function(Reference)? onTap;
 
-  const ReferenceList(
-      {super.key,
-      required this.items,
-      this.filter,
-      this.title,
-      this.subtitle,
-      this.leading,
-      this.trailing,
-      this.onTap});
+  const ReferenceList({
+    super.key,
+    required this.items,
+    this.filter,
+    this.title,
+    this.subtitle,
+    this.leading,
+    this.trailing,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +35,12 @@ class ReferenceList extends StatelessWidget {
         if (leading != null) {
           return leading!(item);
         } else {
-          return Icon(ReferenceConstants.referenceInfo
-              .where((info) => info.name == item.itemName())
-              .first
-              .icon);
+          return Icon(
+            ReferenceConstants.referenceInfo
+                .where((info) => info.name == item.itemName())
+                .first
+                .icon,
+          );
         }
       },
       subtitle: (data) {
@@ -47,7 +51,8 @@ class ReferenceList extends StatelessWidget {
             return null;
           } else {
             return Text(
-                "${data.description.substring(0, min(20, data.description.length))}...");
+              "${data.description.substring(0, min(20, data.description.length))}...",
+            );
           }
         }
       },

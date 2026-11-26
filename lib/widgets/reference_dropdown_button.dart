@@ -8,12 +8,13 @@ class ReferenceDropDownButton<T extends Reference> extends StatefulWidget {
   final List<T> items;
   final ValueChanged<dynamic>? onChanged;
 
-  const ReferenceDropDownButton(
-      {super.key,
-      required this.initialValue,
-      required this.label,
-      required this.items,
-      this.onChanged});
+  const ReferenceDropDownButton({
+    super.key,
+    required this.initialValue,
+    required this.label,
+    required this.items,
+    this.onChanged,
+  });
 
   @override
   State<ReferenceDropDownButton<T>> createState() =>
@@ -24,11 +25,13 @@ class _ReferenceDropDownButtonState<T extends Reference>
     extends State<ReferenceDropDownButton<T>> {
   @override
   Widget build(BuildContext context) {
-    widget.items.sort((a, b) => a.name.compareTo(b.name));
+    final items = [...widget.items]..sort((a, b) => a.name.compareTo(b.name));
     return LabeledDropdownButton(
-      initialValue: widget.items.where((item) => item.id == widget.initialValue?.id).elementAtOrNull(0),
+      initialValue: items
+          .where((item) => item.id == widget.initialValue?.id)
+          .elementAtOrNull(0),
       label: widget.label,
-      items: widget.items,
+      items: items,
       itemView: (value) => (value as Reference).name,
       onChanged: widget.onChanged,
     );

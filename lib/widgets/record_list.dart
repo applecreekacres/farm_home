@@ -2,11 +2,12 @@ import 'dart:math';
 
 import 'package:farm_home/constants/constants.dart';
 import 'package:farm_home/widgets/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:farm_home/models/models.dart';
 
 class RecordList extends StatelessWidget {
-  final Future<List<Record>> items;
+  final AsyncValue<List<Record>> items;
   final Widget? Function(Record)? title;
   final Widget? Function(Record)? subtitle;
   final Widget? Function(Record)? trailing;
@@ -14,15 +15,16 @@ class RecordList extends StatelessWidget {
   final List<Record> Function(List<Record>)? filter;
   final void Function(Record)? onTap;
 
-  const RecordList(
-      {super.key,
-      required this.items,
-      this.filter,
-      this.title,
-      this.subtitle,
-      this.leading,
-      this.trailing,
-      this.onTap});
+  const RecordList({
+    super.key,
+    required this.items,
+    this.filter,
+    this.title,
+    this.subtitle,
+    this.leading,
+    this.trailing,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,8 @@ class RecordList extends StatelessWidget {
             return null;
           } else {
             return Text(
-                "${data.notes.substring(0, min(20, data.notes.length))}...");
+              "${data.notes.substring(0, min(20, data.notes.length))}...",
+            );
           }
         }
       },

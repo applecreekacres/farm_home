@@ -1,22 +1,21 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart' hide Material, MaterialType;
-
-import 'package:provider/provider.dart';
 
 import 'package:farm_home/constants/constants.dart';
 import 'package:farm_home/models/models.dart';
 import 'package:farm_home/providers/providers.dart';
 import 'package:farm_home/widgets/widgets.dart';
 
-class MaterialForm extends StatefulWidget {
+class MaterialForm extends ConsumerStatefulWidget {
   final Material? resource;
 
   const MaterialForm({super.key, this.resource});
 
   @override
-  State<StatefulWidget> createState() => _MaterialFormState();
+  ConsumerState<MaterialForm> createState() => _MaterialFormState();
 }
 
-class _MaterialFormState extends State<MaterialForm> {
+class _MaterialFormState extends ConsumerState<MaterialForm> {
   late Material _material;
   bool _isNew = false;
 
@@ -32,28 +31,28 @@ class _MaterialFormState extends State<MaterialForm> {
   }
 
   List<Widget> buildFields(BuildContext context) {
-    var refProvider = Provider.of<ReferenceProvider>(context);
-    MaterialType materialType;
+    final materialTypes = ref.watch(materialTypesProvider);
 
     return [
-      FutureWidget(
-          future: refProvider.materialType,
-          onData: (data) {
-            if (data != null) {
-              if (_material.materialTypeId == "") {
-                materialType = data.first;
-              } else {
-                materialType =
-                    data.where((item) => item.id == _material.id).first;
-              }
-              return ReferenceDropDownButton(
-                  initialValue: materialType,
-                  label: ReferenceConstants.materialType,
-                  items: data);
-            } else {
-              return const Text("There are no material types to load");
-            }
-          }),
+      AsyncValueView<List<MaterialType>>(
+        value: materialTypes,
+        onData: (data) {
+          if (data.isEmpty) {
+            return const Text("There are no material types to load");
+          }
+          final MaterialType materialType;
+          if (_material.materialTypeId == "") {
+            materialType = data.first;
+          } else {
+            materialType = data.where((item) => item.id == _material.id).first;
+          }
+          return ReferenceDropDownButton(
+            initialValue: materialType,
+            label: ReferenceConstants.materialType,
+            items: data,
+          );
+        },
+      ),
     ];
   }
 

@@ -1,20 +1,20 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:farm_home/models/models.dart';
 import 'package:farm_home/widgets/widgets.dart';
 import 'package:farm_home/providers/providers.dart';
-import 'package:provider/provider.dart';
 
-class CropForm extends StatefulWidget {
+class CropForm extends ConsumerStatefulWidget {
   final Crop? crop;
 
   const CropForm({this.crop, super.key});
 
   @override
-  State<CropForm> createState() => _CropFormState();
+  ConsumerState<CropForm> createState() => _CropFormState();
 }
 
-class _CropFormState extends State<CropForm> {
+class _CropFormState extends ConsumerState<CropForm> {
   late Crop _crop;
   bool _isNew = false;
 
@@ -31,32 +31,34 @@ class _CropFormState extends State<CropForm> {
 
   @override
   Widget build(BuildContext context) {
-    final refProvider = Provider.of<ReferenceProvider>(context);
+    final families = ref.watch(cropFamiliesProvider);
     return ReferenceForm<Crop>(
       reference: _crop,
       isNew: _isNew,
       additionalFields: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: FutureWidget<List<CropFamily>>(
-            future: refProvider.cropFamilies,
+          child: AsyncValueView<List<CropFamily>>(
+            value: families,
             onData: (data) {
-              if (data != null) {
-                data.sort((a, b) => a.name.compareTo(b.name));
-                    return ReferenceDropDownButton<CropFamily>(
-                      initialValue: data.where((item) => item.id == _crop.cropFamilyId).firstOrNull,
-                      label: data.first.itemName(),
-                      items: data,
-                      onChanged: (value) {
-                        _crop.cropFamilyId = value?.id ?? "";
-                      },
-                    );
-              } else {
+              if (data.isEmpty) {
                 return const Text("No Crop families");
               }
+              final sorted = [...data]
+                ..sort((a, b) => a.name.compareTo(b.name));
+              return ReferenceDropDownButton<CropFamily>(
+                initialValue: sorted
+                    .where((item) => item.id == _crop.cropFamilyId)
+                    .firstOrNull,
+                label: sorted.first.itemName(),
+                items: sorted,
+                onChanged: (value) {
+                  _crop.cropFamilyId = value?.id ?? "";
+                },
+              );
             },
             onLoading: () => CircularProgressIndicator(),
-            onError: (p0) => const Text("Failed to load crop families"),
+            onError: (error) => const Text("Failed to load crop families"),
           ),
         ),
         IntFormField(

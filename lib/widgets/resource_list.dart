@@ -2,11 +2,12 @@ import 'dart:math';
 
 import 'package:farm_home/constants/constants.dart';
 import 'package:farm_home/widgets/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:farm_home/models/models.dart';
 
 class ResourceList extends StatelessWidget {
-  final Future<List<Resource>> items;
+  final AsyncValue<List<Resource>> items;
   final Widget? Function(Resource)? title;
   final Widget? Function(Resource)? subtitle;
   final Widget? Function(Resource)? trailing;
@@ -14,15 +15,16 @@ class ResourceList extends StatelessWidget {
   final List<Resource> Function(List<Resource>)? filter;
   final void Function(Resource)? onTap;
 
-  const ResourceList(
-      {super.key,
-      required this.items,
-      this.filter,
-      this.title,
-      this.subtitle,
-      this.leading,
-      this.trailing,
-      this.onTap});
+  const ResourceList({
+    super.key,
+    required this.items,
+    this.filter,
+    this.title,
+    this.subtitle,
+    this.leading,
+    this.trailing,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +35,12 @@ class ResourceList extends StatelessWidget {
         if (leading != null) {
           return leading!(item);
         } else {
-          return Icon(ResourceConstants.resourceInfo
-              .where((info) => info.name == item.itemName())
-              .first
-              .icon);
+          return Icon(
+            ResourceConstants.resourceInfo
+                .where((info) => info.name == item.itemName())
+                .first
+                .icon,
+          );
         }
       },
       subtitle: (data) {
@@ -47,7 +51,8 @@ class ResourceList extends StatelessWidget {
             return null;
           } else {
             return Text(
-                "${data.notes.substring(0, min(20, data.notes.length))}...");
+              "${data.notes.substring(0, min(20, data.notes.length))}...",
+            );
           }
         }
       },
