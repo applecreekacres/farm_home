@@ -1,5 +1,5 @@
 import 'package:farm_home/models/models.dart';
-import 'package:flutter/material.dart' hide Material;
+import 'package:material_ui/material_ui.dart' hide Material;
 
 import 'package:material_symbols_icons/symbols.dart';
 
@@ -19,6 +19,7 @@ class ResourceConstants {
   static const material = "Material";
   static const planting = "Planting";
   static const seed = "Seed";
+  static const structure = "Structure";
 
   static const resources = [
     animal,
@@ -27,6 +28,7 @@ class ResourceConstants {
     material,
     planting,
     seed,
+    structure,
   ];
 
   static List<ItemInfo> resourceInfo = [
@@ -34,7 +36,9 @@ class ResourceConstants {
       animal,
       Icons.pets,
       () => AnimalForm(),
-      (item) => AnimalForm(resource: item,),
+      (item) => AnimalForm(
+        resource: item,
+      ),
     ),
     ItemInfo<Equipment>(
       equipment,
@@ -76,5 +80,12 @@ class ResourceConstants {
         resource: item,
       ),
     ),
+    ItemInfo<Structure> (
+      structure,
+      Icons.home,
+      () => StructureForm(),
+      (item) => StructureForm(resource: item),
+
+    )
   ];
 }

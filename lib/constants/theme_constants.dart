@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ColorConstants {
   static const themeColor = Color.fromARGB(255, 0x48, 0x98, 0x6C);
@@ -21,6 +21,5 @@ ThemeData farmHomeTheme = ThemeData(
     tertiary: ColorConstants.tertiaryColor,
     surface: ColorConstants.primaryBackground,
   ),
-  fontFamily: 'Urbanist',
   useMaterial3: true,
 );

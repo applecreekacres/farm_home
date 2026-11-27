@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:farm_home/models/models.dart';
 import 'package:provider/provider.dart';
@@ -110,13 +110,11 @@ class _ItemFormState<T extends Item> extends State<ItemForm<T>> {
           ),
           body: TabBarView(
             children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      children: edit,
-                    ),
+              SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    children: edit,
                   ),
                 ),
               ),

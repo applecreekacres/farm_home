@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' hide MaterialType;
+import 'package:material_ui/material_ui.dart' hide MaterialType;
 
 import 'package:farm_home/models/models.dart';
 import 'package:farm_home/widgets/widgets.dart';

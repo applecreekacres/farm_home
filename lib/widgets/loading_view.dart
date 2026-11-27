@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:farm_home/constants/constants.dart';
 
@@ -8,7 +8,7 @@ class LoadingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white.withOpacity(0.8),
+      color: Colors.white.withValues(alpha: 0.8),
       child: const Center(
         child: CircularProgressIndicator(
           color: ColorConstants.themeColor,

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:multiple_search_selection/multiple_search_selection.dart';
 import 'package:farm_home/constants/constants.dart';
@@ -53,7 +53,7 @@ class _SearchSelectionState<T> extends State<SearchSelection> {
   Widget build(BuildContext context) {
     return MultipleSearchSelection<T>(
       items: widget.items as List<T>,
-      initialPickedItems: widget.initialPickedItems as List<T>,
+      initialPickedItems: widget.initialPickedItems as List<T>?,
       controller: controller,
       maxSelectedItems: widget.maxSelectedItems,
       sortShowedItems: widget.sortShowedItems,

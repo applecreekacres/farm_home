@@ -1,6 +1,6 @@
 import 'package:farm_home/constants/constants.dart';
 import 'package:farm_home/providers/providers.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:farm_home/models/models.dart';
 import 'package:farm_home/widgets/widgets.dart';
@@ -72,7 +72,8 @@ class _PlantingFormState extends State<PlantingForm> {
                   crop = data.first;
                   _planting.cropId = data.first.id;
                 } else {
-                  crop ??= data.where((item) => item.id == _planting.cropId).first;
+                  crop ??=
+                      data.where((item) => item.id == _planting.cropId).first;
                 }
                 return ReferenceDropDownButton(
                   initialValue: crop,
@@ -114,6 +115,17 @@ class _PlantingFormState extends State<PlantingForm> {
               controllerValue: _planting.inRowSpacing,
               onChanged: (value) => _planting.inRowSpacing = value),
         ],
+      ),
+      LabeledDropdownButton<PlantingMethod>(
+        initialValue: _planting.plantingMethod,
+        label: "Planting Method",
+        items: PlantingMethod.values,
+        itemView: (item) {
+          return item.toString().split('.')[1];
+        },
+        onChanged: (item) {
+          _planting.plantingMethod = item!;
+        },
       ),
     ];
 
